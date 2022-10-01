@@ -20,8 +20,8 @@
   },
   "homepage": "https://github.com/YeloPartyHat/Node-Pier#readme",
   "dependencies": {
-    "express": "^4.18.1",
-    "express-sslify": "^1.2.0"
+    "compression": "^1.7.4",
+    "express": "^4.18.1"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",
