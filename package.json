@@ -7,8 +7,7 @@
     "client": "cd client && npm run start",
     "server": "nodemon server.js",
     "build": "cd client && npm run build",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "install": "npm install && cd client && npm install"
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
