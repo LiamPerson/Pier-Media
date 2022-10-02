@@ -1,0 +1,25 @@
+{
+  "name": "node-pier",
+  "version": "1.0.0",
+  "description": "NodeJS Raspberry Pi Home Server",
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "cd server && nodemon server.js",
+    "build": "cd client && npm run build",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YeloPartyHat/Node-Pier.git"
+  },
+  "author": "Liam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YeloPartyHat/Node-Pier/issues"
+  },
+  "homepage": "https://github.com/YeloPartyHat/Node-Pier#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.19.1"
+  }
+}
