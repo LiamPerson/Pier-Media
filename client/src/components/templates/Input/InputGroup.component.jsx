@@ -1,7 +1,7 @@
 import {InputIcon, InputWrapper, Input} from "./InputGroup.style";
 
-const InputGroup = ({ icon, placeholder, width }) => {
-    return (<InputWrapper width={width}>
+const InputGroup = ({ icon, placeholder }) => {
+    return (<InputWrapper>
         {icon && <InputIcon icon={icon}/>}
         <Input type="text" placeholder={placeholder}/>
     </InputWrapper>)

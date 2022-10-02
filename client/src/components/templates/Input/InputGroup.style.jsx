@@ -15,7 +15,6 @@ export const InputWrapper = styled.div`
   padding: 0;
   display: flex;
   align-items: center;
-  width: ${props => props.width ? props.width : 'auto'};
 `;
 
 export const InputIcon = styled.svg`
@@ -23,9 +22,9 @@ export const InputIcon = styled.svg`
   background-position: center;
   background-size: contain;
   filter: invert(60%);
-  width:20px;
-  height:20px;
-  margin: 0 0 0 8px;
+  width: 20px;
+  height: 20px;
+  margin: 0 8px;
   padding: 0;
 `;
 
@@ -33,12 +32,14 @@ export const Input = styled.input`
   color: ${style.color["light-3"]};
   background-color: transparent;
   border: none;
-  margin: 8px;
+  margin-right: 8px;
   padding: 0;
   font-size: 1em;
   width: 100%;
+  height: 100%;
   
-  :focus,:focus-visible {
+  :focus,
+  :focus-visible {
     outline:none;
   }
 `;
