@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const res = require('express/lib/response');
 const compression = require('compression');
-
+const Database = require('./utils/Database/Database');
 const app = express();
 const port = 5000;
+
+Database.init();
+
 
 // Use GZIP compression for sending files, json decode all requests, set urlencoded to true.
 app.use(compression());
@@ -25,6 +28,13 @@ app.get('/monkey.png', (req, res) => {
     const date = new Date();
     console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]: Requester's IP:`, req.ip);
     
+})
+
+// Test database retrieval
+app.get('/database', (req, res) => {
+    res.sendFile(__dirname + "/deez.txt");
+    const date = new Date();
+    console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]: Requester's IP:`, req.ip);
 })
 
 app.get('/service-worker.js', (req, res) => {
