@@ -3,6 +3,8 @@
         "primary": "#27ABDF",
         "primary_text": "white",
         
+        "grey": "#dedede",
+
         "info": "#FFEE7F",
         "info_text": "black",
         "warning": "#FF8700",
