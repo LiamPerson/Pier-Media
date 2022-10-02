@@ -11,7 +11,7 @@ export const InputWrapper = styled.div`
   border: 1px solid ${style.color["dark-4"]};
   color: ${style.color["light-3"]};
   border-radius: 5px;
-  margin: 7px 20px;
+  margin: 10px 10px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -32,8 +32,8 @@ export const Input = styled.input`
   color: ${style.color["light-3"]};
   background-color: transparent;
   border: none;
-  margin-right: 8px;
-  padding: 0;
+  margin: 0;
+  padding: 0.5em;
   font-size: 1em;
   width: 100%;
   height: 100%;
