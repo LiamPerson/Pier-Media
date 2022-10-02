@@ -4,10 +4,8 @@
   "description": "NodeJS Raspberry Pi Home Server",
   "main": "server.js",
   "scripts": {
-    "client": "cd client && npm run start",
-    "server": "nodemon server.js",
-    "build": "cd client && npm run build",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "start": "nodemon server.js",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,9 +22,5 @@
     "express": "^4.18.1",
     "socket.io": "^4.5.2",
     "sqlite3": "^5.1.1"
-  },
-  "devDependencies": {
-    "concurrently": "^4.0.1",
-    "nodemon": "^1.19.1"
   }
 }
