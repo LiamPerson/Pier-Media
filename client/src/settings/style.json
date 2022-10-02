@@ -4,7 +4,7 @@
         "primary_text": "white",
         
         "info": "#FFEE7F",
-        "info_text": "white",
+        "info_text": "black",
         "warning": "#FF8700",
         "warning_text": "white",
         "danger": "#FF3100",
