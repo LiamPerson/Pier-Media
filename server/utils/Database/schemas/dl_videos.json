@@ -1,0 +1,46 @@
+{
+    "name": "dl_videos",
+    "columns": {
+        "id": {
+            "type": "integer",
+            "primary": false
+        },
+        "name": {
+            "type": "text",
+            "default": "No video name set"
+        },
+        "description": {
+            "type": "text"
+        },
+        "creatorId": {
+            "type": "integer"
+        },
+        "uri": {
+            "type": "text"
+        },
+        "thumbnailUri": {
+            "type": "text"
+        },
+        "dateAdded": {
+            "type": "integer"
+        },
+        "dateReleased": {
+            "type": "integer"
+        },
+        "originalUrl": {
+            "type": "text"
+        },
+        "duration": {
+            "type": "integer"
+        },
+        "tags": {
+            "type": "text"
+        },
+        "category": {
+            "type": "text"
+        },
+        "siteId": {
+            "type": "integer"
+        }
+    }
+}
