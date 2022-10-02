@@ -3,7 +3,7 @@
     "columns": {
         "id": {
             "type": "integer",
-            "primary": false
+            "primary": true
         },
         "name": {
             "type": "text",
