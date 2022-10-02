@@ -33,7 +33,7 @@ export const Button = styled.button.attrs({
     type: "button"
 })`
     border-radius: 15px;
-    border: 1px solid gray;
+    border: 1px solid ${style.color.grey};
     background: ${props => switchColor(props.color)};
     color: ${props => switchColor(props.color, true)};
     &:hover {
