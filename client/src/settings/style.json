@@ -1,0 +1,13 @@
+{
+    "color": {
+        "primary": "#27ABDF",
+        "primary_text": "white",
+        
+        "info": "#FFEE7F",
+        "info_text": "white",
+        "warning": "#FF8700",
+        "warning_text": "white",
+        "danger": "#FF3100",
+        "danger_text": "white"
+    }
+}
