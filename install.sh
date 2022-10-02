@@ -3,6 +3,7 @@
 
 EXECUTION_LOCATION=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 echo -e "Attempting to install all dependencies for Node Pier"
+cd "$EXECUTION_LOCATION/server"
 npm install
 cd "$EXECUTION_LOCATION/client"
 npm install
