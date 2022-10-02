@@ -4,6 +4,15 @@
         "primary_text": "white",
         
         "grey": "#dedede",
+        "black": "#000000",
+
+        "dark-1": "#141414",
+        "dark-2": "#23272d",
+        "dark-3": "#32363c",
+        "dark-4": "#40454b",
+        "light-1": "#eeeeee",
+        "light-2": "#cccccc",
+        "light-3": "#aaaaaa",
 
         "info": "#FFEE7F",
         "info_text": "black",

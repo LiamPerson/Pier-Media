@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Local Components
 import { Spinner } from './components/templates/Loader/Loader.style';
+import Header from "./components/other/Header/Header.component";
+import Sidebar from "./components/other/Sidebar/Sidebar.component";
 
 // Pages
 const HelloWorld = lazy(() => import('./components/pages/HelloWorld/HelloWorld.component'));
@@ -13,6 +15,8 @@ const HelloWorld = lazy(() => import('./components/pages/HelloWorld/HelloWorld.c
 function App() {
   return (<Provider store={store}>
     <BrowserRouter>
+      <Header />
+      <Sidebar />
       <Switch>
         <Suspense fallback={<Spinner />}>
           <Route exact path='/' component={HelloWorld} />
