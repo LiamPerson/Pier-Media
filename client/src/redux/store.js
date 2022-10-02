@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import apiReducer from './apiReducer';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    api: apiReducer,
+  },
 });
 
 export default store;
