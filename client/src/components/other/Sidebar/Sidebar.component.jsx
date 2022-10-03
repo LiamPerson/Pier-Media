@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { SideBar, MainMenu } from "./Sidebar.style";
+import { SideBarContainer, MainMenu } from "./Sidebar.style";
 import MenuItem from "./MenuItem.component";
 import SidebarDownloadInput from "./SidebarDownloadInput.component";
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import OverlayHandler from "../../../utils/OverlayHandler";
 const Sidebar = () => {
 
     const shown = useSelector(state => state.overlay.sidebarShown);
+    const headerHeight = useSelector(state => state.overlay.headerPxHeight);
     
     const ref = useRef();
     useEffect(() => {
@@ -16,7 +17,7 @@ const Sidebar = () => {
     }, [ref]);
 
     if(!shown) return null;
-    return (<SideBar id="SideBar" ref={ref}>
+    return (<SideBarContainer headerHeight={headerHeight} ref={ref}>
 
         <MainMenu>
             <MenuItem route="/movie" icon="movie" title="Movies" />
@@ -28,7 +29,7 @@ const Sidebar = () => {
 
         <SidebarDownloadInput/>
 
-    </SideBar>)
+    </SideBarContainer>)
 }
 
 export default Sidebar;
