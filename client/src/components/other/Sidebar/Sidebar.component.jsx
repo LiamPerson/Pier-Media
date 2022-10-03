@@ -20,6 +20,7 @@ const Sidebar = () => {
     return (<SideBarContainer headerHeight={headerHeight} ref={ref}>
 
         <MainMenu>
+            <MenuItem route="/" icon="home" title="Home" />
             <MenuItem route="/movie" icon="movie" title="Movies" />
             <MenuItem route="/video" icon="video" title="Videos" />
             <MenuItem route="/music" icon="music" title="Music" />
