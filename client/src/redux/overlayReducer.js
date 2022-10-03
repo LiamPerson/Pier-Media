@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     sidebarShown: true,
+    sidebarMinimised: false,
     headerHeight: 50,
     sidebarWidth: 100,
     screenWidth: 1920,
@@ -12,6 +13,9 @@ export const overlaySlice = createSlice({
   name: 'overlay',
   initialState,
   reducers: {
+    setSidebarMinimised: (state, action) => {
+      state.sidebarMinimised = action.payload;
+    },
     setSidebarShown: (state, action) => {
       state.sidebarShown = action.payload;
     },
@@ -30,6 +34,6 @@ export const overlaySlice = createSlice({
   },
 });
 
-export const { setSidebarShown, setHeaderHeight, setSidebarWidth, setScreenWidth, setScreenHeight } = overlaySlice.actions;
+export const { setSidebarShown, setHeaderHeight, setSidebarWidth, setScreenWidth, setScreenHeight, sidebarMinimised } = overlaySlice.actions;
 
 export default overlaySlice.reducer;
