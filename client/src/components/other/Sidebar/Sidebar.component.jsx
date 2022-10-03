@@ -28,7 +28,7 @@ const Sidebar = () => {
             <MenuItem route="/browse" icon="folder" title="Browse" />
         </MainMenu>
 
-        <SidebarDownloadInput/>
+        <SidebarDownloadInput />
 
     </SideBarContainer>)
 }

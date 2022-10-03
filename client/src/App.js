@@ -13,6 +13,9 @@ import Article from './components/other/Article/Article.component';
 
 // Pages
 const HelloWorld = lazy(() => import('./components/pages/HelloWorld/HelloWorld.component'));
+const MoviesPage = lazy(() => import('./components/pages/Movies/MoviesPage.component'));
+const MusicPage = lazy(() => import('./components/pages/Music/MusicPage.component'));
+const VideosPage = lazy(() => import('./components/pages/Videos/VideosPage.component'));
 
 // Object Initialisations
 OverlayHandler.init();
@@ -26,6 +29,9 @@ function App() {
         <Switch>
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HelloWorld} />
+            <Route exact path='/movie' component={MoviesPage} />
+            <Route exact path='/music' component={MusicPage} />
+            <Route exact path='/video' component={VideosPage} />
           </Suspense>
         </Switch>
       </Article>
@@ -34,3 +40,4 @@ function App() {
 }
 
 export default App;
+

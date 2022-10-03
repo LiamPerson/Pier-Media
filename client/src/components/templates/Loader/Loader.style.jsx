@@ -8,7 +8,7 @@ export const Spinner = styled.div`
 
     &::before {
         position: absolute;
-        border: 4px solid #fff;
+        border: 4px solid #000;
         opacity: 1;
         border-radius: 50%;
         animation: ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
