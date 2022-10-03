@@ -15,7 +15,7 @@ const HelloWorld = () => {
             <div>
                 Hello, world! 
                 <Button ref={buttonRef} color="">Sample Button</Button>
-                <Tooltip position={tooltipPositioner}>Deez nuts</Tooltip>
+                <Tooltip position={tooltipPositioner}>Sample tooltip</Tooltip>
             </div>
             <div style={{display: "grid"}}>
                 <div style={{background: "red"}}>asd</div>
