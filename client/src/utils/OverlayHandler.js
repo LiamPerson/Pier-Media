@@ -1,4 +1,4 @@
-import { setHeaderPxHeight, setSidebarPxWidth } from "../redux/overlayReducer";
+import { setHeaderHeight, setScreenHeight, setScreenWidth, setSidebarWidth } from "../redux/overlayReducer";
 import store from "../redux/store";
 
 /**
@@ -10,12 +10,23 @@ class OverlayHandler {
      * The height of the header bar in pixels.
      * @type {Number}
      */
-    static headerPxHeight = 50;
+    static headerHeight = 50;
     /**
      * The width of the side bar in pixels.
      * @type {Number}
      */
-    static sidebarPxWidth = 100;
+    static sidebarWidth = 100;
+
+    /**
+     * The width of the client's screen in pixels.
+     * @type {Number}
+     */
+    static screenWidth = 1920;
+    /**
+     * The height of the client's screen in pixels.
+     * @type {Number}
+     */
+    static screenHeight = 1080;
 
     /**
      * The header bar DOM element.
@@ -50,6 +61,7 @@ class OverlayHandler {
      */
     static init() {
         window.addEventListener("resize", OverlayHandler._resizeHandler);
+        OverlayHandler._updateScreen();
     }
 
     /**
@@ -62,10 +74,27 @@ class OverlayHandler {
     /**
      * Handle resizing of the window and update overlay states.
      */
-    static _resizeHandler = () => {
+    static _resizeHandler() {
+        OverlayHandler._updateScreen();
         // Adjust stored values of header height and sidebar width if necessary
         OverlayHandler._attemptUpdateHeader();
         OverlayHandler._attemptUpdateSidebar();
+    }
+
+    /**
+     * Update state screen width and height.
+     */
+    static _updateScreen() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        if(OverlayHandler.screenHeight !== height) {
+            OverlayHandler.screenHeight = height;
+            store.dispatch(setScreenHeight(OverlayHandler.screenHeight));
+        }
+        if(OverlayHandler.screenWidth !== width) {
+            OverlayHandler.screenWidth = width;
+            store.dispatch(setScreenWidth(OverlayHandler.screenWidth));
+        }
     }
 
     /**
@@ -74,9 +103,9 @@ class OverlayHandler {
     static _attemptUpdateHeader() {
         if(OverlayHandler._headerElement) {
             const headerHeight = OverlayHandler._headerElement.clientHeight;
-            if(headerHeight !== OverlayHandler.headerPxHeight) {
-                OverlayHandler.headerPxHeight = headerHeight;
-                store.dispatch(setHeaderPxHeight(headerHeight));
+            if(headerHeight !== OverlayHandler.headerHeight) {
+                OverlayHandler.headerHeight = headerHeight;
+                store.dispatch(setHeaderHeight(headerHeight));
             }
         }
     }
@@ -87,9 +116,9 @@ class OverlayHandler {
     static _attemptUpdateSidebar() {
         if(OverlayHandler._sidebarElement) {
             const sidebarWidth = OverlayHandler._sidebarElement.clientWidth;
-            if(sidebarWidth !== OverlayHandler.sidebarPxWidth) {
-                OverlayHandler.sidebarPxWidth = sidebarWidth;
-                store.dispatch(setSidebarPxWidth(sidebarWidth));
+            if(sidebarWidth !== OverlayHandler.sidebarWidth) {
+                OverlayHandler.sidebarWidth = sidebarWidth;
+                store.dispatch(setSidebarWidth(sidebarWidth));
             }
         }
     }

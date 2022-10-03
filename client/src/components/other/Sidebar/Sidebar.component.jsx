@@ -8,7 +8,7 @@ import OverlayHandler from "../../../utils/OverlayHandler";
 const Sidebar = () => {
 
     const shown = useSelector(state => state.overlay.sidebarShown);
-    const headerHeight = useSelector(state => state.overlay.headerPxHeight);
+    const headerHeight = useSelector(state => state.overlay.headerHeight);
     
     const ref = useRef();
     useEffect(() => {
