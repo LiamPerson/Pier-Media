@@ -79,6 +79,8 @@ const menuItem = css`
     background-color: ${style.color["dark-5"]};
     padding: 0.5em 2.4em 0.5em 1.6em;
   }
+
+  ${props => props.location === props.to && css` background-color: ${style.color["dark-5"]};  `}
 `;
 
 export const MenuItem = styled(Link)`
