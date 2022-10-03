@@ -9,13 +9,14 @@ export const SideBarContainer = styled.div`
   margin: 0;
   padding: 0;
   position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   left: 0;
   top: var(--header-height);
   bottom: 0;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-
   width: ${props => props.$minimised ? "var(--sidebar-width-minimised)" : "var(--sidebar-width-default)"};
   
   @media (max-width: 420px) {

@@ -16,7 +16,7 @@ const Sidebar = () => {
             <MenuItem $minimised={sidebarIsMinimised} to="/file" icon="file">Files</MenuItem>
             <MenuItem $minimised={sidebarIsMinimised} to="/browse" icon="folder">Browse</MenuItem>
         </MainMenu>
-        <SidebarDownloadInput />
+        <SidebarDownloadInput minimised={sidebarIsMinimised} />
     </SideBarContainer>)
 }
 
