@@ -1,5 +1,5 @@
 import React from "react";
-import {HeaderContainer, PierLogo} from "./Header.style";
+import {BurgerMenuWrapper, HeaderContainer, PierLogo} from "./Header.style";
 import InputGroup from "../../templates/Input/InputGroup.component";
 import BurgerMenu from "./BurgerMenu.component";
 
@@ -7,9 +7,9 @@ const Header = () => {
     return (<HeaderContainer>
         <PierLogo />
         <InputGroup icon="search" placeholder="Search"/>
-        <div class="burgerMenuWrapper">
+        <BurgerMenuWrapper>
             <BurgerMenu />
-        </div>
+        </BurgerMenuWrapper>
     </HeaderContainer>)
 }
 

@@ -17,13 +17,11 @@ function App() {
     <BrowserRouter>
       <Header />
       <Sidebar />
-      <div>
         <Switch>
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HelloWorld} />
           </Suspense>
         </Switch>
-      </div>
     </BrowserRouter>
   </Provider>);
 }

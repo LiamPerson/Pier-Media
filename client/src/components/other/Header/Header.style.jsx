@@ -11,13 +11,13 @@ export const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  
-  .burgerMenuWrapper {
-    height: 100%;
+`;
+
+export const BurgerMenuWrapper = styled.div`
+  height: 100%;
     display:flex;
     align-items: center;
     justify-content: center;
-  }
 `;
 
 export const PierLogo = styled.img.attrs({
