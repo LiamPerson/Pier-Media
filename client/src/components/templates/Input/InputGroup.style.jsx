@@ -20,7 +20,7 @@ export const Input = styled.input`
   background-color: transparent;
   border: none;
   margin: 0;
-  padding: 0.5em;
+  padding: 0 0 0 0.5em;
   font-size: 1em;
   width: 100%;
   height: 100%;

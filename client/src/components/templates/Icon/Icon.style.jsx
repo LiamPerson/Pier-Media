@@ -11,6 +11,6 @@ export const Icon = styled.i`
     filter: invert(60%);
     width: 20px;
     height: 20px;
-    margin: 0 8px;
+    margin: 0 0 0 8px;
     padding: 0;
 `
