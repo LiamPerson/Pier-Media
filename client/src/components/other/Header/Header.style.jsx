@@ -16,7 +16,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const InputGroupWrapper = styled.div`
-  margin: 10px 0;
+  margin: 15px 0;
 `;
 
 export const BurgerMenuWrapper = styled.div`
