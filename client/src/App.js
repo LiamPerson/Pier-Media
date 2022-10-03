@@ -3,12 +3,12 @@ import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import "./App.css";
 
 // Local Components
 import { Spinner } from './components/templates/Loader/Loader.style';
 import Header from "./components/other/Header/Header.component";
 import Sidebar from "./components/other/Sidebar/Sidebar.component";
-import OverlayHandler from './utils/OverlayHandler';
 import Article from './components/other/Article/Article.component';
 
 // Pages
@@ -18,7 +18,6 @@ const MusicPage = lazy(() => import('./components/pages/Music/MusicPage.componen
 const VideosPage = lazy(() => import('./components/pages/Videos/VideosPage.component'));
 
 // Object Initialisations
-OverlayHandler.init();
 
 function App() {
   return (<Provider store={store}>
