@@ -23,8 +23,7 @@ app.listen(port, error => {
 
 // Test get
 app.get('/monkey.png', (req, res) => {
-    //   res.send('Hello World!');
-    res.sendFile(__dirname + "/deez.txt");
+    res.sendFile(__dirname + "/sample.txt");
     const date = new Date();
     console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]: Requester's IP:`, req.ip);
     
@@ -32,7 +31,7 @@ app.get('/monkey.png', (req, res) => {
 
 // Test database retrieval
 app.get('/database', (req, res) => {
-    res.sendFile(__dirname + "/deez.txt");
+    res.send('Hello World!');
     const date = new Date();
     console.log(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]: Requester's IP:`, req.ip);
 })
