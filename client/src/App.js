@@ -8,9 +8,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Spinner } from './components/templates/Loader/Loader.style';
 import Header from "./components/other/Header/Header.component";
 import Sidebar from "./components/other/Sidebar/Sidebar.component";
+import OverlayHandler from './utils/OverlayHandler';
 
 // Pages
 const HelloWorld = lazy(() => import('./components/pages/HelloWorld/HelloWorld.component'));
+
+// Object Initialisations
+OverlayHandler.init();
 
 function App() {
   return (<Provider store={store}>
