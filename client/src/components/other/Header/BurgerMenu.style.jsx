@@ -1,28 +1,16 @@
 import styled from "styled-components";
 
-export const BurgerMenuWrapper = styled.div`
-  height: 100%;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const BurgerMenuIcon = styled.div`
-  background: url("/images/icons/burgerMenu.svg") no-repeat;
-  width: 3em;
-  height: 3em;
-  margin: 0 0.5em 0 0;
+  background: url("/images/ion-icons/burgerMenu.svg") no-repeat;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
   padding: 0;
   filter: invert(80%);
   cursor: pointer;
-  display: none;
+  display: inline-block;
   
-  :hover {
+  &:hover {
     filter: invert(90%);
   }
-
-  @media screen and (max-width: 420px) {
-    display: block;
-  }
-
 `;

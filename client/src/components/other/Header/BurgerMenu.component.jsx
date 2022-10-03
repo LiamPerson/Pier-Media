@@ -1,17 +1,15 @@
 import React from "react";
-import { BurgerMenuIcon, BurgerMenuWrapper } from "./BurgerMenu.style";
+import { BurgerMenuIcon } from "./BurgerMenu.style";
 import store from '../../../redux/store';
-import { setSidebarShown } from "../../../redux/overlayReducer";
+import { setSidebarMinimised } from "../../../redux/overlayReducer";
 import { useSelector } from "react-redux";
 
 const BurgerMenu = () => {
-    const shown = useSelector(state => state.overlay.sidebarShown);
+    const open = useSelector(state => state.overlay.sidebarMinimised);
     const handleClick = () => {
-        store.dispatch(setSidebarShown(!shown))
+        store.dispatch(setSidebarMinimised(!open))
     }
-    return (<BurgerMenuWrapper onClick={handleClick}>
-        <BurgerMenuIcon></BurgerMenuIcon>
-    </BurgerMenuWrapper>)
+    return <BurgerMenuIcon onClick={handleClick} />
 }
 
 export default BurgerMenu;

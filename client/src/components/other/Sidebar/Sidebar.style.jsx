@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import style from '../../../settings/style.json';
 import { Link } from "react-router-dom";
+import { getIconPath } from "../../templates/Icon/Icon.style";
+
 
 export const SideBarContainer = styled.div`
   background-color: ${style.color["dark-3"]};
@@ -8,13 +10,15 @@ export const SideBarContainer = styled.div`
   padding: 0;
   position: fixed;
   left: 0;
-  top: ${props => props.headerHeight}px;
+  top: var(--header-height);
   bottom: 0;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+
+  width: ${props => props.$minimised ? "var(--sidebar-width-minimised)" : "var(--sidebar-width-default)"};
   
-  @media screen and (max-width: 420px) {
+  @media (max-width: 420px) {
     right: 0;
   }
 `;
@@ -23,7 +27,7 @@ export const MainMenu = styled.div`
   margin: 10px 0;
   padding: 0;
   display: flex;
-  flex-flow:column;
+  flex-flow: column;
 `;
 
 const menuIconMini = css`
@@ -35,7 +39,7 @@ const menuIconMini = css`
 const menuIcon = css`
   display: inline-block;
   content: "";
-  background: url(images/ion-icons/${props => props.icon}.svg) no-repeat;
+  background: url(${props => getIconPath(props.icon)}) no-repeat;
   background-size: contain;
   height: 1em;
   width: 1em;
@@ -77,17 +81,15 @@ const menuItem = css`
 `;
 
 export const MenuItem = styled(Link)`
+  /* Default */
   ${menuItem}
-
   &::before {
     ${menuIcon}
   }
+  /* Minimised Sidebar */
+  ${props => props.$minimised ? menuItemMini : ""}
 
-  ${props => props.$minimised ? menuItemMini : ""};
-
-  @media (max-width: 820px) {
-    ${menuItemMini}
-  }
+  /* Media Queries */
   @media (max-width: 420px) {
     ${menuItem}
     &::before {

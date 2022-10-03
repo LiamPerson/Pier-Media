@@ -1,23 +1,19 @@
-import React, { useEffect, useRef } from "react";
-import { HeaderContainer, PierLogo } from "./Header.style";
+import React from "react";
+import { HeaderContainer, InputGroupWrapper, LogoContainer, LogoTitle, PierLogo } from "./Header.style";
 import InputGroup from "../../templates/Input/InputGroup.component";
 import BurgerMenu from "./BurgerMenu.component";
-import OverlayHandler from "../../../utils/OverlayHandler";
 
-const Header = () => {
-    
-    const ref = useRef();
-    useEffect(() => {
-        if(!ref.current) return;
-        OverlayHandler.setHeaderElement(ref.current);
-    }, [ref]);
-
-
-    return (<HeaderContainer ref={ref}>
-        <PierLogo />
-        <InputGroup icon="search" placeholder="Search"/>
-        <BurgerMenu />
-    </HeaderContainer>)
-}
+const Header = () => (
+    <HeaderContainer>
+        <LogoContainer>
+            <BurgerMenu />
+            <PierLogo />
+            <LogoTitle>Pier</LogoTitle>
+        </LogoContainer>
+        <InputGroupWrapper>
+            <InputGroup icon="search" placeholder="Search"/>
+        </InputGroupWrapper>
+    </HeaderContainer>
+)
 
 export default Header;

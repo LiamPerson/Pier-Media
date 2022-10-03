@@ -1,8 +1,9 @@
-import {InputIcon, InputWrapper, Input} from "./InputGroup.style";
+import { Icon } from "../Icon/Icon.style";
+import { InputWrapper, Input } from "./InputGroup.style";
 
 const InputGroup = ({ icon, placeholder }) => {
     return (<InputWrapper>
-        {icon && <InputIcon icon={icon}/>}
+        {icon && <Icon icon={icon}/>}
         <Input type="text" placeholder={placeholder}/>
     </InputWrapper>)
 }
