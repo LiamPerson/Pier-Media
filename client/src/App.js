@@ -9,6 +9,7 @@ import { Spinner } from './components/templates/Loader/Loader.style';
 import Header from "./components/other/Header/Header.component";
 import Sidebar from "./components/other/Sidebar/Sidebar.component";
 import OverlayHandler from './utils/OverlayHandler';
+import Article from './components/other/Article/Article.component';
 
 // Pages
 const HelloWorld = lazy(() => import('./components/pages/HelloWorld/HelloWorld.component'));
@@ -21,11 +22,13 @@ function App() {
     <BrowserRouter>
       <Header />
       <Sidebar />
+      <Article>
         <Switch>
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HelloWorld} />
           </Suspense>
         </Switch>
+      </Article>
     </BrowserRouter>
   </Provider>);
 }
