@@ -10,9 +10,11 @@
         "dark-2": "#23272d",
         "dark-3": "#32363c",
         "dark-4": "#40454b",
+        "dark-5": "#4f545a",
         "light-1": "#eeeeee",
         "light-2": "#cccccc",
         "light-3": "#aaaaaa",
+        "light-4": "#888888",
 
         "info": "#FFEE7F",
         "info_text": "black",

@@ -5,10 +5,19 @@ export const HeaderContainer = styled.div`
   background-color: ${style.color["dark-3"]};
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
-  //justify-content: space-between;
-  //align-items: center;
   margin: 0;
   padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  .burgerMenuWrapper {
+    height: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const PierLogo = styled.img.attrs({
