@@ -1,13 +1,16 @@
 import InputGroup from "../../templates/Input/InputGroup.component";
 import React from "react";
-import { InputButtonContainer, SidebarDownloadInputWrapper } from "./SidebarDownloadInput.style";
+import { InputButtonContainer, InputGroupContainer, SidebarDownloadInputWrapper } from "./SidebarDownloadInput.style";
+import { Button } from "../../templates/Button/Button.style";
 
-const SidebarDownloadInput = () => {
-    return (<SidebarDownloadInputWrapper>
-        <InputGroup placeholder="URL"/>
+const SidebarDownloadInput = ({ minimised }) => {
+    return (<SidebarDownloadInputWrapper $minimised={minimised}>
+        <InputGroupContainer>
+            <InputGroup icon="planet" placeholder="URL"/>
+        </InputGroupContainer>
         <InputButtonContainer>
-            <input type="button" value="audio"/>
-            <input type="button" value="video"/>
+            <Button>Audio</Button>
+            <Button>Video</Button>
         </InputButtonContainer>
     </SidebarDownloadInputWrapper>);
 }
