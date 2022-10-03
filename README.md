@@ -2,4 +2,4 @@
 ___ A NodeJS Raspberry Pi Home Server ___
 
 # Licenses
-- [ionicons](https://raw.githubusercontent.com/YeloPartyHat/Node-Pier/main/docs/licenses/IONICONS-LICENSE)
+- [ion-icons](https://raw.githubusercontent.com/YeloPartyHat/Node-Pier/main/client/public/images/ion-icons/LICENSE)
