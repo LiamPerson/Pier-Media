@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import style from '../../../settings/style.json';
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,6 @@ export const SideBarContainer = styled.div`
   justify-content: space-between;
   
   @media screen and (max-width: 420px) {
-    //display: none;
     right: 0;
   }
 `;
@@ -27,10 +26,40 @@ export const MainMenu = styled.div`
   flex-flow:column;
 `;
 
+const menuIconMini = css`
+  height: 25px;
+  width: 25px;
+  margin: 5px 0 10px;
+`;
 
+const menuIcon = css`
+  display: inline-block;
+  content: "";
+  background: url(images/ion-icons/${props => props.icon}.svg) no-repeat;
+  background-size: contain;
+  height: 1em;
+  width: 1em;
+  padding: 0;
+  margin: 0 15px 0 0;
+  filter: invert(80%);
+`;
 
-export const MenuItem = styled(Link)`
+const menuItemMini = css`
+  padding: 0.5em 1.5em 0.5em 1.5em;
+  flex-direction: column;
+  font-size: 10px;
+  &:hover {
+    padding: 0.5em 1.4em 0.5em 1.6em;
+  }
+
+  &::before {
+    ${menuIconMini}
+  }
+`;
+
+const menuItem = css`
   display: flex;
+  flex-direction: row;
   align-items: center;
   
   position: relative;
@@ -39,39 +68,30 @@ export const MenuItem = styled(Link)`
   padding: 0.5em 2.5em 0.5em 1.5em;
   color: ${style.color["light-2"]};
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 18px;
 
   &:hover {
     background-color: ${style.color["dark-5"]};
     padding: 0.5em 2.4em 0.5em 1.6em;
   }
+`;
+
+export const MenuItem = styled(Link)`
+  ${menuItem}
 
   &::before {
-    display: inline-block;
-    content: "";
-    background: url(images/ion-icons/${props => props.icon}.svg) no-repeat;
-    background-size: contain;
-    height: 1em;
-    width: 1em;
-    padding: 0;
-    margin: 0 0.5em 0 0;
-    filter: invert(80%);
+    ${menuIcon}
   }
+
+  ${props => props.$minimised ? menuItemMini : ""};
 
   @media (max-width: 820px) {
-    padding: 0.5em 1.5em 0.5em 1.5em;
-
-    &:hover {
-      padding: 0.5em 1.4em 0.5em 1.6em;
-    }
-
-    &::before {
-      margin: 0;
-    }
+    ${menuItemMini}
   }
   @media (max-width: 420px) {
+    ${menuItem}
     &::before {
-      margin: 0 0.5em 0 0;
+      ${menuIcon}
     }
   }
 `;

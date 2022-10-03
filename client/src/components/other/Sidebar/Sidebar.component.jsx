@@ -17,15 +17,15 @@ const Sidebar = () => {
     }, [ref]);
 
     if(!shown) return null;
-    return (<SideBarContainer headerHeight={headerHeight} ref={ref} $minimised={sidebarIsMinimised}>
+    return (<SideBarContainer headerHeight={headerHeight} ref={ref}>
 
         <MainMenu>
-            <MenuItem to="/" icon="home">Home</MenuItem>
-            <MenuItem to="/movie" icon="movie">Movies</MenuItem>
-            <MenuItem to="/video" icon="video">Videos</MenuItem>
-            <MenuItem to="/music" icon="music">Music</MenuItem>
-            <MenuItem to="/file" icon="file">Files</MenuItem>
-            <MenuItem to="/browse" icon="folder">Browse</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/" icon="home">Home</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/movie" icon="movie">Movies</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/video" icon="video">Videos</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/music" icon="music">Music</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/file" icon="file">Files</MenuItem>
+            <MenuItem $minimised={sidebarIsMinimised} to="/browse" icon="folder">Browse</MenuItem>
         </MainMenu>
 
         <SidebarDownloadInput />
