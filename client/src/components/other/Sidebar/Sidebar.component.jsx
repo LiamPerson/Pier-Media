@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { SideBarContainer, MainMenu } from "./Sidebar.style";
-import MenuItem from "./MenuItem.component";
 import SidebarDownloadInput from "./SidebarDownloadInput.component";
 import { useSelector } from 'react-redux';
 import OverlayHandler from "../../../utils/OverlayHandler";
+import { MenuItem } from "./MenuItem.style";
 
 const Sidebar = () => {
 
     const shown = useSelector(state => state.overlay.sidebarShown);
     const headerHeight = useSelector(state => state.overlay.headerHeight);
+    const sidebarIsMinimised = useSelector(state => state.overlay.sidebarMinimised);
     
     const ref = useRef();
     useEffect(() => {
@@ -17,15 +18,15 @@ const Sidebar = () => {
     }, [ref]);
 
     if(!shown) return null;
-    return (<SideBarContainer headerHeight={headerHeight} ref={ref}>
+    return (<SideBarContainer headerHeight={headerHeight} ref={ref} $minimised={sidebarIsMinimised}>
 
         <MainMenu>
-            <MenuItem route="/" icon="home" title="Home" />
-            <MenuItem route="/movie" icon="movie" title="Movies" />
-            <MenuItem route="/video" icon="video" title="Videos" />
-            <MenuItem route="/music" icon="music" title="Music" />
-            <MenuItem route="/file" icon="file" title="Files" />
-            <MenuItem route="/browse" icon="folder" title="Browse" />
+            <MenuItem to="/" icon="home">Home</MenuItem>
+            <MenuItem to="/movie" icon="movie">Movies</MenuItem>
+            <MenuItem to="/video" icon="video">Videos</MenuItem>
+            <MenuItem to="/music" icon="music">Music</MenuItem>
+            <MenuItem to="/file" icon="file">Files</MenuItem>
+            <MenuItem to="/browse" icon="folder">Browse</MenuItem>
         </MainMenu>
 
         <SidebarDownloadInput />
