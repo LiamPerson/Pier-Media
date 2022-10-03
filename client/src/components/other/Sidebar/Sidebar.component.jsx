@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { SideBarContainer, MainMenu } from "./Sidebar.style";
+import { SideBarContainer, MainMenu, MenuItem } from "./Sidebar.style";
 import SidebarDownloadInput from "./SidebarDownloadInput.component";
 import { useSelector } from 'react-redux';
 import OverlayHandler from "../../../utils/OverlayHandler";
-import { MenuItem } from "./MenuItem.style";
 
 const Sidebar = () => {
 
