@@ -1,17 +1,10 @@
-import React, {useRef} from "react";
-import {BurgerMenuIcon} from "./BurgerMenu.style";
-import {SideBarYtDl} from "../Sidebar/SideBarYtDlContainer.style";
-
-let menuVisible = false;
-
-export const toggleMainMenu =() => {
-    const sideBar = document.getElementById('SideBar');
-    sideBar.style.display = menuVisible ? "flex" : "none";
-    menuVisible = !menuVisible;
-}
+import React from "react";
+import { BurgerMenuIcon, BurgerMenuWrapper } from "./BurgerMenu.style";
 
 const BurgerMenu = () => {
-    return (<BurgerMenuIcon onClick={toggleMainMenu}></BurgerMenuIcon>)
+    return (<BurgerMenuWrapper>
+        <BurgerMenuIcon></BurgerMenuIcon>
+    </BurgerMenuWrapper>)
 }
 
 export default BurgerMenu;

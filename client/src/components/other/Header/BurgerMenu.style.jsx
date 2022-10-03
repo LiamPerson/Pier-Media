@@ -1,5 +1,11 @@
 import styled from "styled-components";
-import style from '../../../settings/style.json';
+
+export const BurgerMenuWrapper = styled.div`
+  height: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const BurgerMenuIcon = styled.div`
   background: url("/images/icons/burgerMenu.svg") no-repeat;
