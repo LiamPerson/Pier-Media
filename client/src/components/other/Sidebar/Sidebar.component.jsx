@@ -1,8 +1,7 @@
 import React from "react";
-import {SideBar, MainMenu} from "./Sidebar.style";
+import { SideBar, MainMenu } from "./Sidebar.style";
 import MenuItem from "./MenuItem.component";
-import InputGroup from "../../templates/Input/InputGroup.component";
-import SideBarYtDlContainer from "./SideBarYtDlContainer.component";
+import SidebarDownloadInput from "./SidebarDownloadInput.component";
 
 const Sidebar = () => {
     return (<SideBar id="SideBar">
@@ -15,7 +14,7 @@ const Sidebar = () => {
             <MenuItem route="/browse" icon="folder" title="Browse" />
         </MainMenu>
 
-        <SideBarYtDlContainer/>
+        <SidebarDownloadInput/>
 
     </SideBar>)
 }
