@@ -1,7 +1,7 @@
 {
   "name": "node-pier",
   "version": "1.0.0",
-  "description": "NodeJS Raspberry Pi Home Server",
+  "description": "Server-side for Pier: The NodeJS Raspberry Pi Home Server",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

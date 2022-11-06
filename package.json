@@ -4,6 +4,7 @@
   "description": "NodeJS Raspberry Pi Home Server",
   "scripts": {
     "client": "cd client && npm run start",
+    "debug-server": "cd server && nodemon --inspect-brk server.js",
     "server": "cd server && nodemon server.js",
     "build": "cd client && npm run build",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
