@@ -15,9 +15,3 @@ __Advantages over Pier__
 ## Dependencies:
 - NodeJS V16.10+
 - NPM V8+
-
-## Installation
-Ensure you have the dependencies then simply clone this repository and run the included `install.sh` script.
-
-## Licenses
-- [ion-icons](https://raw.githubusercontent.com/YeloPartyHat/Pier-2/main/client/public/images/ion-icons/LICENSE)
