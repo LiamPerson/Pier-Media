@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Server-side for Pier: The NodeJS Raspberry Pi Home Server",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "build": "npm run build"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,9 @@
     "compression": "^1.7.4",
     "express": "^4.18.1",
     "socket.io": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "typescript": "^4.9.5"
   }
 }
