@@ -1,9 +1,9 @@
 {
     "name": "dl_videos",
+    "primary": "id",
     "columns": {
         "id": {
-            "type": "integer",
-            "primary": true
+            "type": "integer"
         },
         "name": {
             "type": "text",
