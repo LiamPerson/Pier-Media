@@ -1,9 +1,5 @@
 {
-    "cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json"],
+	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json"],
 	"cSpell.language": "en-GB",
-    "cSpell.words": [
-        "nodepier",
-        "rxdb",
-        "websql"
-    ]
+	"cSpell.words": ["nodepier", "rxdb", "Videocam", "websql"]
 }
