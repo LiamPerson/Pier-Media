@@ -1,12 +1,12 @@
-# Pier 2
+# Ocean Pier
 __A NextJS Raspberry Pi Home Server__
 
-![Sample image of Pier 2's homepage](https://raw.githubusercontent.com/YeloPartyHat/Pier-2/main/docs/sample.png)
+![Sample image of Pier's homepage](./docs/sample.png)
 
 A home media center made for use with Raspberry Pi 4 Model B (though should work on other devices)
-Connect to your Pier server by going to it's IP address in the browser of your choice e.g. in Google Chrome, top bar `192.168.8.77/` or simply go to the URL: `raspberrypi/`
+Connect to your Pier server by going to it's IP address in the browser of your choice. For example in Google Chrome's address bar enter the server's ip address (example: `192.168.8.77/`) or simply go to the device's name which should be by default `raspberrypi/`.
 
-__Advantages over Pier__
+__Advantages over Pier Legacy__
 - Requires only 2 dependencies
 - Much easier to install
 - More efficient runtime
