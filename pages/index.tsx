@@ -1,11 +1,10 @@
-import Head from '@/components/Head'
+import GenericPage from '@/components/GenericPage'
 
 const IndexPage = () => {
 	return (
-		<div>
-			<Head />
+		<GenericPage>
 			<p>Hello world!</p>
-		</div>
+		</GenericPage>
 	)
 }
 
