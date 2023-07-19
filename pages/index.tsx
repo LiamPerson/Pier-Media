@@ -1,10 +1,10 @@
-import GenericPage from '@/components/GenericPage'
+import DashboardPage from '@/components/DashboardPage'
 
 const IndexPage = () => {
 	return (
-		<GenericPage>
+		<DashboardPage>
 			<p>Hello world!</p>
-		</GenericPage>
+		</DashboardPage>
 	)
 }
 
