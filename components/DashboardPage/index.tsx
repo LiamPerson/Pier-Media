@@ -1,8 +1,8 @@
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack } from '@mui/material'
 import BasePage from '../BasePage'
 import Sidebar from './Sidebar'
+import ROUTES, { ROUTE_ICONS } from '@/libs/routes'
+import { toCapitalCase } from '@/libs/helpers'
 
 interface DashboardPageProps {
 	children: React.ReactNode
@@ -10,9 +10,11 @@ interface DashboardPageProps {
 const DashboardPage = ({ children }: DashboardPageProps) => {
 	return (
 		<BasePage>
+			<Box sx={{ height: '50px', background: 'red' }}>a</Box>
 			<Stack
 				direction={'row'}
 				height={'100%'}
+				gap={'15px'}
 			>
 				<Sidebar
 					defaultOpen
@@ -20,17 +22,23 @@ const DashboardPage = ({ children }: DashboardPageProps) => {
 					title={<>Navigation</>}
 				>
 					<List>
-						{['Details', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-							<ListItem
-								key={text}
-								disablePadding
-							>
-								<ListItemButton>
-									<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-									<ListItemText primary={text} />
-								</ListItemButton>
-							</ListItem>
-						))}
+						{Object.keys(ROUTES).map((key) => {
+							const routeName = ROUTES[key as keyof typeof ROUTES]
+							const UsingIcon = ROUTE_ICONS[routeName as keyof typeof ROUTE_ICONS]
+							return (
+								<ListItem
+									key={key}
+									disablePadding
+								>
+									<ListItemButton>
+										<ListItemIcon>
+											<UsingIcon />
+										</ListItemIcon>
+										<ListItemText primary={toCapitalCase(key)} />
+									</ListItemButton>
+								</ListItem>
+							)
+						})}
 					</List>
 				</Sidebar>
 				{children}
