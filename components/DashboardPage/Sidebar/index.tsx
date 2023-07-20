@@ -50,6 +50,10 @@ const DrawerHeader = styled('div')<DrawerHeaderProps>(({ theme, anchor }) => ({
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
 	width: MAXIMUM_DRAWER_WIDTH,
 	flexShrink: 0,
+	top: 0,
+	left: 0,
+	bottom: 0,
+	maxHeight: '100vh',
 	whiteSpace: 'nowrap',
 	boxSizing: 'border-box',
 	...(open && {
@@ -90,9 +94,11 @@ interface MiniDrawerProps {
 	children: React.ReactNode
 	defaultOpen?: boolean
 	anchor?: DrawerProps['anchor']
+	position?: 'fixed' | 'static' | 'sticky'
 	title?: React.ReactNode
+	sx?: DrawerProps['sx']
 }
-export default function Sidebar({ children, defaultOpen, anchor, title }: MiniDrawerProps) {
+export default function Sidebar({ children, defaultOpen, anchor, title, sx, position }: MiniDrawerProps) {
 	const [open, setOpen] = useTransientState(defaultOpen, defaultOpen)
 
 	const handleToggle = () => {
@@ -101,6 +107,7 @@ export default function Sidebar({ children, defaultOpen, anchor, title }: MiniDr
 
 	return (
 		<Drawer
+			sx={sx}
 			anchor={anchor}
 			variant='permanent'
 			open={open}

@@ -1,9 +1,16 @@
 import DashboardPage from '@/components/DashboardPage'
+import { Box } from '@mui/material'
 
 const IndexPage = () => {
 	return (
 		<DashboardPage>
-			<p>Hello world!</p>
+			<Box
+				sx={{
+					height: '1500px',
+				}}
+			>
+				Hello world!
+			</Box>
 		</DashboardPage>
 	)
 }
