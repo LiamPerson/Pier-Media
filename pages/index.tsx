@@ -17,7 +17,7 @@ const IndexPage = () => {
 					{Array.from({ length: 20 }).map((_, index) => (
 						<Box
 							key={index}
-							sx={{ display: 'flex', background: 'blue', width: '200px', height: '200px' }}
+							sx={{ display: 'flex', background: 'cyan', width: '100px', height: '100px' }}
 						>
 							A box {index}
 						</Box>
