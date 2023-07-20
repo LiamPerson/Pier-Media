@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 
 interface StickyPageProps {
 	children: React.ReactNode
@@ -7,7 +7,12 @@ interface StickyPageProps {
 const StickyPage = ({ children }: StickyPageProps) => {
 	return (
 		<Box position={'relative'}>
-			<Box sx={{ position: 'sticky', top: 0 }}>{children}</Box>
+			<Stack
+				direction={'row'}
+				sx={{ position: 'sticky', top: 0, bottom: 0 }}
+			>
+				{children}
+			</Stack>
 		</Box>
 	)
 }
