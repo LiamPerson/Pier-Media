@@ -2,6 +2,7 @@ import { Box, Paper } from '@mui/material'
 import BasePage from '../BasePage'
 import StickyPage from './StickyPage'
 import Sticky from './Sticky'
+import Banner from '../Banner'
 
 interface DashboardPageProps {
 	children: React.ReactNode
@@ -9,7 +10,7 @@ interface DashboardPageProps {
 const DashboardPage = ({ children }: DashboardPageProps) => {
 	return (
 		<BasePage>
-			<Box sx={{ height: '50px', background: 'red' }}>a</Box>
+			<Banner />
 			<StickyPage>
 				<Sticky>
 					<Paper>
