@@ -1,9 +1,9 @@
-import { Box, Button, alpha } from '@mui/material'
+import { Box, Typography, alpha } from '@mui/material'
 import { HEADER_HEIGHT_PX, SIDEBAR_WIDTH_PX } from './constants'
 import { ROUTE, ROUTE_ICON, ROUTE_NAME } from '@/libs/routes'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { BACKGROUND } from '@/styles/color'
+import NextLink from '@/components/ui/NextLink'
 
 interface MenuButtonProps {
 	isActive: boolean
@@ -12,9 +12,24 @@ interface MenuButtonProps {
 }
 const MenuButton = ({ isActive, children, href }: MenuButtonProps) => {
 	return (
-		<Link href={href}>
-			<Button sx={{ background: isActive ? '#555' : '#000' }}>{children}</Button>
-		</Link>
+		<NextLink href={href}>
+			<Box
+				sx={{
+					background: isActive ? '#ffffff22' : undefined,
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					pt: '10px',
+					pb: '5px',
+					transition: '0.333s',
+					'&:hover': {
+						background: '#ffffff33',
+					},
+				}}
+			>
+				{children}
+			</Box>
+		</NextLink>
 	)
 }
 
@@ -43,7 +58,11 @@ const Sidebar = () => {
 						isActive={route === ROUTE[routeName]}
 						key={routeName}
 					>
-						<RouteIcon />
+						<RouteIcon
+							width={25}
+							height={25}
+						/>
+						<Typography variant='caption'>{routeName}</Typography>
 					</MenuButton>
 				)
 			})}

@@ -1,7 +1,7 @@
-import HomeIcon from '@mui/icons-material/Home'
-import VideocamIcon from '@mui/icons-material/Videocam'
-import MovieIcon from '@mui/icons-material/Movie'
-import LibraryMusicIcon from '@mui/icons-material/LibraryMusic'
+import HomeIcon from '@/components/ui/icons/HomeIcon'
+import MovieIcon from '@/components/ui/icons/MovieIcon'
+import MusicIcon from '@/components/ui/icons/MusicIcon'
+import VideoIcon from '@/components/ui/icons/VideoIcon'
 
 export enum ROUTE_NAME {
 	HOME = 'Home',
@@ -19,7 +19,7 @@ export const ROUTE: Record<ROUTE_NAME, string> = {
 
 export const ROUTE_ICON: Record<ROUTE_NAME, typeof HomeIcon> = {
 	[ROUTE_NAME.HOME]: HomeIcon,
-	[ROUTE_NAME.VIDEOS]: VideocamIcon,
+	[ROUTE_NAME.VIDEOS]: VideoIcon,
 	[ROUTE_NAME.MOVIES]: MovieIcon,
-	[ROUTE_NAME.MUSIC]: LibraryMusicIcon,
+	[ROUTE_NAME.MUSIC]: MusicIcon,
 }
