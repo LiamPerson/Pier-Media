@@ -1,9 +1,10 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, IconButton, Paper, Toolbar, Typography } from '@mui/material'
 import { HEADER_HEIGHT, HEADER_HEIGHT_PX } from './constants'
 import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
 import { ROUTE } from '@/libs/routes'
 import NextLink from '@/components/ui/NextLink'
+import SiteSearch from './SiteSearch'
 
 interface HeaderProps {
 	width: number // in pixels
@@ -32,12 +33,9 @@ const Header = ({ width }: HeaderProps) => (
 				/>
 				<Typography variant='h4'>Pier</Typography>
 			</NextLink>
-			<Button
-				sx={{ marginLeft: 'auto' }}
-				color='inherit'
-			>
-				Login
-			</Button>
+			<Paper sx={{ marginLeft: 'auto' }}>
+				<SiteSearch />
+			</Paper>
 		</Toolbar>
 	</AppBar>
 )
