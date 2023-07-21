@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material'
-import { SIDEBAR_WIDTH } from './constants'
+import { HEADER_HEIGHT, SIDEBAR_WIDTH } from './constants'
 import { ROUTE, ROUTE_ICON, ROUTE_NAME } from '@/libs/routes'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -20,7 +20,7 @@ const MenuButton = ({ isActive, children, href }: MenuButtonProps) => {
 const Sidebar = () => {
 	const route = useRouter().route
 	return (
-		<Box sx={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: SIDEBAR_WIDTH }}>
+		<Box sx={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: SIDEBAR_WIDTH, paddingTop: HEADER_HEIGHT }}>
 			{Object.values(ROUTE_NAME).map((routeName) => {
 				const RouteIcon = ROUTE_ICON[routeName]
 				return (

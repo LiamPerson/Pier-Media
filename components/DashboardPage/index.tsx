@@ -5,7 +5,7 @@ import Sticky from './Sticky'
 import Banner from '../Banner'
 import { useElementSize } from 'usehooks-ts'
 import Header from './Header'
-import { HEADING_HEIGHT, SIDEBAR_WIDTH } from './constants'
+import { HEADER_HEIGHT, SIDEBAR_WIDTH } from './constants'
 import Sidebar from './Sidebar'
 
 interface DashboardPageProps {
@@ -23,7 +23,7 @@ const DashboardPage = ({ children }: DashboardPageProps) => {
 					<Sidebar />
 				</Sticky>
 				<Box
-					marginTop={`calc(${HEADING_HEIGHT} + 15px)`}
+					marginTop={`calc(${HEADER_HEIGHT} + 15px)`}
 					marginLeft={`calc(${SIDEBAR_WIDTH} + 15px)`}
 				>
 					{children}
