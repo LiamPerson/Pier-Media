@@ -10,7 +10,7 @@ interface MenuButtonProps {
 	children: React.ReactNode
 	href: string
 }
-const MenuButton = ({ isActive, children, href }: MenuButtonProps) => {
+const MenuItem = ({ isActive, children, href }: MenuButtonProps) => {
 	return (
 		<NextLink href={href}>
 			<Box
@@ -21,9 +21,10 @@ const MenuButton = ({ isActive, children, href }: MenuButtonProps) => {
 					alignItems: 'center',
 					pt: '10px',
 					pb: '5px',
-					transition: '0.333s',
+					transition: '0.2s',
 					'&:hover': {
-						background: '#ffffff33',
+						background: '#ffffff22',
+						pl: '5px',
 					},
 				}}
 			>
@@ -53,7 +54,7 @@ const Sidebar = () => {
 			{Object.values(ROUTE_NAME).map((routeName) => {
 				const RouteIcon = ROUTE_ICON[routeName]
 				return (
-					<MenuButton
+					<MenuItem
 						href={ROUTE[routeName]}
 						isActive={route === ROUTE[routeName]}
 						key={routeName}
@@ -63,7 +64,7 @@ const Sidebar = () => {
 							height={25}
 						/>
 						<Typography variant='caption'>{routeName}</Typography>
-					</MenuButton>
+					</MenuItem>
 				)
 			})}
 		</Box>
