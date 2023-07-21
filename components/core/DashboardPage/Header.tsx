@@ -1,8 +1,7 @@
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material'
 import { HEADER_HEIGHT, HEADER_HEIGHT_PX } from './constants'
 import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ROUTE } from '@/libs/routes'
 import NextLink from '@/components/ui/NextLink'
 
