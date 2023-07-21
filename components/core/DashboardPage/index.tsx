@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material'
+import { Box } from '@mui/material'
 import BasePage from '../BasePage'
 import StickyPage from './StickyPage'
 import Sticky from './Sticky'
@@ -23,8 +23,8 @@ const DashboardPage = ({ children }: DashboardPageProps) => {
 					<Sidebar />
 				</Sticky>
 				<Box
-					marginTop={`calc(${HEADER_HEIGHT} + 15px)`}
-					marginLeft={`calc(${SIDEBAR_WIDTH} + 15px)`}
+					marginTop={`${HEADER_HEIGHT + 15}px`}
+					marginLeft={`${SIDEBAR_WIDTH + 15}px`}
 				>
 					{children}
 				</Box>

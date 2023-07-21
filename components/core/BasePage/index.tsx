@@ -1,4 +1,4 @@
-import Head from '@/components/BasePage/Head'
+import Head from '@/components/core/BasePage/Head'
 import { Box } from '@mui/material'
 import { forwardRef } from 'react'
 

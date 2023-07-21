@@ -1,4 +1,4 @@
-import DashboardPage from '@/components/DashboardPage'
+import DashboardPage from '@/components/core/DashboardPage'
 import { Box, Grid, Stack } from '@mui/material'
 
 const IndexPage = () => {
