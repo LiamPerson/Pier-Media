@@ -33,10 +33,14 @@ const SiteSearch = () => {
 					inputProps={{ ...params.inputProps, autoComplete: 'new-password' }}
 				/>
 			)}
-			id='country-select-demo'
-			sx={{ width: 300 }}
+			sx={{
+				width: 120,
+				transition: '0.2s',
+				'&:focus, &:active, &:hover, &:focus-within': {
+					width: 200,
+				},
+			}}
 			options={OPTIONS}
-			autoHighlight
 			getOptionLabel={(option) => option.label}
 			renderOption={(props, option) => (
 				<Box
