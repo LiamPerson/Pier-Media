@@ -15,3 +15,7 @@ __Advantages over Pier Legacy__
 ## Dependencies:
 - NodeJS V16.10+
 - NPM V8+
+
+---
+## Licenses
+- [Ion-Icons](./public/ion-icons/LICENSE) (MIT License)
