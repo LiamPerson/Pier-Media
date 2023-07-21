@@ -4,8 +4,9 @@ import StickyPage from './StickyPage'
 import Sticky from './Sticky'
 import Banner from '../Banner'
 import { useElementSize } from 'usehooks-ts'
-
-const SIDEBAR_WIDTH = '150px'
+import Header from './Header'
+import { HEADING_HEIGHT, SIDEBAR_WIDTH } from './constants'
+import Sidebar from './Sidebar'
 
 interface DashboardPageProps {
 	children: React.ReactNode
@@ -18,12 +19,15 @@ const DashboardPage = ({ children }: DashboardPageProps) => {
 			<Banner />
 			<StickyPage>
 				<Sticky sx={{ height: '100vh', zIndex: 1 }}>
-					<Paper sx={{ position: 'absolute', top: 0, left: 0, width: windowWidth, background: 'yellow' }}>
-						9999999999999999999999999999
-					</Paper>
-					<Paper sx={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: SIDEBAR_WIDTH }}>side</Paper>
+					<Header width={windowWidth} />
+					<Sidebar />
 				</Sticky>
-				<Box marginLeft={SIDEBAR_WIDTH}>{children}</Box>
+				<Box
+					marginTop={`calc(${HEADING_HEIGHT} + 15px)`}
+					marginLeft={`calc(${SIDEBAR_WIDTH} + 15px)`}
+				>
+					{children}
+				</Box>
 			</StickyPage>
 			{/* Footer */}
 			<Box sx={{ background: 'orange', height: '1400px' }}>823r239ry</Box>
