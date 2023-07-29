@@ -16,6 +16,18 @@ __Advantages over Pier Legacy__
 - NodeJS V16.10+
 - NPM V8+
 
----
-## Licenses
+# Developers
+All information below is only necessary for those wanting to contribute to, or edit the project.
+
+## Requirements
+- NVM ([Windows](https://github.com/coreybutler/nvm-windows) | [Everything Else](https://github.com/nvm-sh/nvm))
+
+## Required VSCode Extensions
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+
+
+
+# Licenses
 - [Ion-Icons](./public/ion-icons/LICENSE) (MIT License)
