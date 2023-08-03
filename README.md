@@ -27,7 +27,8 @@ All information below is only necessary for those wanting to contribute to, or e
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
-
+## Conventions
+All time units are stored in milliseconds (ms) unless otherwise specified.
 
 # Licenses
 - [Ion-Icons](./public/ion-icons/LICENSE) (MIT License)
