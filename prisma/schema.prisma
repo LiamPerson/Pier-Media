@@ -1,11 +1,81 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+model File {
+  id        Int      @id @default(autoincrement())
+  location  String // The location of the file on the filesystem
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Track     Track[]
+  Image     Image[]
+}
+
+model Provider {
+  id      Int      @id @default(autoincrement())
+  name    String
+  url     String
+  authors Author[]
+}
+
+model Author {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tracks     Track[]
+  providerId Int
+  provider   Provider @relation(fields: [providerId], references: [id])
+}
+
+model Genre {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  tracks      Track[]
+}
+
+model Album {
+  id           Int      @id @default(autoincrement())
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  tracks       Track[]
+  albumImageId Int
+  albumImage   Image    @relation(fields: [albumImageId], references: [id])
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  fileId    Int
+  file      File     @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Album     Album[]
+}
+
+model Track {
+  id                      Int      @id @default(autoincrement())
+  title                   String
+  genreId                 Int
+  genre                   Genre    @relation(fields: [genreId], references: [id])
+  bitrate                 Int // Stored in kbs
+  url                     String // We can store the original URl here so we can decode the source later
+  authorId                Int
+  author                  Author   @relation(fields: [authorId], references: [id])
+  fileId                  Int
+  file                    File     @relation(fields: [fileId], references: [id])
+  contributingArtistsJson String // Please see ./json-interfaces for definition
+  albumId                 Int
+  album                   Album    @relation(fields: [albumId], references: [id])
+  duration                Int
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 }
