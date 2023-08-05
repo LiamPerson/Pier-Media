@@ -9,6 +9,22 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model DownloadSettings {
+  id        Int        @id @default(autoincrement())
+  updatedAt DateTime   @updatedAt
+  path      String
+  audioPath String
+  imagePath String
+  videoPath String
+  Settings  Settings[]
+}
+
+model Settings {
+  id                 Int              @id @default(autoincrement())
+  downloads          DownloadSettings @relation(fields: [downloadSettingsId], references: [id])
+  downloadSettingsId Int
+}
+
 model File {
   id        Int      @id @default(autoincrement())
   location  String // The location of the file on the filesystem
