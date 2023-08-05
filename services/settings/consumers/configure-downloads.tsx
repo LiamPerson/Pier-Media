@@ -1,7 +1,8 @@
+import { CONFIGURE_DOWNLOADS_ENDPOINT } from '../endpoints'
 import { DownloadsSettings } from '../handlers/configure-downloads'
 
 const configureDownloads = (settings: DownloadsSettings) => {
-	return fetch('/api/configure-downloads', {
+	return fetch(CONFIGURE_DOWNLOADS_ENDPOINT, {
 		method: 'POST',
 		body: JSON.stringify(settings),
 	})
