@@ -1,5 +1,7 @@
+import FileSystem from '@/libs/server-only/FileSystem'
+import PierSettings from '@/libs/server-only/PierSettings'
+import { PrismaClient } from '@prisma/client'
 import Ajv from 'ajv'
-import { accessSync, constants } from 'fs'
 import { NextApiHandler } from 'next'
 
 /**
@@ -32,19 +34,28 @@ const settingsSchema = {
 const handler: NextApiHandler = async (req, res) => {
 	const incomingSettingsObject = JSON.parse(req.body) as unknown
 	const validator = new Ajv()
-	validator.addFormat('filepath', (path: string) => {
-		try {
-			accessSync(path, constants.W_OK)
-			return true
-		} catch {
-			return false
-		}
-	})
+	validator.addFormat('filepath', FileSystem.isAccessible)
 	const validate = validator.compile(settingsSchema)
 	if (!validate(incomingSettingsObject)) {
 		res.status(400).json({ errors: validate.errors })
 		return
 	}
+
+	const validatedSettings = incomingSettingsObject as DownloadsSettings
+
+	const prisma = new PrismaClient()
+	const settings = await PierSettings.getSettings(prisma)
+
+	await prisma.downloadSettings.update({
+		where: {
+			id: settings.downloadSettingsId,
+		},
+		data: {
+			audioPath: validatedSettings.audio_directory,
+			videoPath: validatedSettings.video_directory,
+		},
+	})
+
 	res.status(200).json({ youGave: incomingSettingsObject })
 }
 
