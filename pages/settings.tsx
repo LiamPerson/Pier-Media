@@ -2,10 +2,13 @@ import DashboardPage from '@/components/core/DashboardPage'
 import { TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import configureDownloads from '@/services/settings/consumers/configure-downloads'
+import { useMutation } from '@tanstack/react-query'
+import { getErrorDetails } from '@/libs/ReactQuery'
 
 const IndexPage = () => {
 	const [audioErrors, setAudioErrors] = useState<string[]>([])
-	const updateAudioLocation = (e: React.FocusEvent<HTMLInputElement>) => {
+	const { isLoading, error, isError, mutate, isSuccess, isIdle } = useMutation({ mutationFn: configureDownloads })
+	const updateAudioLocation = async (e: React.FocusEvent<HTMLInputElement>) => {
 		const newAudioLocation = e.target.value
 		const newAudioErrors = []
 		if (!newAudioLocation) {
@@ -13,7 +16,7 @@ const IndexPage = () => {
 		}
 		setAudioErrors(newAudioErrors)
 		if (!newAudioErrors.length) {
-			configureDownloads({ audio_directory: newAudioLocation })
+			mutate({ audio_directory: newAudioLocation })
 		}
 	}
 
@@ -21,10 +24,14 @@ const IndexPage = () => {
 		<DashboardPage>
 			<Typography variant='h1'>Settings</Typography>
 			<TextField
-				error={!!audioErrors.length}
+				error={!!audioErrors.length || isError}
 				onBlur={updateAudioLocation}
 				placeholder='Audio download location'
 			/>
+			{isLoading && <p>Loading mutation...</p>}
+			{isError && <p>Something went wrong! {getErrorDetails(error)}</p>}
+			{isSuccess && <p>Mutation complete!</p>}
+			{isIdle && <p>Idle?</p>}
 		</DashboardPage>
 	)
 }

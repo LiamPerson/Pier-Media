@@ -32,7 +32,7 @@ const settingsSchema = {
 }
 
 const handler: NextApiHandler = async (req, res) => {
-	const incomingSettingsObject = JSON.parse(req.body) as unknown
+	const incomingSettingsObject = req.body as unknown
 	const validator = new Ajv()
 	validator.addFormat('filepath', FileSystem.isAccessible)
 	const validate = validator.compile(settingsSchema)
