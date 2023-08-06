@@ -30,7 +30,7 @@ class PierSettings {
 			})
 		}
 
-		return settings
+		return { ...settings, downloads: downloadSettings }
 	}
 }
 
