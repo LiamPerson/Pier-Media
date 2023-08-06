@@ -32,7 +32,7 @@ All time units are stored in milliseconds (ms) unless otherwise specified.
 
 ## API
 
-The API is handled by [Next](./docs/packages/README.md#Next) but is built out using a `services` architecture.
+The API is handled by [Next](./docs/packages/README.md#Next) but is built out using a [services](./docs/api/README.md#services-directory) architecture.
 
 Please read the [API readme](./docs/api/README.md) before interacting with or building out the API or any services.
 
