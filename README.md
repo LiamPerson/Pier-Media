@@ -27,8 +27,14 @@ All information below is only necessary for those wanting to contribute to, or e
 - [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
-## Conventions
+## Naming Conventions
 All time units are stored in milliseconds (ms) unless otherwise specified.
+
+## API
+
+The API is handled by [Next](./docs/packages/README.md#Next) but is built out using a `services` architecture.
+
+Please read the [API readme](./docs/api/README.md) before interacting with or building out the API or any services.
 
 ## Packages
 All packages added should have their reason stated on the [packages readme](./docs/packages/README.md). This project should have minimal dependencies and modifications to the `package.json`.
