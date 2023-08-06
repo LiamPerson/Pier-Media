@@ -13,9 +13,9 @@ class PierSettings {
 				data: {
 					id: 1,
 					path: basePath,
-					audioPath: basePath + '/audio',
-					imagePath: basePath + '/image',
-					videoPath: basePath + '/video',
+					audioPath: path.join(basePath, '/audio'),
+					imagePath: path.join(basePath, '/image'),
+					videoPath: path.join(basePath, '/video'),
 				},
 			})
 		}
