@@ -59,7 +59,7 @@ A hook-based approach to handling queries that also handles, errors, state chang
 
 ## [axios](https://axios-http.com/)
 
-Basically what fetch does but with better error handling. We need this for use with `@tanstack/react-query`. All things you would think to do in fetch will be done in axios in this project.
+Basically what fetch does but with better error handling and types. We need this for use with `@tanstack/react-query`. All things you would think to do in fetch will be done in axios in this project.
 
 ## [usehooks-ts](https://usehooks-ts.com/)
 
