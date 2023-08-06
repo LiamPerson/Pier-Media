@@ -30,5 +30,10 @@ All information below is only necessary for those wanting to contribute to, or e
 ## Conventions
 All time units are stored in milliseconds (ms) unless otherwise specified.
 
+## Packages
+All packages added should have their reason stated on the [packages readme](./docs/packages/README.md). This project should have minimal dependencies and modifications to the `package.json`.
+
+Read more here: [packages readme!](./docs/packages/README.md)
+
 # Licenses
 - [Ion-Icons](./public/ion-icons/LICENSE) (MIT License)
