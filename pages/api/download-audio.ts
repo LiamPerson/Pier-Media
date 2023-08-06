@@ -1,3 +1,3 @@
-import downloadAudio from '@/services/downloader/handlers/download-audio'
+import downloadAudioHandler from '@/services/downloader/handlers/download-audio'
 
-export default downloadAudio
+export default downloadAudioHandler
