@@ -1,5 +1,16 @@
 # A complete breakdown of the package.json
 
+# Scripts
+
+`dev`: Used to generate [GraphQL](#graphql-codegencli) types and run the [Next](#next) server at the same time.
+`build`: Used to build the [Next](#next) server.
+`start`: Used to start the [Next](#next) server. _(Optionally we can change this to use `next export` to save the server as HTML)_
+`lint`: Used to lint the project.
+`codegen`: Used to generate codegen files.
+`codegen:watch`: Used to automatically generate codegen files when files change.
+
+# Production Packages
+
 All packages added should have their reason added here. This project should have minimal dependencies.
 
 It's easiest to presume `@types/*` sub-packages are for TypeScript type definitions.
@@ -40,6 +51,21 @@ Material UI is chosen as a base template to help build out the styles and functi
 
 Prisma is our interface with the database that handles the schema, migrations, queries, and connection. This will be the only way you interact with the database in this project (aside from viewing the sqlite database in a viewer while testing).
 
+## [GraphQL](https://graphql.org/)
+### VSCode Extension Requirements
+- [GraphQL](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql)
+
+The query language used to interact with our Apollo server. Heavily simplifies querying and types for a better developer experience.
+
+## [@apollo/server](https://www.apollographql.com/docs/apollo-server/)
+### Sub-packages
+- [@as-integrations/next](https://github.com/apollo-server-integrations/apollo-server-integration-next) (for integration with [NextJS](#next))
+
+Our GraphQL server that heavily simplifies querying and types.
+
+## [@apollo/client](https://www.apollographql.com/docs/react/get-started)
+
+A hook-based approach to interacting with the graphql API. Anywhere you need to interact with the api should use this in the form of either `useQuery` _(get something)_ or `useMutation` _(change something)_.
 
 ## [ESLint](https://eslint.org/)
 ### Sub-packages
@@ -67,7 +93,20 @@ A large collection of hooks you would eventually make anyway but it gets maintai
 
 Before introducing a new hook, check it doesn't already exist in this library.
 
-# Development Dependencies
+# Development Packages
+
+## [@graphql-codegen/cli](https://github.com/dotansimha/graphql-code-generator)
+### Sub-packages
+- [@graphql-codegen/client-preset](https://the-guild.dev/graphql/codegen/plugins/presets/preset-client) (support for client-side code generation consumed in [@apollo/client](#apollo-client))
+- [@graphql-codegen/typescript](https://the-guild.dev/graphql/codegen/plugins/typescript) (for generating types)
+- [@graphql-codegen/typescript-resolvers](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-resolvers) (for generating resolver types) 
+- [@parcel/watcher](https://www.npmjs.com/package/@parcel/watcher) (for watching files for changes and re-generating codegen files)
+
+Used to generate types for the GraphQL API interface. This is so we don't have to re-write the graphql types in TypeScript.
+
+## [Concurrently](https://www.npmjs.com/package/concurrently)
+
+Used to run multiple scripts at once. For example, we want to run [codegen](#graphql-codegencli) and our [Next](#next) server at the same time during development.
 
 ## [husky](https://typicode.github.io/husky/#/)
 
