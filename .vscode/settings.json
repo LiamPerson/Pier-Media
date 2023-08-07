@@ -1,5 +1,5 @@
 {
 	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json"],
 	"cSpell.language": "en-GB",
-	"cSpell.words": ["deduping", "nodepier", "rxdb", "tanstack", "usehooks", "Videocam", "websql"]
+	"cSpell.words": ["codegen", "deduping", "nodepier", "rxdb", "tanstack", "usehooks", "Videocam", "websql"]
 }
