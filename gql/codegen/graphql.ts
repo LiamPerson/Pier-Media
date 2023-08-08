@@ -26,6 +26,23 @@ export type DownloadSettings = {
   videoPath: Scalars['String']['output'];
 };
 
+export type DownloadSettingsInput = {
+  audioPath?: InputMaybe<Scalars['String']['input']>;
+  imagePath?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  videoPath?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  update_settings: Settings;
+};
+
+
+export type MutationUpdate_SettingsArgs = {
+  input?: InputMaybe<SettingsInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   settings: Settings;
@@ -36,6 +53,10 @@ export type Settings = {
   downloadSettingsId: Scalars['Int']['output'];
   downloads: DownloadSettings;
   id: Scalars['Int']['output'];
+};
+
+export type SettingsInput = {
+  downloads?: InputMaybe<DownloadSettingsInput>;
 };
 
 export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;

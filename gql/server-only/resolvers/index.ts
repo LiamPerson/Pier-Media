@@ -10,6 +10,14 @@ const resolvers: Resolvers = {
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
 	},
+	Mutation: {
+		update_settings: async (_, { input }) => {
+			if (!input) throw new Error('No input provided')
+			const prisma = new PrismaClient()
+			const rawSettings = await PierSettings.setSettings(prisma, input)
+			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
+		},
+	},
 }
 
 export default resolvers

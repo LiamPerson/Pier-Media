@@ -25,6 +25,23 @@ export type DownloadSettings = {
   videoPath: Scalars['String']['output'];
 };
 
+export type DownloadSettingsInput = {
+  audioPath?: InputMaybe<Scalars['String']['input']>;
+  imagePath?: InputMaybe<Scalars['String']['input']>;
+  path?: InputMaybe<Scalars['String']['input']>;
+  videoPath?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  update_settings: Settings;
+};
+
+
+export type MutationUpdate_SettingsArgs = {
+  input?: InputMaybe<SettingsInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   settings: Settings;
@@ -35,6 +52,10 @@ export type Settings = {
   downloadSettingsId: Scalars['Int']['output'];
   downloads: DownloadSettings;
   id: Scalars['Int']['output'];
+};
+
+export type SettingsInput = {
+  downloads?: InputMaybe<DownloadSettingsInput>;
 };
 
 
@@ -110,9 +131,12 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DownloadSettings: ResolverTypeWrapper<DownloadSettings>;
+  DownloadSettingsInput: DownloadSettingsInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Settings: ResolverTypeWrapper<Settings>;
+  SettingsInput: SettingsInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
 
@@ -120,9 +144,12 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   DownloadSettings: DownloadSettings;
+  DownloadSettingsInput: DownloadSettingsInput;
   Int: Scalars['Int']['output'];
+  Mutation: {};
   Query: {};
   Settings: Settings;
+  SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
 };
 
@@ -134,6 +161,10 @@ export type DownloadSettingsResolvers<ContextType = any, ParentType extends Reso
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   videoPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -149,6 +180,7 @@ export type SettingsResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type Resolvers<ContextType = any> = {
   DownloadSettings?: DownloadSettingsResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Settings?: SettingsResolvers<ContextType>;
 };

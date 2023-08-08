@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import path from 'path'
+import { deepmergeInto } from 'deepmerge-ts'
+import { InputMaybe, SettingsInput } from '@/gql/codegen/graphql'
 
 class PierSettings {
 	/**
@@ -31,6 +33,26 @@ class PierSettings {
 		}
 
 		return { ...settings, downloads: downloadSettings }
+	}
+	static async setSettings(prisma: PrismaClient, newSettings: InputMaybe<SettingsInput>) {
+		const settings = await PierSettings.getSettings(prisma)
+		deepmergeInto(settings, newSettings)
+		await prisma.settings.update({
+			where: {
+				id: settings.id,
+			},
+			data: {
+				downloads: {
+					update: {
+						path: settings.downloads.path,
+						audioPath: settings.downloads.audioPath,
+						imagePath: settings.downloads.imagePath,
+						videoPath: settings.downloads.videoPath,
+					},
+				},
+			},
+		})
+		return await PierSettings.getSettings(prisma)
 	}
 }
 

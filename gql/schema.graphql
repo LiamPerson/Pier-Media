@@ -13,6 +13,21 @@ type DownloadSettings {
 	videoPath: String!
 }
 
+input DownloadSettingsInput {
+	path: String
+	audioPath: String
+	imagePath: String
+	videoPath: String
+}
+
+input SettingsInput {
+	downloads: DownloadSettingsInput
+}
+
 type Query {
 	settings: Settings!
+}
+
+type Mutation {
+	update_settings(input: SettingsInput): Settings!
 }
