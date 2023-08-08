@@ -75,18 +75,6 @@ A hook-based approach to interacting with the graphql API. Anywhere you need to 
 
 To force you to develop correctly by introducing linting rules and more static tests.
 
-## [AJV](https://ajv.js.org/)
-
-Another JSON schema Validator used to validate JSON data in API requests and generate errors for us.
-
-## [@tanstack/react-query](https://react-query.tanstack.com/)
-
-A hook-based approach to handling queries that also handles, errors, state changes, and caching for us. Anywhere you need to interact with the api should use this in the form of either `useQuery` _(get something)_ or `useMutation` _(change something)_.
-
-## [axios](https://axios-http.com/)
-
-Basically what fetch does but with better error handling and types. We need this for use with `@tanstack/react-query`. All things you would think to do in fetch will be done in axios in this project.
-
 ## [usehooks-ts](https://usehooks-ts.com/)
 
 A large collection of hooks you would eventually make anyway but it gets maintained for free by someone else 🤑💰💲💸.
