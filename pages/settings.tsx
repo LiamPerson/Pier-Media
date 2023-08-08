@@ -1,15 +1,12 @@
 import DashboardPage from '@/components/core/DashboardPage'
 import { TextField, Typography } from '@mui/material'
 import { useState } from 'react'
-import configureDownloads from '@/services/settings/consumers/configure-downloads'
-import { getErrorDetails } from '@/libs/ReactQuery'
-import { GetSettingsDocument } from '@/gql/codegen/graphql'
-import { useQuery } from '@apollo/client'
-import { useMutation } from '@tanstack/react-query'
+import { GetSettingsDocument, UpdateSettingsDocument } from '@/gql/codegen/graphql'
+import { useMutation, useQuery } from '@apollo/client'
 
 const IndexPage = () => {
 	const [audioErrors, setAudioErrors] = useState<string[]>([])
-	const mutation = useMutation({ mutationFn: configureDownloads })
+	const [mutate, mutationInfo] = useMutation(UpdateSettingsDocument)
 	const updateAudioLocation = async (e: React.FocusEvent<HTMLInputElement>) => {
 		const newAudioLocation = e.target.value
 		const newAudioErrors = []
@@ -18,25 +15,24 @@ const IndexPage = () => {
 		}
 		setAudioErrors(newAudioErrors)
 		if (!newAudioErrors.length) {
-			mutation.mutate({ audio_directory: newAudioLocation })
+			mutate({ variables: { input: { downloads: { audioPath: newAudioLocation } } } })
 		}
 	}
 
 	const newQuery = useQuery(GetSettingsDocument)
 	console.log('New query', newQuery)
+	console.log('Mutation info', mutationInfo)
 
 	return (
 		<DashboardPage>
 			<Typography variant='h1'>Settings</Typography>
 			<TextField
-				error={!!audioErrors.length || mutation.isError}
+				error={!!audioErrors.length || !!mutationInfo.error}
 				onBlur={updateAudioLocation}
 				placeholder='Audio download location'
 			/>
-			{mutation.isLoading && <p>Loading mutation...</p>}
-			{mutation.isError && <p>Something went wrong! {getErrorDetails(mutation.error)}</p>}
-			{mutation.isSuccess && <p>Mutation complete!</p>}
-			{mutation.isIdle && <p>Idle?</p>}
+			{mutationInfo.loading && <p>Loading mutation...</p>}
+			{mutationInfo.error && <p>Something went wrong! {mutationInfo.error.message}</p>}
 		</DashboardPage>
 	)
 }
