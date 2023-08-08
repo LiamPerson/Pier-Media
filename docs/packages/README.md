@@ -93,6 +93,10 @@ A large collection of hooks you would eventually make anyway but it gets maintai
 
 Before introducing a new hook, check it doesn't already exist in this library.
 
+## [deepmerge-ts](https://www.npmjs.com/package/deepmerge-ts)
+
+Easily do deep merges of objects and arrays. Quick and easy implementation without having to upkeep it or worry about performance.
+
 # Development Packages
 
 ## [@graphql-codegen/cli](https://github.com/dotansimha/graphql-code-generator)
