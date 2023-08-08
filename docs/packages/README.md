@@ -93,7 +93,7 @@ A large collection of hooks you would eventually make anyway but it gets maintai
 
 Before introducing a new hook, check it doesn't already exist in this library.
 
-## [deepmerge-ts](https://www.npmjs.com/package/deepmerge-ts)
+## [ts-deepmerge](https://www.npmjs.com/package/ts-deepmerge)
 
 Easily do deep merges of objects and arrays. Quick and easy implementation without having to upkeep it or worry about performance.
 
