@@ -1,3 +1,18 @@
+type Settings {
+	id: Int!
+	downloads: DownloadSettings!
+	downloadSettingsId: Int!
+}
+
+type DownloadSettings {
+	id: Int!
+	updatedAt: String!
+	path: String!
+	audioPath: String!
+	imagePath: String!
+	videoPath: String!
+}
+
 type Query {
-	hello: String
+	settings: Settings!
 }

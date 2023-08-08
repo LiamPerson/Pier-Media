@@ -16,15 +16,32 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Query = {
-  __typename?: 'Query';
-  hello?: Maybe<Scalars['String']['output']>;
+export type DownloadSettings = {
+  __typename?: 'DownloadSettings';
+  audioPath: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  imagePath: Scalars['String']['output'];
+  path: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  videoPath: Scalars['String']['output'];
 };
 
-export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
+export type Query = {
+  __typename?: 'Query';
+  settings: Settings;
+};
+
+export type Settings = {
+  __typename?: 'Settings';
+  downloadSettingsId: Scalars['Int']['output'];
+  downloads: DownloadSettings;
+  id: Scalars['Int']['output'];
+};
+
+export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HelloQuery = { __typename?: 'Query', hello?: string | null };
+export type GetSettingsQuery = { __typename?: 'Query', settings: { __typename?: 'Settings', id: number } };
 
 
-export const HelloDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Hello"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hello"}}]}}]} as unknown as DocumentNode<HelloQuery, HelloQueryVariables>;
+export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"settings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;

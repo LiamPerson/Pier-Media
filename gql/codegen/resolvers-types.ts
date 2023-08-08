@@ -15,9 +15,26 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type DownloadSettings = {
+  __typename?: 'DownloadSettings';
+  audioPath: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  imagePath: Scalars['String']['output'];
+  path: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+  videoPath: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  hello?: Maybe<Scalars['String']['output']>;
+  settings: Settings;
+};
+
+export type Settings = {
+  __typename?: 'Settings';
+  downloadSettingsId: Scalars['Int']['output'];
+  downloads: DownloadSettings;
+  id: Scalars['Int']['output'];
 };
 
 
@@ -92,22 +109,47 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  DownloadSettings: ResolverTypeWrapper<DownloadSettings>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Query: ResolverTypeWrapper<{}>;
+  Settings: ResolverTypeWrapper<Settings>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  DownloadSettings: DownloadSettings;
+  Int: Scalars['Int']['output'];
   Query: {};
+  Settings: Settings;
   String: Scalars['String']['output'];
 };
 
+export type DownloadSettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['DownloadSettings'] = ResolversParentTypes['DownloadSettings']> = {
+  audioPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  imagePath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  videoPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType>;
+};
+
+export type SettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Settings'] = ResolversParentTypes['Settings']> = {
+  downloadSettingsId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  downloads?: Resolver<ResolversTypes['DownloadSettings'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  DownloadSettings?: DownloadSettingsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Settings?: SettingsResolvers<ContextType>;
 };
 
