@@ -2,9 +2,10 @@ import DashboardPage from '@/components/core/DashboardPage'
 import { TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import configureDownloads from '@/services/settings/consumers/configure-downloads'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { getErrorDetails } from '@/libs/ReactQuery'
-import getSettings from '@/services/settings/consumers/get-settings'
+import { GetSettingsDocument } from '@/gql/codegen/graphql'
+import { useQuery } from '@apollo/client'
+import { useMutation } from '@tanstack/react-query'
 
 const IndexPage = () => {
 	const [audioErrors, setAudioErrors] = useState<string[]>([])
@@ -21,8 +22,8 @@ const IndexPage = () => {
 		}
 	}
 
-	const query = useQuery({ queryFn: getSettings })
-	console.log('Query', query.data?.data)
+	const newQuery = useQuery(GetSettingsDocument)
+	console.log('New query', newQuery)
 
 	return (
 		<DashboardPage>
