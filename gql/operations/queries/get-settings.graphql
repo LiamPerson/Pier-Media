@@ -1,5 +1,10 @@
 query GetSettings {
 	settings {
 		id
+		downloads {
+			id
+			updatedAt
+			audioPath
+		}
 	}
 }
