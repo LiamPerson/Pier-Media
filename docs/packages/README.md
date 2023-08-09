@@ -30,6 +30,7 @@ React is used as a common base to build the UI of the project. It was chosen as 
 ## [Next](https://nextjs.org/)
 ### Sub-packages
 - [@types/node](https://www.npmjs.com/package/@types/node)
+- [server-only](https://www.npmjs.com/package/server-only) (for telling you off when you try import the wrong thing)
 
 
 NextJS is used in this project to allow easy routing with React, API routes, and integration with TypeScript. This is the main glue that allows us to develop the frontend and backend on the same repository.
