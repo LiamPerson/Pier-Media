@@ -1,3 +1,4 @@
+'use client'
 import DashboardPage from '@/components/core/DashboardPage'
 import { TextField, Typography } from '@mui/material'
 import { useState } from 'react'

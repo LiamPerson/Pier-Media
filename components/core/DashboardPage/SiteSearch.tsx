@@ -1,9 +1,10 @@
 import { Autocomplete, TextField, Box } from '@mui/material'
-import { NextRouter, useRouter } from 'next/router'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
+import { useRouter } from 'next/navigation'
 import { SyntheticEvent } from 'react'
 
 interface ActionParams {
-	router?: NextRouter
+	router?: AppRouterInstance
 }
 
 interface Option {

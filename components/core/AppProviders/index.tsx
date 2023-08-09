@@ -1,16 +1,16 @@
-import type { AppProps } from 'next/app'
+'use client'
 import '@/styles/global.css'
 import { ThemeProvider } from '@mui/material'
 import theme from '@/styles/theme'
 import { ApolloProvider } from '@apollo/client'
 import apollo from '@/libs/apollo'
 
-export default function App({ Component, pageProps }: AppProps) {
+const AppProviders = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ApolloProvider client={apollo}>
-			<ThemeProvider theme={theme}>
-				<Component {...pageProps} />
-			</ThemeProvider>
+			<ThemeProvider theme={theme}>{children}</ThemeProvider>
 		</ApolloProvider>
 	)
 }
+
+export default AppProviders

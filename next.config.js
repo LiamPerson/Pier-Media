@@ -2,6 +2,7 @@
 const nextConfig = {
 	experimental: {
 		instrumentationHook: false,
+		appDir: true,
 	},
 }
 

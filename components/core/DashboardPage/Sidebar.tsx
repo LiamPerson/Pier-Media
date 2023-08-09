@@ -1,9 +1,9 @@
 import { Box, Typography, alpha } from '@mui/material'
 import { HEADER_HEIGHT_PX, SIDEBAR_WIDTH_PX } from './constants'
 import { ROUTE, ROUTE_ICON, ROUTE_NAME } from '@/libs/routes'
-import { useRouter } from 'next/router'
 import { BACKGROUND } from '@/styles/color'
 import NextLink from '@/components/ui/NextLink'
+import { usePathname } from 'next/navigation'
 
 interface MenuButtonProps {
 	isActive: boolean
@@ -37,7 +37,7 @@ const MenuItem = ({ isActive, children, href }: MenuButtonProps) => {
 const HEADER_BACKGROUND_COLOR = alpha(BACKGROUND.DEFAULT, 0.9)
 
 const Sidebar = () => {
-	const route = useRouter().route
+	const route = usePathname()
 	return (
 		<Box
 			sx={{

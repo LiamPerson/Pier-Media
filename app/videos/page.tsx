@@ -1,5 +1,6 @@
+'use client'
 import DashboardPage from '@/components/core/DashboardPage'
-import { Box, Button, Grid, Stack, Typography } from '@mui/material'
+import { Button } from '@mui/material'
 import downloadAudio from '@/services/downloader/consumers/download-audio'
 
 const IndexPage = () => {
