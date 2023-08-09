@@ -1,3 +1,4 @@
+import 'server-only'
 import { InputMaybe, Resolvers } from '@/gql/codegen/resolvers-types'
 import PierSettings from '@/libs/server-only/PierSettings'
 import { PrismaClient } from '@prisma/client'

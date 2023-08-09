@@ -1,3 +1,4 @@
+import 'server-only'
 import { PrismaClient } from '@prisma/client'
 import path from 'path'
 import { deepmergeInto } from 'deepmerge-ts'

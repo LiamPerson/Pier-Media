@@ -1,3 +1,4 @@
+import 'server-only'
 import { accessSync, constants } from 'fs'
 
 interface isAccessibleOptions {
