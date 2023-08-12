@@ -57,6 +57,7 @@ model Author {
   updatedAt  DateTime @updatedAt
   tracks     Track[]
   videos     Video[]
+  sourceId   String   @unique
   providerId Int
   provider   Provider @relation(fields: [providerId], references: [id])
 }
@@ -84,6 +85,8 @@ model Video {
   file           File     @relation(fields: [fileId], references: [id])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  sourceId       String   @unique // The ID of the track on the source platform
+  originalUrl    String // We can store the original URl here so we can decode the source later
   width          Int
   height         Int
   duration       Int // In milliseconds
@@ -113,6 +116,7 @@ model Track {
   genreId                 Int
   genre                   Genre    @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
+  sourceId                String   @unique // The ID of the track on the source platform
   originalUrl             String // We can store the original URl here so we can decode the source later
   authorId                Int
   author                  Author   @relation(fields: [authorId], references: [id])
