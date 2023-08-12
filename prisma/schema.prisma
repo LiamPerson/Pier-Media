@@ -84,7 +84,7 @@ model Track {
   genreId                 Int
   genre                   Genre    @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
-  url                     String // We can store the original URl here so we can decode the source later
+  originalUrl             String // We can store the original URl here so we can decode the source later
   authorId                Int
   author                  Author   @relation(fields: [authorId], references: [id])
   fileId                  Int
@@ -92,7 +92,7 @@ model Track {
   contributingArtistsJson String // Please see ./json-interfaces for definition
   albumId                 Int
   album                   Album    @relation(fields: [albumId], references: [id])
-  duration                Int
+  duration                Int // In milliseconds
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 }
