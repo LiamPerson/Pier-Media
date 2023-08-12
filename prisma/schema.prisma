@@ -46,7 +46,7 @@ model File {
 model Provider {
   id      Int      @id @default(autoincrement())
   name    String
-  url     String
+  domain  String
   authors Author[]
 }
 
