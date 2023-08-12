@@ -31,7 +31,8 @@
 		"react-dom": "18.2.0",
 		"server-only": "^0.0.1",
 		"typescript": "5.1.6",
-		"usehooks-ts": "^2.9.1"
+		"usehooks-ts": "^2.9.1",
+		"yt-dlp-wrap-extended": "^2.3.15"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "5.0.0",

@@ -68,6 +68,10 @@ Our GraphQL server that heavily simplifies querying and types.
 
 A hook-based approach to interacting with the graphql API. Anywhere you need to interact with the api should use this in the form of either `useQuery` _(get something)_ or `useMutation` _(change something)_.
 
+## [yt-dlp-wrap-extended](https://www.npmjs.com/package/yt-dlp-wrap-extended)
+
+A wrapper for the yt-dlp binary that saves us a whole bunch of pain when operating on a number of operating systems.
+
 ## [ESLint](https://eslint.org/)
 ### Sub-packages
 - [eslint-config-next](https://www.npmjs.com/package/eslint-config-next) (for NextJS specific linting rules)
