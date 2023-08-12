@@ -27,12 +27,20 @@ model Settings {
 }
 
 model File {
-  id        Int      @id @default(autoincrement())
-  location  String // The location of the file on the filesystem
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Track     Track[]
-  Image     Image[]
+  id         Int      @id @default(autoincrement())
+  location   String // The location of the file on the filesystem
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  dislikes   Int      @default(0)
+  superLikes Int      @default(0)
+  mediaType  String // The MIME type of the file
+  size       Int // In bytes
+  tagsJson   String // Please see ./json-interfaces for definition
+  Track      Track[]
+  Image      Image[]
+  Video      Video[]
 }
 
 model Provider {
@@ -48,6 +56,7 @@ model Author {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   tracks     Track[]
+  videos     Video[]
   providerId Int
   provider   Provider @relation(fields: [providerId], references: [id])
 }
@@ -69,18 +78,38 @@ model Album {
   albumImage   Image    @relation(fields: [albumImageId], references: [id])
 }
 
+model Video {
+  id             Int      @id @default(autoincrement())
+  fileId         Int
+  file           File     @relation(fields: [fileId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  width          Int
+  height         Int
+  duration       Int // In milliseconds
+  categoriesJson String // Please see ./json-interfaces for definition
+  authorId       Int
+  author         Author   @relation(fields: [authorId], references: [id])
+  fps            Int
+  title          String
+  description    String
+}
+
 model Image {
   id        Int      @id @default(autoincrement())
   fileId    Int
   file      File     @relation(fields: [fileId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  width     Int
+  height    Int
   Album     Album[]
 }
 
 model Track {
   id                      Int      @id @default(autoincrement())
   title                   String
+  description             String
   genreId                 Int
   genre                   Genre    @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
