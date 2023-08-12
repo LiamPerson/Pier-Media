@@ -32,6 +32,12 @@ Find `yt-dlp` releases here: [yt-dlp releases](https://github.com/yt-dlp/yt-dlp#
 # Developers
 All information below is only necessary for those wanting to contribute to, or edit the project.
 
+## Sample .ENV
+```sh
+DATABASE_URL="file:./dev.db" # Prisma db
+DEBUG_MODE="true"
+```
+
 ## Requirements
 - NVM ([Windows](https://github.com/coreybutler/nvm-windows) | [Everything Else](https://github.com/nvm-sh/nvm))
 
