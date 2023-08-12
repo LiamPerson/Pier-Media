@@ -16,6 +16,19 @@ __Advantages over Pier Legacy__
 - NodeJS V16.10+
 - NPM V8+
 
+## Supported Architectures
+- All Windows versions from Vista SP2+ and onwards
+- Linux/BSD armv7l, aarch64, x86, x64
+- All MacOS versions 10.9+ and onwards
+
+## Notes
+
+### Automatic Updates
+
+The included `yt-dlp` version automatically updates. Please replace the `yt-dlp` binary in the `/public/bin/yt-dlp/` folder with one compatible for your operating system and architecture if you do not want this functionality. 
+
+Find `yt-dlp` releases here: [yt-dlp releases](https://github.com/yt-dlp/yt-dlp#release-files)
+
 # Developers
 All information below is only necessary for those wanting to contribute to, or edit the project.
 
