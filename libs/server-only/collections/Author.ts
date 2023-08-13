@@ -9,24 +9,29 @@ namespace Author {
 	}
 
 	export const get = async (author: getProps, prisma: PrismaClient) => {
-		let authorDetails = await prisma.author.findFirst({
+		const authorDetails = await prisma.author.upsert({
 			where: {
 				sourceId: author.sourceId,
 			},
-		})
-		if (!authorDetails) {
-			authorDetails = await prisma.author.create({
-				data: {
-					name: author.name,
-					sourceId: author.sourceId,
-					provider: {
-						connect: {
-							id: author.provider.id,
-						},
+			update: {
+				name: author.name,
+				sourceId: author.sourceId,
+				provider: {
+					connect: {
+						id: author.provider.id,
 					},
 				},
-			})
-		}
+			},
+			create: {
+				name: author.name,
+				sourceId: author.sourceId,
+				provider: {
+					connect: {
+						id: author.provider.id,
+					},
+				},
+			},
+		})
 		return authorDetails
 	}
 
