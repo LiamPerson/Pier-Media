@@ -1,19 +1,14 @@
-import { lookup } from 'mime-types'
-import { createWriteStream } from 'node:fs'
-import { get as httpGet } from 'node:http'
-import { get as httpsGet } from 'node:https'
-import { basename } from 'node:path'
+import { basename, dirname } from 'node:path'
+import { pipeline as streamPipeline } from 'node:stream/promises'
+import got from 'got'
+import { createWriteStream, mkdirSync, writeFileSync } from 'node:fs'
+import { fileTypeFromFile } from 'file-type'
+import Debugger from './Debugger'
 
 namespace Network {
 	export const getFilenameFromUrl = (path: string) => {
 		const url = new URL(path)
 		return basename(url.pathname)
-	}
-	const getProtocolAdapter = (targetUrl: string) => {
-		const url = new URL(targetUrl)
-		if (url.protocol === 'http:') return httpGet
-		if (url.protocol === 'https:') return httpsGet
-		throw new Error(`Protocol '${url.protocol}' is not supported`)
 	}
 	interface fileProps {
 		url: string
@@ -23,22 +18,23 @@ namespace Network {
 		mediaType: string
 		size: number
 	}
+
+	const writeFileAndDirectories = (output: string) => {
+		mkdirSync(dirname(output), { recursive: true })
+		writeFileSync(output, '')
+	}
+
 	export const getFile = async ({ url, output }: fileProps): Promise<fileReturn> => {
-		const protocolAdapter = getProtocolAdapter(url)
-		return await new Promise((resolve) => {
-			protocolAdapter(url, (response) => {
-				const mediaType = lookup(output)
-				if (!mediaType) throw Error(`Media type for '${output}' could not be found`)
-				const file = createWriteStream(output)
-				response.pipe(file)
-				file.on('finish', () => {
-					const size = file.bytesWritten
-					file.close()
-					console.log('Download Completed')
-					resolve({ mediaType, size })
-				})
-			})
-		})
+		const gotStream = got.stream(url)
+		writeFileAndDirectories(output)
+		const outStream = createWriteStream(output)
+		await streamPipeline(gotStream, outStream)
+		/** @todo - Liam: Figure out how to get this to read from `got` stream */
+		const fileType = await fileTypeFromFile(output)
+		const size = outStream.bytesWritten
+		const mediaType = fileType?.mime ?? 'application/octet-stream'
+		Debugger.log(`Saving file from '${url}' to location:`, { output, size, mediaType })
+		return { mediaType, size }
 	}
 }
 
