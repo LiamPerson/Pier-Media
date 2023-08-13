@@ -1,4 +1,5 @@
 {
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json", ".next", "gql/codegen"],
 	"cSpell.language": "en-GB",
 	"cSpell.words": [
