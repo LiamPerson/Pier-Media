@@ -12,6 +12,9 @@ namespace Author {
 		const authorDetails = await prisma.author.upsert({
 			where: {
 				sourceId: author.sourceId,
+				provider: {
+					id: author.provider.id,
+				},
 			},
 			update: {
 				name: author.name,
