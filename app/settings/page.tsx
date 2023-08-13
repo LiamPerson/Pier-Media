@@ -28,6 +28,7 @@ const IndexPage = () => {
 		<DashboardPage>
 			<Typography variant='h1'>Settings</Typography>
 			<TextField
+				defaultValue={newQuery.data?.settings?.downloads?.audioPath || ''}
 				error={!!audioErrors.length || !!mutationInfo.error}
 				onBlur={updateAudioLocation}
 				placeholder='Audio download location'
