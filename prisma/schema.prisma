@@ -100,7 +100,7 @@ model Video {
 
 model Image {
   id        Int      @id @default(autoincrement())
-  fileId    Int
+  fileId    Int      @unique
   file      File     @relation(fields: [fileId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
