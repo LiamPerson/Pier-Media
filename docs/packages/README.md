@@ -78,6 +78,20 @@ A wrapper for the yt-dlp binary that saves us a whole bunch of pain when operati
 
 For reading & parsing mime types without having to write our own parser & types.
 
+## [image-size](https://www.npmjs.com/package/image-size)
+
+For reading image dimensions without having to write our own parser.
+
+## [file-type](https://www.npmjs.com/package/file-type)
+
+For reading the magic number of files to get mime types and extensions.
+
+## [got](https://www.npmjs.com/package/got)
+### Sub-packages
+- [@types/got](https://www.npmjs.com/package/@types/got)
+
+For getting files as streams compatible with [file-type](#file-type).
+
 ## [ESLint](https://eslint.org/)
 ### Sub-packages
 - [eslint-config-next](https://www.npmjs.com/package/eslint-config-next) (for NextJS specific linting rules)
