@@ -28,19 +28,19 @@ namespace Provider {
 	} as const
 
 	export const get = async (provider: Options, prisma: PrismaClient) => {
-		let providerDetails = await prisma.provider.findFirst({
+		const providerDetails = await prisma.provider.upsert({
 			where: {
 				domain: Details[provider].domain,
 			},
+			update: {
+				name: Details[provider].name,
+				domain: Details[provider].domain,
+			},
+			create: {
+				name: Details[provider].name,
+				domain: Details[provider].domain,
+			},
 		})
-		if (!providerDetails) {
-			providerDetails = await prisma.provider.create({
-				data: {
-					name: Details[provider].name,
-					domain: Details[provider].domain,
-				},
-			})
-		}
 		return providerDetails
 	}
 	export const toProviderOption = (domain: string) => {
