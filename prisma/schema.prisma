@@ -38,9 +38,9 @@ model File {
   mediaType  String // The MIME type of the file
   size       Int // In bytes
   tagsJson   String // Please see ./json-interfaces for definition
-  Track      Track[]
-  Image      Image[]
-  Video      Video[]
+  Track      Track?
+  Image      Image?
+  Video      Video?
 }
 
 model Provider {
@@ -81,8 +81,8 @@ model Album {
 
 model Video {
   id             Int      @id @default(autoincrement())
-  fileId         Int
-  file           File     @relation(fields: [fileId], references: [id])
+  fileId         Int      @unique
+  file           File?    @relation(fields: [fileId], references: [id])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   sourceId       String   @unique // The ID of the track on the source platform
@@ -120,8 +120,8 @@ model Track {
   originalUrl             String // We can store the original URl here so we can decode the source later
   authorId                Int
   author                  Author   @relation(fields: [authorId], references: [id])
-  fileId                  Int
-  file                    File     @relation(fields: [fileId], references: [id])
+  fileId                  Int      @unique
+  file                    File?    @relation(fields: [fileId], references: [id])
   contributingArtistsJson String // Please see ./json-interfaces for definition
   albumId                 Int
   album                   Album    @relation(fields: [albumId], references: [id])
