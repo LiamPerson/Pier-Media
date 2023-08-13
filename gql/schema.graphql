@@ -1,3 +1,51 @@
+type Genre {
+	id: Int!
+	name: String!
+	description: String!
+}
+
+type File {
+	id: Int!
+	location: String!
+}
+
+type Image {
+	id: Int!
+	file: File!
+}
+
+type Album {
+	id: Int!
+	name: String!
+	tracks: [Track]
+	albumImage: Image!
+}
+
+type Provider {
+	id: Int!
+	name: String!
+	url: String!
+}
+
+type Author {
+	id: Int!
+	name: String!
+	provider: Provider!
+}
+
+type Track {
+	id: Int!
+	title: String!
+	genre: Genre!
+	bitrate: Int!
+	originalUrl: String!
+	author: Author!
+	file: File!
+	contributors: [Author] # Please see ./json-interfaces for definition
+	album: Album!
+	duration: Int! # in milliseconds
+}
+
 type Settings {
 	id: Int!
 	downloads: DownloadSettings!
@@ -24,10 +72,17 @@ input SettingsInput {
 	downloads: DownloadSettingsInput
 }
 
+### START Downloads
+input GenericDownloadInput {
+	url: String!
+}
+## END Downloads
+
 type Query {
 	settings: Settings!
 }
 
 type Mutation {
 	update_settings(input: SettingsInput): Settings!
+	download_audio(input: GenericDownloadInput!): Track!
 }

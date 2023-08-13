@@ -2,11 +2,12 @@ import 'server-only'
 import { InputMaybe, Resolvers } from '@/gql/codegen/resolvers-types'
 import PierSettings from '@/libs/server-only/PierSettings'
 import { PrismaClient } from '@prisma/client'
-import FileSystem from '@/libs/server-only/FileSystem'
+import System from '@/libs/server-only/System'
+import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
 
 const checkExistingPathThrowingError = (path?: InputMaybe<string>) => {
 	if (path === undefined || path === null) return
-	if (!FileSystem.isAccessible(path)) {
+	if (!System.isAccessible(path)) {
 		throw new Error(`Path '${path}' cannot be set as it is not accessible.`)
 	}
 }
@@ -31,6 +32,10 @@ const resolvers: Resolvers = {
 			const prisma = new PrismaClient()
 			const rawSettings = await PierSettings.setSettings(prisma, input)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
+		},
+		download_audio: async (_, { input: { url } }) => {
+			await Downloader.download({ url, type: DownloadType.AUDIO })
+			throw Error('Not implemented')
 		},
 	},
 }

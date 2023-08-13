@@ -6,6 +6,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -13,6 +14,21 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+};
+
+export type Album = {
+  __typename?: 'Album';
+  albumImage: Image;
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  tracks?: Maybe<Array<Maybe<Track>>>;
+};
+
+export type Author = {
+  __typename?: 'Author';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  provider: Provider;
 };
 
 export type DownloadSettings = {
@@ -32,14 +48,50 @@ export type DownloadSettingsInput = {
   videoPath?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type File = {
+  __typename?: 'File';
+  id: Scalars['Int']['output'];
+  location: Scalars['String']['output'];
+};
+
+export type GenericDownloadInput = {
+  url: Scalars['String']['input'];
+};
+
+export type Genre = {
+  __typename?: 'Genre';
+  description: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type Image = {
+  __typename?: 'Image';
+  file: File;
+  id: Scalars['Int']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  download_audio: Track;
   update_settings: Settings;
+};
+
+
+export type MutationDownload_AudioArgs = {
+  input: GenericDownloadInput;
 };
 
 
 export type MutationUpdate_SettingsArgs = {
   input?: InputMaybe<SettingsInput>;
+};
+
+export type Provider = {
+  __typename?: 'Provider';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -56,6 +108,20 @@ export type Settings = {
 
 export type SettingsInput = {
   downloads?: InputMaybe<DownloadSettingsInput>;
+};
+
+export type Track = {
+  __typename?: 'Track';
+  album: Album;
+  author: Author;
+  bitrate: Scalars['Int']['output'];
+  contributors?: Maybe<Array<Maybe<Author>>>;
+  duration: Scalars['Int']['output'];
+  file: File;
+  genre: Genre;
+  id: Scalars['Int']['output'];
+  originalUrl: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 
@@ -129,28 +195,59 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Album: ResolverTypeWrapper<Album>;
+  Author: ResolverTypeWrapper<Author>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DownloadSettings: ResolverTypeWrapper<DownloadSettings>;
   DownloadSettingsInput: DownloadSettingsInput;
+  File: ResolverTypeWrapper<File>;
+  GenericDownloadInput: GenericDownloadInput;
+  Genre: ResolverTypeWrapper<Genre>;
+  Image: ResolverTypeWrapper<Image>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
+  Provider: ResolverTypeWrapper<Provider>;
   Query: ResolverTypeWrapper<{}>;
   Settings: ResolverTypeWrapper<Settings>;
   SettingsInput: SettingsInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Track: ResolverTypeWrapper<Track>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Album: Album;
+  Author: Author;
   Boolean: Scalars['Boolean']['output'];
   DownloadSettings: DownloadSettings;
   DownloadSettingsInput: DownloadSettingsInput;
+  File: File;
+  GenericDownloadInput: GenericDownloadInput;
+  Genre: Genre;
+  Image: Image;
   Int: Scalars['Int']['output'];
   Mutation: {};
+  Provider: Provider;
   Query: {};
   Settings: Settings;
   SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
+  Track: Track;
+};
+
+export type AlbumResolvers<ContextType = any, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
+  albumImage?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  tracks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  provider?: Resolver<ResolversTypes['Provider'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type DownloadSettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['DownloadSettings'] = ResolversParentTypes['DownloadSettings']> = {
@@ -163,8 +260,35 @@ export type DownloadSettingsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  location?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GenreResolvers<ContextType = any, ParentType extends ResolversParentTypes['Genre'] = ResolversParentTypes['Genre']> = {
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
+  file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
+};
+
+export type ProviderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Provider'] = ResolversParentTypes['Provider']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -178,10 +302,31 @@ export type SettingsResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
+  album?: Resolver<ResolversTypes['Album'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  bitrate?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  contributors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Author']>>>, ParentType, ContextType>;
+  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
+  genre?: Resolver<ResolversTypes['Genre'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  originalUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
+  Album?: AlbumResolvers<ContextType>;
+  Author?: AuthorResolvers<ContextType>;
   DownloadSettings?: DownloadSettingsResolvers<ContextType>;
+  File?: FileResolvers<ContextType>;
+  Genre?: GenreResolvers<ContextType>;
+  Image?: ImageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Provider?: ProviderResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Settings?: SettingsResolvers<ContextType>;
+  Track?: TrackResolvers<ContextType>;
 };
 

@@ -16,6 +16,21 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Album = {
+  __typename?: 'Album';
+  albumImage: Image;
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  tracks?: Maybe<Array<Maybe<Track>>>;
+};
+
+export type Author = {
+  __typename?: 'Author';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  provider: Provider;
+};
+
 export type DownloadSettings = {
   __typename?: 'DownloadSettings';
   audioPath: Scalars['String']['output'];
@@ -33,14 +48,50 @@ export type DownloadSettingsInput = {
   videoPath?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type File = {
+  __typename?: 'File';
+  id: Scalars['Int']['output'];
+  location: Scalars['String']['output'];
+};
+
+export type GenericDownloadInput = {
+  url: Scalars['String']['input'];
+};
+
+export type Genre = {
+  __typename?: 'Genre';
+  description: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type Image = {
+  __typename?: 'Image';
+  file: File;
+  id: Scalars['Int']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  download_audio: Track;
   update_settings: Settings;
+};
+
+
+export type MutationDownload_AudioArgs = {
+  input: GenericDownloadInput;
 };
 
 
 export type MutationUpdate_SettingsArgs = {
   input?: InputMaybe<SettingsInput>;
+};
+
+export type Provider = {
+  __typename?: 'Provider';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+  url: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -57,6 +108,20 @@ export type Settings = {
 
 export type SettingsInput = {
   downloads?: InputMaybe<DownloadSettingsInput>;
+};
+
+export type Track = {
+  __typename?: 'Track';
+  album: Album;
+  author: Author;
+  bitrate: Scalars['Int']['output'];
+  contributors?: Maybe<Array<Maybe<Author>>>;
+  duration: Scalars['Int']['output'];
+  file: File;
+  genre: Genre;
+  id: Scalars['Int']['output'];
+  originalUrl: Scalars['String']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type UpdateSettingsMutationVariables = Exact<{

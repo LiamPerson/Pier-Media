@@ -6,7 +6,7 @@ interface isAccessibleOptions {
 	throwError?: boolean
 }
 
-class FileSystem {
+class System {
 	/**
 	 * Checks if a path is accessible with the given mode.
 	 */
@@ -23,4 +23,4 @@ class FileSystem {
 	}
 }
 
-export default FileSystem
+export default System
