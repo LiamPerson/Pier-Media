@@ -6,3 +6,13 @@ export const toCapitalCase = (string: string) => {
 		return a.toUpperCase()
 	})
 }
+
+/**
+ * Gets an image from a URL.
+ */
+export const getImage = async (url: string) => {
+	const img = new Image()
+	img.src = url
+	await img.decode()
+	return img
+}
