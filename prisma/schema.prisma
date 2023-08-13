@@ -28,7 +28,7 @@ model Settings {
 
 model File {
   id         Int      @id @default(autoincrement())
-  location   String // The location of the file on the filesystem
+  location   String   @unique // The location of the file on the filesystem
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   views      Int      @default(0)
