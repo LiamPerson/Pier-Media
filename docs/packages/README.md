@@ -72,6 +72,12 @@ A hook-based approach to interacting with the graphql API. Anywhere you need to 
 
 A wrapper for the yt-dlp binary that saves us a whole bunch of pain when operating on a number of operating systems.
 
+## [mime-types](https://www.npmjs.com/package/mime-types)
+### Sub-packages
+- [@types/mime-types](https://www.npmjs.com/package/@types/mime-types)
+
+For reading & parsing mime types without having to write our own parser & types.
+
 ## [ESLint](https://eslint.org/)
 ### Sub-packages
 - [eslint-config-next](https://www.npmjs.com/package/eslint-config-next) (for NextJS specific linting rules)
