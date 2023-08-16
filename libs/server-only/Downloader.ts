@@ -160,10 +160,11 @@ class Downloader {
 		const downloader = new YTDlpWrap(binary)
 		const downloadDetails = await Downloader.getDownloadDetails(url, downloader)
 		Debugger.dumpJsonToFile(downloadDetails)
+		const authorSourceId = downloadDetails.channel_id || downloadDetails.uploader_id
 
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
-		const author = await Author.get({ name: downloadDetails.uploader, sourceId: downloadDetails.uploader_id, provider }, prisma)
-		const videoFile = await File.get({ location: downloadPath, size: downloadDetails.filesize_approx, tags: downloadDetails.tags }, prisma)
+		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
+		// const videoFile = await File.get({ location: downloadPath, size: downloadDetails.filesize_approx, tags: downloadDetails.tags }, prisma)
 		const image = await Image.get({ source: downloadDetails.thumbnail, filename: 'test123.jpg' }, prisma)
 
 		console.log(`Attempting to download to path ${downloadPath}`)
