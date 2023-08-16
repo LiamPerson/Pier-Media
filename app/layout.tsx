@@ -1,7 +1,7 @@
 import AppProviders from '@/components/core/AppProviders'
 
 export const metadata = {
-	title: 'Open Pier',
+	title: 'Pier Media',
 	description: 'An open source media server made to work on a RaspberryPi.',
 }
 
