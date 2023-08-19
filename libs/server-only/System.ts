@@ -1,16 +1,15 @@
 import 'server-only'
-import { accessSync, constants } from 'fs'
+import { accessSync, constants, existsSync } from 'node:fs'
 
-interface isAccessibleOptions {
-	mode?: number
-	throwError?: boolean
-}
-
-class System {
+namespace System {
+	interface isAccessibleOptions {
+		mode?: number
+		throwError?: boolean
+	}
 	/**
 	 * Checks if a path is accessible with the given mode.
 	 */
-	static isAccessible(path: string, { mode = constants.W_OK, throwError = false }: isAccessibleOptions = {}) {
+	export const isAccessible = (path: string, { mode = constants.W_OK, throwError = false }: isAccessibleOptions = {}) => {
 		try {
 			accessSync(path, mode)
 			return true
@@ -20,6 +19,12 @@ class System {
 			}
 			return false
 		}
+	}
+	/**
+	 * Checks if a file or directory exists and is writable.
+	 */
+	export const exists = (path: string) => {
+		return existsSync(path)
 	}
 }
 
