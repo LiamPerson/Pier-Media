@@ -33,8 +33,8 @@ const resolvers: Resolvers = {
 			const rawSettings = await PierSettings.setSettings(prisma, input)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
-		download_audio: async (_, { input: { url } }) => {
-			await Downloader.download({ url, type: DownloadType.AUDIO })
+		download_audio: async (_, { input: { url, overrideOnCollision } }) => {
+			await Downloader.download({ url, type: DownloadType.AUDIO, overrideOnCollision })
 			throw Error('Not implemented')
 		},
 	},

@@ -75,6 +75,7 @@ input SettingsInput {
 ### START Downloads
 input GenericDownloadInput {
 	url: String!
+	overrideOnCollision: Boolean
 }
 ## END Downloads
 

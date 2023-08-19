@@ -55,6 +55,7 @@ export type File = {
 };
 
 export type GenericDownloadInput = {
+  overrideOnCollision?: InputMaybe<Scalars['Boolean']['input']>;
   url: Scalars['String']['input'];
 };
 
