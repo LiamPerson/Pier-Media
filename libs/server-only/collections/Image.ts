@@ -50,6 +50,7 @@ namespace Image {
 		})
 		return imageDetails
 	}
+	export type Type = Awaited<ReturnType<typeof get>>
 }
 
 export default Image
