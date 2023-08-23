@@ -10,14 +10,15 @@ generator client {
 }
 
 model DownloadSettings {
-  id        Int        @id @default(autoincrement())
-  updatedAt DateTime   @updatedAt
+  id           Int        @id @default(autoincrement())
+  updatedAt    DateTime   @updatedAt
   // Paths specify where NEW downloads go. Old downloads will not be moved.
-  path      String
-  audioPath String
-  imagePath String
-  videoPath String
-  Settings  Settings[]
+  path         String
+  audioPath    String
+  metadataPath String
+  imagePath    String
+  videoPath    String
+  Settings     Settings[]
 }
 
 model Settings {
