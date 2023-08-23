@@ -32,6 +32,12 @@ interface YtdlpBinaries {
 	releaseChecker?: (release: string) => boolean
 }
 
+interface TryDownloadProps {
+	downloader: YTDlpWrap
+	downloadPath: string
+	source: string
+}
+
 /**
  * @todo - Anyone:
  * I probably got this dictionary incorrect. Please correct for me at some point :)
@@ -159,6 +165,62 @@ class Downloader {
 		// if(event.toLowerCase() === 'download' && )
 		return false
 	}
+	static verifyOriginality({ targetPath, throwErrorOnCollision }: { targetPath: string; throwErrorOnCollision: boolean }) {
+		// We need to check that the file doesn't already exist as the target as yt-dlp will not override by default.
+		if (!System.isAccessible(targetPath, { mode: constants.W_OK })) {
+			throw new Error(
+				`You cannot download to the path '${targetPath}' as it is not writable. Please check your download settings and permissions.`
+			)
+		}
+		if (throwErrorOnCollision && System.exists(targetPath)) {
+			throw new Error(`There is a file collision at '${targetPath}'. Please remove it or change your download settings.`)
+		}
+	}
+	static getExtensionFromUrl = (url: string) => {
+		const urlSplit = url.split('.')
+		const extension = urlSplit[urlSplit.length - 1]
+		return extension
+	}
+
+	static tryDownload = async ({ downloader, downloadPath, source }: TryDownloadProps) =>
+		new Promise<void>((resolve, reject) => {
+			const controller = new AbortController()
+			const timeout = setTimeout(() => {
+				controller.abort()
+				console.log('Event killed?: ', downloadEventEmitter.ytDlpProcess?.killed)
+				reject(`Download timed out. Waited ${MAX_DOWNLOAD_TIME} milliseconds.`)
+			}, MAX_DOWNLOAD_TIME)
+			const killPromise = (error: Error) => {
+				clearTimeout(timeout)
+				reject(error || 'Download failed or was aborted.')
+			}
+			const downloadEventEmitter = downloader
+				.exec([source, '-f', 'best', '-o', downloadPath], { shell: true }, controller.signal)
+				.on('progress', (progress) => {
+					console.log('Progress', progress)
+				})
+				.on('ytDlpEvent', (eventType, eventData) => {
+					/**
+					 * @todo - Anyone: We need to pay close attention here as this is where we will find
+					 * gotchas. The event data is just string literals that are verbatim from the console.
+					 *
+					 * @todo - Anyone: Need to test the errors have the same (or similar)
+					 * errors across the different binaries.
+					 *
+					 * Maybe we should log an issue with the yt-dlp project to get them to standardise errors or
+					 * generate error codes?
+					 */
+					// console.log('Event found!', { eventType, eventData })
+				})
+				.on('error', (error) => {
+					killPromise(error)
+				})
+				.on('close', () => {
+					clearTimeout(timeout)
+					console.log('all done')
+					resolve()
+				})
+		})
 	static async download({ url, type, overrideOnCollision }: DownloadProps) {
 		const prisma = new PrismaClient()
 
@@ -179,22 +241,16 @@ class Downloader {
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
 
-		// We need to check that the file doesn't already exist as the target as yt-dlp will not override by default.
 		const downloadFolder = await Downloader.getDownloadFolderPath(type, prisma)
-		Debugger.log('Download folder: ', downloadFolder)
-		const downloadPath = `${downloadFolder}/${provider.id}.${sourceId}.mp4`
-		Debugger.log('Download path: ', downloadPath)
-		if (!System.isAccessible(downloadFolder, { mode: constants.W_OK })) {
-			throw new Error(
-				`You cannot download to the path '${downloadFolder}' as it is not writable. Please check your download settings and permissions.`
-			)
-		}
-		if (!overrideOnCollision && System.exists(downloadPath)) {
-			throw new Error(`There is a file collision at '${downloadPath}'. Please remove it or change your download settings.`)
-		}
+		Debugger.log('Audio download folder: ', downloadFolder)
+		const downloadPath = `${downloadFolder}/${provider.id}.${sourceId}.mp4` /** @todo - Liam: There is no guarantee it will be an mp4 */
+		Debugger.log('Audio download path: ', downloadPath)
+		Downloader.verifyOriginality({ targetPath: downloadPath, throwErrorOnCollision: !overrideOnCollision })
+		/** @todo - Liam: There is no guarantee it will be a jpg */
+		const thumbnailFilename = `${sourceId}.${Downloader.getExtensionFromUrl(downloadDetails.thumbnail)}`
+		const thumbnail = await Image.get({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
 
 		// const videoFile = await File.get({ location: downloadPath, size: downloadDetails.filesize_approx, tags: downloadDetails.tags }, prisma)
-		const image = await Image.get({ source: downloadDetails.thumbnail, filename: 'test123.jpg' }, prisma)
 
 		console.log(`Attempting to download to path ${downloadPath}`)
 		/**
@@ -202,41 +258,12 @@ class Downloader {
 		 * You need to handle the download explicitly reading from console to catch warnings + errors + info.
 		 * Right now any download to the same location will not override and you will never know why.
 		 */
-		return new Promise((resolve, reject) => {
-			const controller = new AbortController()
-			const timeout = setTimeout(() => {
-				controller.abort()
-				console.log('Event killed?: ', downloadEventEmitter.ytDlpProcess?.killed)
-				reject(`Download timed out. Waited ${MAX_DOWNLOAD_TIME} milliseconds.`)
-			}, MAX_DOWNLOAD_TIME)
-			const downloadEventEmitter = downloader
-				.exec([url, '-f', 'best', '-o', downloadPath], { shell: true }, controller.signal)
-				.on('progress', (progress) => {
-					console.log('Progress', progress)
-				})
-				.on('ytDlpEvent', (eventType, eventData) => {
-					/**
-					 * @todo - Anyone: We need to pay close attention here as this is where we will find
-					 * gotchas. The event data is just string literals that are verbatim from the console.
-					 *
-					 * @todo - Anyone: Need to test the errors have the same (or similar)
-					 * errors across the different binaries.
-					 *
-					 * Maybe we should log an issue with the yt-dlp project to get them to standardise errors or
-					 * generate error codes?
-					 */
-					console.log('Event found!', { eventType, eventData })
-				})
-				.on('error', (error) => {
-					clearTimeout(timeout)
-					reject(error)
-				})
-				.on('close', () => {
-					clearTimeout(timeout)
-					console.log('all done')
-					resolve('Done!')
-				})
-		})
+		await Downloader.tryDownload({ downloader, downloadPath, source: url })
+
+		// Verify download
+		if (!System.exists(downloadPath)) {
+			throw new Error(`Download failed. Verification of file '${downloadPath}' found that the file does not exist.`)
+		}
 	}
 }
 
