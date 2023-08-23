@@ -19,6 +19,7 @@ class PierSettings {
 					audioPath: path.join(basePath, '/audio'),
 					imagePath: path.join(basePath, '/image'),
 					videoPath: path.join(basePath, '/video'),
+					metadataPath: path.join(basePath, '/metadata'),
 				},
 			})
 		}
@@ -49,6 +50,7 @@ class PierSettings {
 						audioPath: settings.downloads.audioPath,
 						imagePath: settings.downloads.imagePath,
 						videoPath: settings.downloads.videoPath,
+						metadataPath: settings.downloads.metadataPath,
 					},
 				},
 			},
