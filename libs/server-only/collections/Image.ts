@@ -9,12 +9,16 @@ namespace Image {
 	interface getProps {
 		source: string
 		filename: string
+		isMetadata?: boolean // Is the image metadata for another file?
 	}
 
-	export const get = async ({ source, filename }: getProps, prisma: PrismaClient) => {
+	export const get = async ({ source, filename, isMetadata }: getProps, prisma: PrismaClient) => {
 		Debugger.log('Trying to create image from source:', source)
 		const settings = await PierSettings.getSettings(prisma)
-		const output = `${settings.downloads.imagePath}/${filename}`
+		let output = `${settings.downloads.imagePath}/${filename}`
+		if (isMetadata) {
+			output = `${settings.downloads.metadataPath}/${filename}`
+		}
 		const { mediaType, size: byteSize } = await Network.getFile({ url: source, output })
 		const file = await File.get({ location: output, size: byteSize, tags: [] }, prisma)
 
