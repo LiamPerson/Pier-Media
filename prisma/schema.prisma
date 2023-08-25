@@ -76,7 +76,7 @@ model Album {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   tracks       Track[]
-  albumImageId Int
+  albumImageId Int      @unique
   albumImage   Image    @relation(fields: [albumImageId], references: [id])
 }
 
@@ -107,7 +107,8 @@ model Image {
   updatedAt DateTime @updatedAt
   width     Int
   height    Int
-  Album     Album[]
+  Album     Album?
+  Track     Track?
 }
 
 model Track {
@@ -129,4 +130,6 @@ model Track {
   duration                Int // In milliseconds
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
+  thumbnailId             Int      @unique
+  thumbnail               Image    @relation(fields: [thumbnailId], references: [id])
 }
