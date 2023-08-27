@@ -72,15 +72,25 @@ export type Image = {
   id: Scalars['Int']['output'];
 };
 
+export type InitialiseGenresInput = {
+  overrideExisting?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
+  initialise_genres: Scalars['Boolean']['output'];
   update_settings: Settings;
 };
 
 
 export type MutationDownload_AudioArgs = {
   input: GenericDownloadInput;
+};
+
+
+export type MutationInitialise_GenresArgs = {
+  input?: InputMaybe<InitialiseGenresInput>;
 };
 
 
@@ -205,6 +215,7 @@ export type ResolversTypes = {
   GenericDownloadInput: GenericDownloadInput;
   Genre: ResolverTypeWrapper<Genre>;
   Image: ResolverTypeWrapper<Image>;
+  InitialiseGenresInput: InitialiseGenresInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Provider: ResolverTypeWrapper<Provider>;
@@ -226,6 +237,7 @@ export type ResolversParentTypes = {
   GenericDownloadInput: GenericDownloadInput;
   Genre: Genre;
   Image: Image;
+  InitialiseGenresInput: InitialiseGenresInput;
   Int: Scalars['Int']['output'];
   Mutation: {};
   Provider: Provider;
@@ -282,6 +294,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
+  initialise_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialise_GenresArgs>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
 };
 

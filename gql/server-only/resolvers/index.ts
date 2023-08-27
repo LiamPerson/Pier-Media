@@ -4,6 +4,9 @@ import PierSettings from '@/libs/server-only/PierSettings'
 import { PrismaClient } from '@prisma/client'
 import System from '@/libs/server-only/System'
 import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
+import Genre from '@/libs/server-only/collections/Genre'
+
+const prisma = new PrismaClient()
 
 const checkExistingPathThrowingError = (path?: InputMaybe<string>) => {
 	if (path === undefined || path === null) return
@@ -15,7 +18,6 @@ const checkExistingPathThrowingError = (path?: InputMaybe<string>) => {
 const resolvers: Resolvers = {
 	Query: {
 		settings: async () => {
-			const prisma = new PrismaClient()
 			const rawSettings = await PierSettings.getSettings(prisma)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
@@ -29,13 +31,16 @@ const resolvers: Resolvers = {
 			checkExistingPathThrowingError(input?.downloads?.imagePath)
 			checkExistingPathThrowingError(input?.downloads?.videoPath)
 
-			const prisma = new PrismaClient()
 			const rawSettings = await PierSettings.setSettings(prisma, input)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
 		download_audio: async (_, { input: { url, overrideOnCollision } }) => {
 			await Downloader.download({ url, type: DownloadType.AUDIO, overrideOnCollision })
 			throw Error('Not implemented')
+		},
+		initialise_genres: async (_, { input }) => {
+			await Genre.tryAddDefaults({ overrideExisting: input?.overrideExisting }, prisma)
+			return true
 		},
 	},
 }

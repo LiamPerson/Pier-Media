@@ -72,15 +72,25 @@ export type Image = {
   id: Scalars['Int']['output'];
 };
 
+export type InitialiseGenresInput = {
+  overrideExisting?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
+  initialise_genres: Scalars['Boolean']['output'];
   update_settings: Settings;
 };
 
 
 export type MutationDownload_AudioArgs = {
   input: GenericDownloadInput;
+};
+
+
+export type MutationInitialise_GenresArgs = {
+  input?: InputMaybe<InitialiseGenresInput>;
 };
 
 
