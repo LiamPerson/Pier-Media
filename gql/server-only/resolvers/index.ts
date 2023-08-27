@@ -21,6 +21,9 @@ const resolvers: Resolvers = {
 			const rawSettings = await PierSettings.getSettings(prisma)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
+		genres: async () => {
+			return prisma.genre.findMany()
+		},
 	},
 	Mutation: {
 		update_settings: async (_, { input }) => {

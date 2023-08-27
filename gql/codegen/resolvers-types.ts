@@ -107,6 +107,7 @@ export type Provider = {
 
 export type Query = {
   __typename?: 'Query';
+  genres: Array<Maybe<Genre>>;
   settings: Settings;
 };
 
@@ -306,6 +307,7 @@ export type ProviderResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  genres?: Resolver<Array<Maybe<ResolversTypes['Genre']>>, ParentType, ContextType>;
   settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType>;
 };
 

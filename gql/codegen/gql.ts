@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "mutation UpdateSettings($input: SettingsInput) {\n  update_settings(input: $input) {\n    id\n    downloads {\n      id\n      updatedAt\n    }\n  }\n}": types.UpdateSettingsDocument,
+    "query GetGenres {\n  genres {\n    id\n    name\n    description\n  }\n}": types.GetGenresDocument,
     "query GetSettings {\n  settings {\n    id\n    downloads {\n      id\n      updatedAt\n      audioPath\n    }\n  }\n}": types.GetSettingsDocument,
 };
 
@@ -35,6 +36,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation UpdateSettings($input: SettingsInput) {\n  update_settings(input: $input) {\n    id\n    downloads {\n      id\n      updatedAt\n    }\n  }\n}"): (typeof documents)["mutation UpdateSettings($input: SettingsInput) {\n  update_settings(input: $input) {\n    id\n    downloads {\n      id\n      updatedAt\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetGenres {\n  genres {\n    id\n    name\n    description\n  }\n}"): (typeof documents)["query GetGenres {\n  genres {\n    id\n    name\n    description\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
