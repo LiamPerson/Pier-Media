@@ -40,6 +40,8 @@ namespace File {
 		})
 		return updatedFileDetails
 	}
+
+	export type Type = Awaited<ReturnType<typeof get>>
 }
 
 export default File
