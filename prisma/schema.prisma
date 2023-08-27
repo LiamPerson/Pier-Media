@@ -123,10 +123,10 @@ model Track {
   authorId                Int
   author                  Author   @relation(fields: [authorId], references: [id])
   fileId                  Int      @unique
-  file                    File?    @relation(fields: [fileId], references: [id])
+  file                    File     @relation(fields: [fileId], references: [id])
   contributingArtistsJson String // Please see ./json-interfaces for definition
   albumId                 Int
-  album                   Album    @relation(fields: [albumId], references: [id])
+  album                   Album?   @relation(fields: [albumId], references: [id])
   duration                Int // In milliseconds
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
