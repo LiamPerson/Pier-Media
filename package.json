@@ -29,6 +29,7 @@
 		"graphql": "^16.7.1",
 		"image-size": "^1.0.2",
 		"mime-types": "^2.1.35",
+		"music-metadata": "^8.1.4",
 		"next": "13.4.10",
 		"prisma": "^5.1.1",
 		"react": "18.2.0",
