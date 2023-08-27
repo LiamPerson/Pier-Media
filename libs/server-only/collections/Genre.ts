@@ -41,6 +41,27 @@ namespace Genre {
 		}
 	}
 
+	const createAcronym = (string: string) => {
+		return string
+			.split(' ')
+			.map((word) => word[0])
+			.join('')
+	}
+
+	const cullSpaceSeparators = (string: string) => {
+		return string.replace(/[-_ ]/, '')
+	}
+
+	export const inferGenre = async (metadata: string, prisma: PrismaClient) => {
+		const allGenres = await prisma.genre.findMany()
+		// We should reverse the array because chances are 'Unknown' is at the start of the list.
+		return allGenres.reverse().find((genre) => {
+			const fullRegex = new RegExp(` ${cullSpaceSeparators(genre.name)} `, 'i')
+			const acronymRegex = new RegExp(` ${createAcronym(genre.name)} `, 'i')
+			return fullRegex.test(metadata) || acronymRegex.test(metadata)
+		})
+	}
+
 	export type Type = Awaited<ReturnType<typeof get>>
 }
 
