@@ -218,7 +218,7 @@ namespace Downloader {
 					resolve()
 				})
 		})
-	const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
+	export const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
 		const prisma = new PrismaClient()
 
 		/** @todo - Liam: Remove any html query strings from url */
@@ -232,12 +232,14 @@ namespace Downloader {
 		const downloadDetails = await getDownloadDetails(url, downloader)
 
 		const sourceId = downloadDetails.id
+		const genre =
+			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
+		Debugger.log('Inferred genre (from description & tags): ', inferredGenre)
 
 		Debugger.dumpJsonToFile(downloadDetails)
 		const authorSourceId = downloadDetails.channel_id || downloadDetails.uploader_id
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
-		const genre = await Genre.get({ name: downloadDetails.genre, description: downloadDetails.genre }, prisma)
 
 		const downloadFolder = await getDownloadFolderPath(type, prisma)
 		Debugger.log('Audio download folder: ', downloadFolder)
