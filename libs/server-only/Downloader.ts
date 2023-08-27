@@ -11,6 +11,7 @@ import Author from './collections/Author'
 import Image from './collections/Image'
 import System from './System'
 import { InputMaybe } from '@/gql/codegen/graphql'
+import Genre from './collections/Genre'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
@@ -161,10 +162,6 @@ class Downloader {
 		// This url cleaning may only work for YouTube, need to test on more providers
 		return url.split('&')[0]
 	}
-	static checkEventForError({ event, data, onError }: { event: string; data: string; onError: (error: string) => void }) {
-		// if(event.toLowerCase() === 'download' && )
-		return false
-	}
 	static verifyOriginality({ targetPath, throwErrorOnCollision }: { targetPath: string; throwErrorOnCollision: boolean }) {
 		// We need to check that the file doesn't already exist as the target as yt-dlp will not override by default.
 		if (!System.isAccessible(targetPath, { mode: constants.W_OK })) {
@@ -240,6 +237,7 @@ class Downloader {
 		const authorSourceId = downloadDetails.channel_id || downloadDetails.uploader_id
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
+		const genre = await Genre.get({ name: downloadDetails.genre, description: downloadDetails.genre }, prisma)
 
 		const downloadFolder = await Downloader.getDownloadFolderPath(type, prisma)
 		Debugger.log('Audio download folder: ', downloadFolder)
