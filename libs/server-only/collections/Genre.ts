@@ -40,6 +40,8 @@ namespace Genre {
 			)
 		}
 	}
+
+	export type Type = Awaited<ReturnType<typeof get>>
 }
 
 export default Genre
