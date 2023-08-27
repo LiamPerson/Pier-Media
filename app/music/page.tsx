@@ -21,7 +21,7 @@ const IndexPage = () => {
 						return (
 							<Card key={genre.id}>
 								<CardContent>
-									<Typography variant='body1'>{genre.name}</Typography>
+									<Typography variant='h5'>{genre.name}</Typography>
 									<Typography variant='body2'>{genre.description}</Typography>
 								</CardContent>
 							</Card>
