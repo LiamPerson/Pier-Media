@@ -105,15 +105,15 @@ const YT_DLP_BINARIES: YtdlpBinaries[] = [
 	},
 ]
 
-class Downloader {
-	static checkExistingPathThrowingError(path: string) {
+namespace Downloader {
+	const checkExistingPathThrowingError = (path: string) => {
 		if (!System.isAccessible(path, { mode: constants.W_OK })) {
 			throw new Error(
 				`You cannot download to the path '${path}' as it is not writable. Please check your download settings and permissions.`
 			)
 		}
 	}
-	static downloadTypeToString(type: DownloadType) {
+	const downloadTypeToString = (type: DownloadType) => {
 		switch (type) {
 			case DownloadType.AUDIO:
 				return 'audio'
@@ -121,7 +121,7 @@ class Downloader {
 				return 'video'
 		}
 	}
-	static getYtdlpBinaryPath() {
+	const getYtdlpBinaryPath = () => {
 		const machine = os.machine()
 		const platform = os.platform()
 		const release = os.release()
@@ -140,7 +140,7 @@ class Downloader {
 		/** @todo - Liam: This will probably not work on compile time */
 		return path.resolve('./public/bin/yt-dlp/' + binaryInfo.binary)
 	}
-	static async getDownloadFolderPath(downloadType: DownloadType, prisma: PrismaClient) {
+	const getDownloadFolderPath = async (downloadType: DownloadType, prisma: PrismaClient) => {
 		const settings = await PierSettings.getSettings(prisma)
 		let path = settings.downloads.path
 		switch (downloadType) {
@@ -152,17 +152,17 @@ class Downloader {
 				break
 		}
 
-		Downloader.checkExistingPathThrowingError(path)
+		checkExistingPathThrowingError(path)
 		return path
 	}
-	static async getDownloadDetails(url: string, ytdlp: YTDlpWrap) {
+	const getDownloadDetails = async (url: string, ytdlp: YTDlpWrap) => {
 		return await ytdlp.getVideoInfo(url)
 	}
-	static cleanUrl(url: string) {
+	const cleanUrl = (url: string) => {
 		// This url cleaning may only work for YouTube, need to test on more providers
 		return url.split('&')[0]
 	}
-	static verifyOriginality({ targetPath, throwErrorOnCollision }: { targetPath: string; throwErrorOnCollision: boolean }) {
+	const verifyOriginality = ({ targetPath, throwErrorOnCollision }: { targetPath: string; throwErrorOnCollision: boolean }) => {
 		// We need to check that the file doesn't already exist as the target as yt-dlp will not override by default.
 		if (!System.isAccessible(targetPath, { mode: constants.W_OK })) {
 			throw new Error(
@@ -173,13 +173,13 @@ class Downloader {
 			throw new Error(`There is a file collision at '${targetPath}'. Please remove it or change your download settings.`)
 		}
 	}
-	static getExtensionFromUrl = (url: string) => {
+	const getExtensionFromUrl = (url: string) => {
 		const urlSplit = url.split('.')
 		const extension = urlSplit[urlSplit.length - 1]
 		return extension
 	}
 
-	static tryDownload = async ({ downloader, downloadPath, source }: TryDownloadProps) =>
+	const tryDownload = async ({ downloader, downloadPath, source }: TryDownloadProps) =>
 		new Promise<void>((resolve, reject) => {
 			const controller = new AbortController()
 			const timeout = setTimeout(() => {
@@ -218,18 +218,18 @@ class Downloader {
 					resolve()
 				})
 		})
-	static async download({ url, type, overrideOnCollision }: DownloadProps) {
+	const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
 		const prisma = new PrismaClient()
 
 		/** @todo - Liam: Remove any html query strings from url */
-		url = Downloader.cleanUrl(url)
+		url = cleanUrl(url)
 		console.log('Cleaned url: ', url)
 
-		Debugger.log(`Downloading ${url} as ${Downloader.downloadTypeToString(type)}`)
-		const binary = Downloader.getYtdlpBinaryPath()
+		Debugger.log(`Downloading ${url} as ${downloadTypeToString(type)}`)
+		const binary = getYtdlpBinaryPath()
 		Debugger.log(`Using binary at location ${binary}`)
 		const downloader = new YTDlpWrap(binary)
-		const downloadDetails = await Downloader.getDownloadDetails(url, downloader)
+		const downloadDetails = await getDownloadDetails(url, downloader)
 
 		const sourceId = downloadDetails.id
 
@@ -239,13 +239,13 @@ class Downloader {
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
 		const genre = await Genre.get({ name: downloadDetails.genre, description: downloadDetails.genre }, prisma)
 
-		const downloadFolder = await Downloader.getDownloadFolderPath(type, prisma)
+		const downloadFolder = await getDownloadFolderPath(type, prisma)
 		Debugger.log('Audio download folder: ', downloadFolder)
 		const downloadPath = `${downloadFolder}/${provider.id}.${sourceId}.mp4` /** @todo - Liam: There is no guarantee it will be an mp4 */
 		Debugger.log('Audio download path: ', downloadPath)
-		Downloader.verifyOriginality({ targetPath: downloadPath, throwErrorOnCollision: !overrideOnCollision })
+		verifyOriginality({ targetPath: downloadPath, throwErrorOnCollision: !overrideOnCollision })
 		/** @todo - Liam: There is no guarantee it will be a jpg */
-		const thumbnailFilename = `${sourceId}.${Downloader.getExtensionFromUrl(downloadDetails.thumbnail)}`
+		const thumbnailFilename = `${sourceId}.${getExtensionFromUrl(downloadDetails.thumbnail)}`
 		const thumbnail = await Image.get({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
 
 		// const videoFile = await File.get({ location: downloadPath, size: downloadDetails.filesize_approx, tags: downloadDetails.tags }, prisma)
@@ -256,7 +256,7 @@ class Downloader {
 		 * You need to handle the download explicitly reading from console to catch warnings + errors + info.
 		 * Right now any download to the same location will not override and you will never know why.
 		 */
-		await Downloader.tryDownload({ downloader, downloadPath, source: url })
+		await tryDownload({ downloader, downloadPath, source: url })
 
 		// Verify download
 		if (!System.exists(downloadPath)) {
