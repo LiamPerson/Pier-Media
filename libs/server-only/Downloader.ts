@@ -9,8 +9,8 @@ import { constants } from 'node:fs'
 import Provider from './collections/Provider'
 import Author from './collections/Author'
 import Image from './collections/Image'
-import { InputMaybe } from '@/gql/codegen/resolvers-types'
 import System from './System'
+import { InputMaybe } from '@/gql/codegen/graphql'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
