@@ -116,7 +116,7 @@ model Track {
   title                   String
   description             String
   genreId                 Int
-  genre                   Genre    @relation(fields: [genreId], references: [id])
+  genre                   Genre?   @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
   sourceId                String   @unique // The ID of the track on the source platform
   originalUrl             String // We can store the original URl here so we can decode the source later
