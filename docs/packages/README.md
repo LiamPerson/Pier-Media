@@ -95,6 +95,7 @@ For reading & parsing mime types without having to write our own parser & types.
 
 ## [music-metadata](https://www.npmjs.com/package/music-metadata)
 
+@todo - We should replace this with some FFMPEG wrap.
 For reading metadata from audio files without having to write our own parser.
 
 ## [image-size](https://www.npmjs.com/package/image-size)
