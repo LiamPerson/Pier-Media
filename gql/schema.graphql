@@ -59,6 +59,7 @@ type DownloadSettings {
 	audioPath: String!
 	imagePath: String!
 	videoPath: String!
+	metadataPath: String!
 }
 
 input DownloadSettingsInput {

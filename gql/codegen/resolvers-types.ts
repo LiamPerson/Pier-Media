@@ -36,6 +36,7 @@ export type DownloadSettings = {
   audioPath: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   imagePath: Scalars['String']['output'];
+  metadataPath: Scalars['String']['output'];
   path: Scalars['String']['output'];
   updatedAt: Scalars['String']['output'];
   videoPath: Scalars['String']['output'];
@@ -268,6 +269,7 @@ export type DownloadSettingsResolvers<ContextType = any, ParentType extends Reso
   audioPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   imagePath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  metadataPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   videoPath?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

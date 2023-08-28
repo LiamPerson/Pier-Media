@@ -5,6 +5,10 @@ query GetSettings {
 			id
 			updatedAt
 			audioPath
+			videoPath
+			imagePath
+			metadataPath
+			path
 		}
 	}
 }
