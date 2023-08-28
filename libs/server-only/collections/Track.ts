@@ -18,9 +18,10 @@ namespace Track {
 		thumbnail: Image.Type
 		originalUrl: string
 		contributingArtistIds: string[]
-		genre: Genre.Type
+		genre?: Genre.Type
 	}
 	export const get = async (track: getProps, prisma: PrismaClient) => {
+		const connectGenre = track.genre ? { genre: { connect: { id: track.genre.id } } } : {}
 		const trackDetails = await prisma.track.upsert({
 			where: {
 				sourceId: track.sourceId,
@@ -38,11 +39,6 @@ namespace Track {
 				originalUrl: track.originalUrl,
 				sourceId: track.sourceId,
 				contributingArtistsJson: JSON.stringify(track.contributingArtistIds),
-				genre: {
-					connect: {
-						id: track.genre.id,
-					},
-				},
 				thumbnail: {
 					connect: {
 						id: track.thumbnail.id,
@@ -58,6 +54,7 @@ namespace Track {
 						id: track.file.id,
 					},
 				},
+				...connectGenre,
 			},
 			create: {
 				title: track.title,
@@ -67,11 +64,6 @@ namespace Track {
 				originalUrl: track.originalUrl,
 				contributingArtistsJson: JSON.stringify(track.contributingArtistIds),
 				duration: track.duration,
-				genre: {
-					connect: {
-						id: track.genre.id,
-					},
-				},
 				thumbnail: {
 					connect: {
 						id: track.thumbnail.id,
@@ -87,6 +79,7 @@ namespace Track {
 						id: track.file.id,
 					},
 				},
+				...connectGenre,
 			},
 		})
 		return trackDetails
