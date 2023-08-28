@@ -1,6 +1,7 @@
 import AppProviders from '@/components/core/AppProviders'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Pier Media',
 	description: 'An open source media server made to work on a RaspberryPi.',
 }
