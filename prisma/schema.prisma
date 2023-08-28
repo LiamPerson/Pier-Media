@@ -115,7 +115,7 @@ model Track {
   id                      Int      @id @default(autoincrement())
   title                   String
   description             String
-  genreId                 Int
+  genreId                 Int?
   genre                   Genre?   @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
   sourceId                String   @unique // The ID of the track on the source platform
@@ -125,7 +125,7 @@ model Track {
   fileId                  Int      @unique
   file                    File     @relation(fields: [fileId], references: [id])
   contributingArtistsJson String // Please see ./json-interfaces for definition
-  albumId                 Int
+  albumId                 Int?
   album                   Album?   @relation(fields: [albumId], references: [id])
   duration                Int // In milliseconds
   createdAt               DateTime @default(now())
