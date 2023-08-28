@@ -6,6 +6,12 @@ import { fileTypeFromFile } from 'file-type'
 import Debugger from './Debugger'
 
 namespace Network {
+	/**
+	 * Gets the filename from any url.
+	 * @example
+	 * getFileNameFromUrl("https://a.example.com/123/ui3rh2hr/image.jpg?test=-oaymwEmC444OgC8quKqQMa8AEB-ABGHIgUCg1MA8=&rs=AOn4C__=-=-aK3tq5QQ-333bv3_Xqw")
+	 * // result: `image.jpg`
+	 */
 	export const getFilenameFromUrl = (path: string) => {
 		const url = new URL(path)
 		return basename(url.pathname)
