@@ -5,13 +5,17 @@ import YTDlpWrap from 'yt-dlp-wrap-extended'
 import PierSettings from './PierSettings'
 import { PrismaClient } from '@prisma/client'
 import path from 'node:path'
-import { constants } from 'node:fs'
+import { constants, statSync } from 'node:fs'
 import Provider from './collections/Provider'
 import Author from './collections/Author'
 import Image from './collections/Image'
 import System from './System'
 import { InputMaybe } from '@/gql/codegen/graphql'
 import Genre from './collections/Genre'
+import { parseFile } from 'music-metadata'
+import Track from './collections/Track'
+import File from './collections/File'
+import Network from './Network'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
@@ -37,6 +41,7 @@ interface TryDownloadProps {
 	downloader: YTDlpWrap
 	downloadPath: string
 	source: string
+	type: DownloadType
 }
 
 /**
@@ -164,11 +169,6 @@ namespace Downloader {
 	}
 	const verifyOriginality = ({ targetPath, throwErrorOnCollision }: { targetPath: string; throwErrorOnCollision: boolean }) => {
 		// We need to check that the file doesn't already exist as the target as yt-dlp will not override by default.
-		if (!System.isAccessible(targetPath, { mode: constants.W_OK })) {
-			throw new Error(
-				`You cannot download to the path '${targetPath}' as it is not writable. Please check your download settings and permissions.`
-			)
-		}
 		if (throwErrorOnCollision && System.exists(targetPath)) {
 			throw new Error(`There is a file collision at '${targetPath}'. Please remove it or change your download settings.`)
 		}
@@ -179,8 +179,9 @@ namespace Downloader {
 		return extension
 	}
 
-	const tryDownload = async ({ downloader, downloadPath, source }: TryDownloadProps) =>
-		new Promise<void>((resolve, reject) => {
+	const tryDownload = async ({ downloader, downloadPath, source, type }: TryDownloadProps) => {
+		const extraCommands = type === DownloadType.AUDIO ? ['--extract-audio', '--audio-format', 'mp3'] : []
+		return new Promise<void>((resolve, reject) => {
 			const controller = new AbortController()
 			const timeout = setTimeout(() => {
 				controller.abort()
@@ -192,7 +193,7 @@ namespace Downloader {
 				reject(error || 'Download failed or was aborted.')
 			}
 			const downloadEventEmitter = downloader
-				.exec([source, '-f', 'best', '-o', downloadPath], { shell: true }, controller.signal)
+				.exec([source, '-f', 'best', '-o', downloadPath, ...extraCommands], { shell: true }, controller.signal)
 				.on('progress', (progress) => {
 					console.log('Progress', progress)
 				})
@@ -207,17 +208,18 @@ namespace Downloader {
 					 * Maybe we should log an issue with the yt-dlp project to get them to standardise errors or
 					 * generate error codes?
 					 */
-					// console.log('Event found!', { eventType, eventData })
+					console.log('Event found!', { eventType, eventData })
 				})
 				.on('error', (error) => {
 					killPromise(error)
 				})
 				.on('close', () => {
 					clearTimeout(timeout)
-					console.log('all done')
 					resolve()
 				})
 		})
+	}
+
 	export const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
 		const prisma = new PrismaClient()
 
@@ -232,25 +234,26 @@ namespace Downloader {
 		const downloadDetails = await getDownloadDetails(url, downloader)
 
 		const sourceId = downloadDetails.id
-		const genre =
-			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
-		Debugger.log('Inferred genre (from description & tags): ', inferredGenre)
 
 		Debugger.dumpJsonToFile(downloadDetails)
 		const authorSourceId = downloadDetails.channel_id || downloadDetails.uploader_id
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
+		const genre =
+			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
+		Debugger.log('Inferred genre (from description & tags): ', genre)
 
+		const baseName = `${provider.id}.${sourceId}`
+		const finalExtension = type === DownloadType.AUDIO ? 'mp3' : 'mp4' /** @todo - Liam: There is no guarantee it will be an mp4 */
 		const downloadFolder = await getDownloadFolderPath(type, prisma)
-		Debugger.log('Audio download folder: ', downloadFolder)
-		const downloadPath = `${downloadFolder}/${provider.id}.${sourceId}.mp4` /** @todo - Liam: There is no guarantee it will be an mp4 */
-		Debugger.log('Audio download path: ', downloadPath)
-		verifyOriginality({ targetPath: downloadPath, throwErrorOnCollision: !overrideOnCollision })
-		/** @todo - Liam: There is no guarantee it will be a jpg */
-		const thumbnailFilename = `${sourceId}.${getExtensionFromUrl(downloadDetails.thumbnail)}`
-		const thumbnail = await Image.get({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
+		const downloadPath = `${downloadFolder}/${baseName}`
+		const finalPath = `${downloadFolder}/${baseName}.${finalExtension}`
 
-		// const videoFile = await File.get({ location: downloadPath, size: downloadDetails.filesize_approx, tags: downloadDetails.tags }, prisma)
+		Debugger.log('Audio download folder: ', downloadFolder)
+		Debugger.log('Audio download path: ', downloadPath)
+		verifyOriginality({ targetPath: finalPath, throwErrorOnCollision: !overrideOnCollision })
+		const thumbnailFilename = `${baseName}.${getExtensionFromUrl(Network.removeSearchFromUrl(downloadDetails.thumbnail))}`
+		const thumbnail = await Image.get({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
 
 		console.log(`Attempting to download to path ${downloadPath}`)
 		/**
@@ -258,12 +261,39 @@ namespace Downloader {
 		 * You need to handle the download explicitly reading from console to catch warnings + errors + info.
 		 * Right now any download to the same location will not override and you will never know why.
 		 */
-		await tryDownload({ downloader, downloadPath, source: url })
+		await tryDownload({ downloader, downloadPath, source: url, type: DownloadType.AUDIO })
 
 		// Verify download
-		if (!System.exists(downloadPath)) {
-			throw new Error(`Download failed. Verification of file '${downloadPath}' found that the file does not exist.`)
+		if (!System.exists(finalPath)) {
+			throw new Error(`Download failed. Verification of file '${finalPath}' found that the file does not exist.`)
 		}
+
+		const fileStats = statSync(finalPath)
+		console.log('File stats', fileStats)
+		const fileTags = [...downloadDetails.categories, ...downloadDetails.tags]
+		const file = await File.get({ location: finalPath, size: fileStats.size, tags: fileTags }, prisma)
+
+		// Get file bitrate and duration
+		/** @todo - Liam: This should be replaced with an FFMPEG call. */
+		const metadata = await parseFile(finalPath)
+		console.log('Metadata', metadata)
+		const track = await Track.get(
+			{
+				title: downloadDetails.title,
+				author,
+				provider,
+				sourceId,
+				thumbnail,
+				genre,
+				description: downloadDetails.description,
+				bitrate: metadata.format.bitrate || -1,
+				duration: metadata.format.duration || -1,
+				file,
+				originalUrl: downloadDetails.webpage_url,
+				contributingArtistIds: [],
+			},
+			prisma
+		)
 	}
 }
 
