@@ -26,6 +26,8 @@ const DashboardPage = ({ children }: DashboardPageProps) => {
 				<Box
 					marginTop={`${HEADER_HEIGHT + 15}px`}
 					marginLeft={`${SIDEBAR_WIDTH + 15}px`}
+					marginRight={`15px`}
+					width={`calc(100% - ${SIDEBAR_WIDTH + 30}px)`}
 				>
 					{children}
 				</Box>
