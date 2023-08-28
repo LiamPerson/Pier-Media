@@ -67,6 +67,7 @@ input DownloadSettingsInput {
 	audioPath: String
 	imagePath: String
 	videoPath: String
+	metadataPath: String
 }
 
 input SettingsInput {

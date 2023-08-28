@@ -45,6 +45,7 @@ export type DownloadSettings = {
 export type DownloadSettingsInput = {
   audioPath?: InputMaybe<Scalars['String']['input']>;
   imagePath?: InputMaybe<Scalars['String']['input']>;
+  metadataPath?: InputMaybe<Scalars['String']['input']>;
   path?: InputMaybe<Scalars['String']['input']>;
   videoPath?: InputMaybe<Scalars['String']['input']>;
 };

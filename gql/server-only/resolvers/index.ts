@@ -33,6 +33,7 @@ const resolvers: Resolvers = {
 			checkExistingPathThrowingError(input?.downloads?.audioPath)
 			checkExistingPathThrowingError(input?.downloads?.imagePath)
 			checkExistingPathThrowingError(input?.downloads?.videoPath)
+			checkExistingPathThrowingError(input?.downloads?.metadataPath)
 
 			const rawSettings = await PierSettings.setSettings(prisma, input)
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
