@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { lookup } from 'mime-types'
-import { PathLike } from 'node:fs'
+import Debugger from '../Debugger'
 
 namespace File {
 	interface getProps {
@@ -12,6 +12,7 @@ namespace File {
 	export const get = async (file: getProps, prisma: PrismaClient) => {
 		const mediaType = lookup(file.location)
 		if (!mediaType) throw new Error(`Error in File collection: Could not find media type for file '${file.location}'`)
+		Debugger.log(`Created new ${mediaType} file with location '${file.location}'`)
 		const upsertedFileDetails = await prisma.file.upsert({
 			where: {
 				location: file.location,
@@ -35,7 +36,7 @@ namespace File {
 				id: upsertedFileDetails.id,
 			},
 			data: {
-				tagsJson: JSON.stringify(new Set([...existingTags, ...file.tags])),
+				tagsJson: JSON.stringify(Array.from(new Set([...existingTags, ...file.tags]).values())),
 			},
 		})
 		return updatedFileDetails
