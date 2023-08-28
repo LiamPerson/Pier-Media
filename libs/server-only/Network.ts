@@ -9,7 +9,7 @@ namespace Network {
 	/**
 	 * Gets the filename from any url.
 	 * @example
-	 * getFileNameFromUrl("https://a.example.com/123/ui3rh2hr/image.jpg?test=-oaymwEmC444OgC8quKqQMa8AEB-ABGHIgUCg1MA8=&rs=AOn4C__=-=-aK3tq5QQ-333bv3_Xqw")
+	 * getFileNameFromUrl("https://a.example.com/123/abc123/image.jpg?test=-oaymwEmC444OgC8quKqQMa8AEB-ABGHIgUCg1MA8=&rs=AOn4C__=-=-aK3tq5QQ-333bv3_Xqw")
 	 * // result: `image.jpg`
 	 */
 	export const getFilenameFromUrl = (path: string) => {
@@ -29,7 +29,17 @@ namespace Network {
 		mkdirSync(dirname(output), { recursive: true })
 		writeFileSync(output, '')
 	}
-
+	/**
+	 * Removes search parameters from a url.
+	 * @example
+	 * removeSearchFromUrl("https://a.example.com/123/abc123/image.jpg?test=-oaymwEmC444OgC8quKqQMa8AEB-ABGHIgUCg1MA8=&rs=AOn4C__=-=-aK3tq5QQ-333bv3_Xqw")
+	 * // result: `https://a.example.com/123/ui3rh2hr/image.jpg`
+	 */
+	export const removeSearchFromUrl = (url: string) => {
+		const urlObject = new URL(url)
+		urlObject.search = ''
+		return urlObject.toString()
+	}
 	export const getFile = async ({ url, output }: fileProps): Promise<fileReturn> => {
 		const gotStream = got.stream(url)
 		writeFileAndDirectories(output)
