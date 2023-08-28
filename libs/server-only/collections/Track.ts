@@ -38,6 +38,11 @@ namespace Track {
 				originalUrl: track.originalUrl,
 				sourceId: track.sourceId,
 				contributingArtistsJson: JSON.stringify(track.contributingArtistIds),
+				genre: {
+					connect: {
+						id: track.genre.id,
+					},
+				},
 				thumbnail: {
 					connect: {
 						id: track.thumbnail.id,
