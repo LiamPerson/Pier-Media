@@ -164,3 +164,13 @@ To inject scripts onto specifically the staged files in git.
 ## [prettier](https://prettier.io/)
 
 To format your code on commit so we don't have to worry about people conforming to a specific style. You will conform!
+
+## [Jest](https://jestjs.io/)
+
+### Sub-packages
+
+- [@types/jest](https://www.npmjs.com/package/@types/jest)
+- [ts-jest](https://github.com/kulshekhar/ts-jest) (transformer to allow jest to work with TypeScript)
+- [jest-mock-extended](https://www.npmjs.com/package/jest-mock-extended) (for mocking Prisma for tests)
+
+To test our application works as expected and easily detect bugs.
