@@ -171,6 +171,6 @@ To format your code on commit so we don't have to worry about people conforming 
 
 - [@types/jest](https://www.npmjs.com/package/@types/jest)
 - [ts-jest](https://github.com/kulshekhar/ts-jest) (transformer to allow jest to work with TypeScript)
-- [jest-mock-extended](https://www.npmjs.com/package/jest-mock-extended) (for mocking Prisma for tests)
+- [jest-mock-extended](https://www.npmjs.com/package/jest-mock-extended) (for mocking Prisma for tests. Implementation follows [this](https://www.prisma.io/docs/guides/testing/unit-testing))
 
 To test our application works as expected and easily detect bugs.
