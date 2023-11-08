@@ -55,6 +55,11 @@ namespace Genre {
 		return string.replace(/[-_ ]/, '')
 	}
 
+	/**
+	 * Infers the genre from the string of metadata provided.
+	 *
+	 * The metadata can be the source's tags, name, description, a combination of all, etc.
+	 */
 	export const inferGenre = async (metadata: string, prisma: PrismaClient) => {
 		const allGenres = await prisma.genre.findMany()
 		// We should reverse the array because chances are 'Unknown' is at the start of the list.
