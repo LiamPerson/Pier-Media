@@ -5,6 +5,9 @@ import imageSize from 'image-size'
 import File from './File'
 import Debugger from '../Debugger'
 
+/**
+ * The Image collection.
+ */
 namespace Image {
 	interface getProps {
 		source: string

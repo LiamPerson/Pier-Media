@@ -1,6 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import Provider from './Provider'
 
+/**
+ * The Author collection.
+ */
 namespace Author {
 	interface getProps {
 		name: string

@@ -5,6 +5,9 @@ import Author from './Author'
 import Genre from './Genre'
 import File from './File'
 
+/**
+ * The Track (audio file) collection.
+ */
 namespace Track {
 	interface getProps {
 		title: string
