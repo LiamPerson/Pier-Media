@@ -1,7 +1,7 @@
 import 'server-only'
 import os from 'node:os'
 import Debugger from './Debugger'
-import YTDlpWrap from 'yt-dlp-wrap-extended'
+import YtDlpWrap from 'yt-dlp-wrap-extended'
 import PierSettings from './PierSettings'
 import { PrismaClient } from '@prisma/client'
 import path from 'node:path'
@@ -38,7 +38,7 @@ interface YtdlpBinaries {
 }
 
 interface TryDownloadProps {
-	downloader: YTDlpWrap
+	downloader: YtDlpWrap
 	downloadPath: string
 	source: string
 	type: DownloadType
@@ -160,7 +160,7 @@ namespace Downloader {
 		checkExistingPathThrowingError(path)
 		return path
 	}
-	const getDownloadDetails = async (url: string, ytdlp: YTDlpWrap) => {
+	const getDownloadDetails = async (url: string, ytdlp: YtDlpWrap) => {
 		return await ytdlp.getVideoInfo(url)
 	}
 	const cleanUrl = (url: string) => {
@@ -230,7 +230,7 @@ namespace Downloader {
 		Debugger.log(`Downloading ${url} as ${downloadTypeToString(type)}`)
 		const binary = getYtdlpBinaryPath()
 		Debugger.log(`Using binary at location ${binary}`)
-		const downloader = new YTDlpWrap(binary)
+		const downloader = new YtDlpWrap(binary)
 		const downloadDetails = await getDownloadDetails(url, downloader)
 
 		const sourceId = downloadDetails.id
