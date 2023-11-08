@@ -16,6 +16,7 @@ import { parseFile } from 'music-metadata'
 import Track from './collections/Track'
 import File from './collections/File'
 import Network from './Network'
+import prisma from '@/prisma/database'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
@@ -221,8 +222,6 @@ namespace Downloader {
 	}
 
 	export const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
-		const prisma = new PrismaClient()
-
 		/** @todo - Liam: Remove any html query strings from url */
 		url = cleanUrl(url)
 		console.log('Cleaned url: ', url)

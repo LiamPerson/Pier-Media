@@ -1,12 +1,10 @@
 import 'server-only'
 import { InputMaybe, Resolvers } from '@/gql/codegen/resolvers-types'
 import PierSettings from '@/libs/server-only/PierSettings'
-import { PrismaClient } from '@prisma/client'
 import System from '@/libs/server-only/System'
 import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
 import Genre from '@/libs/server-only/collections/Genre'
-
-const prisma = new PrismaClient()
+import prisma from '@/prisma/database'
 
 const checkExistingPathThrowingError = (path?: InputMaybe<string>) => {
 	if (path === undefined || path === null) return
