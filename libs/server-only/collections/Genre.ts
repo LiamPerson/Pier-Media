@@ -1,6 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 import DEFAULT_GENRES from '@/data/audio_genres.json'
-import { Maybe } from '@/gql/codegen/resolvers-types'
 import { InputMaybe } from '@/gql/codegen/graphql'
 
 /**
@@ -55,13 +54,13 @@ namespace Genre {
 		return string.replace(/[-_ ]/, '')
 	}
 
-	export const inferGenre = async (metadata: string, prisma: PrismaClient) => {
+	export const guessGenreFromString = async (sourceString: string, prisma: PrismaClient) => {
 		const allGenres = await prisma.genre.findMany()
 		// We should reverse the array because chances are 'Unknown' is at the start of the list.
 		return allGenres.reverse().find((genre) => {
 			const fullRegex = new RegExp(` ${cullSpaceSeparators(genre.name)} `, 'i')
 			const acronymRegex = new RegExp(` ${createAcronym(genre.name)} `, 'i')
-			return fullRegex.test(metadata) || acronymRegex.test(metadata)
+			return fullRegex.test(sourceString) || acronymRegex.test(sourceString)
 		})
 	}
 

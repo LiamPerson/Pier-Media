@@ -240,7 +240,8 @@ namespace Downloader {
 		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
 		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
 		const genre =
-			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
+			(await Genre.guessGenreFromString(downloadDetails.tags.join(' '), prisma)) ||
+			(await Genre.guessGenreFromString(downloadDetails.description, prisma))
 		Debugger.log('Inferred genre (from description & tags): ', genre)
 
 		const baseName = `${provider.id}.${sourceId}`
