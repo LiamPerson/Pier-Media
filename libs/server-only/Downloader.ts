@@ -142,7 +142,7 @@ namespace Downloader {
 				`No binary found for machine '${machine}', platform '${platform}' and release '${release}'. Please report this to the developers or consider contributing to the Downloader.ts file.`
 			)
 		}
-		/** @todo - Liam: This will probably not work on compile time */
+		/** @todo - Liam: This will probably not work after a build (outside of development) */
 		return path.resolve('./public/bin/yt-dlp/' + binaryInfo.binary)
 	}
 	const getDownloadFolderPath = async (downloadType: DownloadType, prisma: PrismaClient) => {
