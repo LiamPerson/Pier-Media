@@ -126,7 +126,7 @@ namespace Downloader {
 				return 'video'
 		}
 	}
-	const getYtdlpBinaryPath = () => {
+	const getYtDlpBinaryPath = () => {
 		const machine = os.machine()
 		const platform = os.platform()
 		const release = os.release()
@@ -228,7 +228,7 @@ namespace Downloader {
 		console.log('Cleaned url: ', url)
 
 		Debugger.log(`Downloading ${url} as ${downloadTypeToString(type)}`)
-		const binary = getYtdlpBinaryPath()
+		const binary = getYtDlpBinaryPath()
 		Debugger.log(`Using binary at location ${binary}`)
 		const downloader = new YtDlpWrap(binary)
 		const downloadDetails = await getDownloadDetails(url, downloader)
