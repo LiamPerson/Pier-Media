@@ -46,7 +46,7 @@ const IndexPage = () => {
 									<AudioPlayerSmall src={track.file.location} />
 									<Typography variant='h5'>{track.title}</Typography>
 									<Typography variant='body2'>
-										By {track.author.name} | {secondsToTimestamp(track.duration)}
+										By {track.author.name} | {secondsToTimestamp(track.duration)} {track.genre?.name && ' | ' + track.genre.name}
 									</Typography>
 									<Typography variant='body1'>
 										Sourced from <Link href={track.originalUrl}>{track.author.provider.name}</Link>
