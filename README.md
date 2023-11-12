@@ -18,6 +18,8 @@ Connect to your Pier server by going to it's IP address in the browser of your c
 
 - NodeJS V16.10+
 - NPM V8+
+- FFMPEG
+- FFPROBE
 
 ## Supported Architectures
 
@@ -47,12 +49,6 @@ Tests in this application define the product case. Do not modify these. If you a
 DATABASE_URL="file:./dev.db" # Prisma db
 DEBUG_MODE="true"
 ```
-
-## Requirements
-
-- NVM ([Windows](https://github.com/coreybutler/nvm-windows) | [Everything Else](https://github.com/nvm-sh/nvm))
-- FFMPEG (for yt-dlp)
-- FFPROBE (for yt-dlp)
 
 ## Required VSCode Extensions
 
