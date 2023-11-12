@@ -22,6 +22,47 @@ const resolvers: Resolvers = {
 		genres: async () => {
 			return prisma.genre.findMany()
 		},
+		tracks: async () => {
+			/** @todo - Anyone: Refactor this into the Track collection. */
+			const tracksPromise = prisma.track.findMany()
+			const genresPromise = prisma.genre.findMany()
+			const authorsPromise = prisma.author.findMany()
+			const filesPromise = prisma.file.findMany()
+			const thumbnailsPromise = prisma.image.findMany()
+			const providersPromise = prisma.provider.findMany()
+			const [tracks, genres, authors, files, thumbnails, providers] = await Promise.all([
+				tracksPromise,
+				genresPromise,
+				authorsPromise,
+				filesPromise,
+				thumbnailsPromise,
+				providersPromise,
+			])
+			return tracks.map((track) => {
+				// Optional fields
+				const genre = genres.find((genre) => genre.id === track.genreId)
+
+				// Compulsory fields
+				const author = authors.find((author) => author.id === track.authorId)
+				if (!author) throw new Error(`Could not find author with id '${track.authorId}'`)
+				const file = files.find((file) => file.id === track.fileId)
+				if (!file) throw new Error(`Could not find file with id '${track.fileId}'`)
+				const thumbnail = thumbnails.find((thumbnail) => thumbnail.id === track.thumbnailId)
+				if (!thumbnail) throw new Error(`Could not find thumbnail with id '${track.thumbnailId}'`)
+				const provider = providers.find((provider) => provider.id === author.providerId)
+				if (!provider) throw new Error(`Could not find provider with id '${author.providerId}'`)
+				return {
+					...track,
+					genre,
+					author: {
+						...author,
+						provider,
+					},
+					file,
+					thumbnail,
+				}
+			})
+		},
 	},
 	Mutation: {
 		update_settings: async (_, { input }) => {

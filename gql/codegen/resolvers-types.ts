@@ -103,6 +103,7 @@ export type Query = {
   __typename?: 'Query';
   genres: Array<Maybe<Genre>>;
   settings: Settings;
+  tracks: Array<Maybe<Track>>;
 };
 
 export type Settings = {
@@ -293,6 +294,7 @@ export type ProviderResolvers<ContextType = any, ParentType extends ResolversPar
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   genres?: Resolver<Array<Maybe<ResolversTypes['Genre']>>, ParentType, ContextType>;
   settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType>;
+  tracks?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType>;
 };
 
 export type SettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Settings'] = ResolversParentTypes['Settings']> = {

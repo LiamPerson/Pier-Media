@@ -103,6 +103,7 @@ export type Query = {
   __typename?: 'Query';
   genres: Array<Maybe<Genre>>;
   settings: Settings;
+  tracks: Array<Maybe<Track>>;
 };
 
 export type Settings = {

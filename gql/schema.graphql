@@ -80,6 +80,7 @@ input GenericDownloadInput {
 type Query {
 	settings: Settings!
 	genres: [Genre]!
+	tracks: [Track]!
 }
 
 type Mutation {
