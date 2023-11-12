@@ -51,6 +51,8 @@ DEBUG_MODE="true"
 ## Requirements
 
 - NVM ([Windows](https://github.com/coreybutler/nvm-windows) | [Everything Else](https://github.com/nvm-sh/nvm))
+- FFMPEG (for yt-dlp)
+- FFPROBE (for yt-dlp)
 
 ## Required VSCode Extensions
 
