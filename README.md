@@ -1,5 +1,7 @@
 # Pier Media
 
+⚠ This project is still under development and is not yet ready for general user usage. Please feel free to contribute. ⚠
+
 A home media center made for use with Raspberry Pi 4 Model B (though should work on other devices).
 Includes:
 
