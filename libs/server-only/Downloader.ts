@@ -20,6 +20,18 @@ import prisma from '@/prisma/database'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
+const AUDIO_COMMANDS = ['--extract-audio', '--audio-format mp3', '--keep-video']
+
+/**
+ * Excess files from the download that need to be cleaned up.
+ * @note Is there a better way to do this with yt-dlp?
+ *
+ * For some reason --keep-video keeps a bunch of junk. We don't want this.
+ * We only want the audio (mp3), and the video (mp4) that also contains the audio.
+ * @example '1.f898934hhh.f140.m4a' // <- junk
+ */
+const AUDIO_FILES_TO_BE_REMOVED_AFTER_DOWNLOAD = ['%name%.f140.m4a', '%name%.f614.mp4', '%name%']
+
 export enum DownloadType {
 	AUDIO,
 	VIDEO,
@@ -180,8 +192,16 @@ namespace Downloader {
 		return extension
 	}
 
+	const cleanUpFiles = (downloadFolder: string, baseName: string) => {
+		const deletionPromises = AUDIO_FILES_TO_BE_REMOVED_AFTER_DOWNLOAD.map((file) => {
+			const filename = file.replace('%name%', baseName)
+			return System.removeFile(`${downloadFolder}/${filename}`)
+		})
+		return Promise.all(deletionPromises)
+	}
+
 	const tryDownload = async ({ downloader, downloadPath, source, type }: TryDownloadProps) => {
-		const extraCommands = type === DownloadType.AUDIO ? ['--extract-audio', '--audio-format', 'mp3'] : []
+		const extraCommands = type === DownloadType.AUDIO ? AUDIO_COMMANDS : []
 		return new Promise<void>((resolve, reject) => {
 			const controller = new AbortController()
 			const timeout = setTimeout(() => {
@@ -206,7 +226,7 @@ namespace Downloader {
 					 * @todo - Anyone: Need to test the errors have the same (or similar)
 					 * errors across the different binaries.
 					 *
-					 * Maybe we should log an issue with the yt-dlp project to get them to standardise errors or
+					 * Maybe we should log an issue with the yt-dlp project to get them to standardize errors or
 					 * generate error codes?
 					 */
 					console.log('Event found!', { eventType, eventData })
@@ -221,6 +241,12 @@ namespace Downloader {
 		})
 	}
 
+	/**
+	 * Currently only audio downloads are supported.
+	 *
+	 * @note - Liam: Maybe we can section out video and audio downloads
+	 * to remove the ffmpeg requirement that is necessary for audio but not video.
+	 */
 	export const download = async ({ url, type, overrideOnCollision }: DownloadProps) => {
 		/** @todo - Liam: Remove any html query strings from url */
 		url = cleanUrl(url)
@@ -242,6 +268,9 @@ namespace Downloader {
 			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
 		Debugger.log('Inferred genre (from description & tags): ', genre)
 
+		/**
+		 * The name of the file without extensions.
+		 */
 		const baseName = `${provider.id}.${sourceId}`
 		const finalExtension = type === DownloadType.AUDIO ? 'mp3' : 'mp4' /** @todo - Liam: There is no guarantee it will be an mp4 */
 		const downloadFolder = await getDownloadFolderPath(type, prisma)
@@ -267,14 +296,16 @@ namespace Downloader {
 			throw new Error(`Download failed. Verification of file '${finalPath}' found that the file does not exist.`)
 		}
 
+		Debugger.log('Cleaning up excess files')
+		await cleanUpFiles(downloadFolder, baseName)
+
 		const fileStats = statSync(finalPath)
 		console.log('File stats', fileStats)
 		const fileTags = [...downloadDetails.categories, ...downloadDetails.tags]
 		const file = await File.get({ location: finalPath, size: fileStats.size, tags: fileTags }, prisma)
 
 		// Get file bitrate and duration
-		/** @todo - Liam: This should be replaced with an FFMPEG call. */
-		const metadata = await parseFile(finalPath)
+		const metadata = await parseFile(finalPath) /** @todo - Liam: This should be replaced with an FFMPEG call. */
 		console.log('Metadata', metadata)
 		const track = await Track.get(
 			{
