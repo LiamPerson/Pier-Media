@@ -2,7 +2,6 @@ import resolvers from '@/gql/server-only/resolvers'
 import { ApolloServer } from '@apollo/server'
 import { startServerAndCreateNextHandler } from '@as-integrations/next'
 import { readFileSync } from 'fs'
-import { NextRequest } from 'next/server'
 import path from 'path'
 
 const typeDefs = readFileSync(path.resolve('./gql/schema.graphql')).toString('utf-8')
