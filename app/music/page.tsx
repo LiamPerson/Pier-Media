@@ -1,11 +1,13 @@
 'use client'
 import DashboardPage from '@/components/core/DashboardPage'
-import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
-import { GetGenresDocument } from '@/gql/codegen/graphql'
+import { Box, Card, CardContent, Grid, Link, Typography } from '@mui/material'
 import { useQuery } from '@apollo/client'
+import { GetTracksDocument } from '@/gql/codegen/graphql'
+import { secondsToTimestamp } from '@/libs/helpers'
+import Image from 'next/image'
 
 const IndexPage = () => {
-	const { data, loading, error } = useQuery(GetGenresDocument)
+	const { data, loading, error } = useQuery(GetTracksDocument)
 	return (
 		<DashboardPage>
 			<Typography variant='h1'>Music</Typography>
@@ -16,13 +18,24 @@ const IndexPage = () => {
 					container
 					gap={2}
 				>
-					{data?.genres.map((genre) => {
-						if (!genre) return null
+					{data?.tracks.map((track) => {
+						if (!track) return null
 						return (
-							<Card key={genre.id}>
+							<Card key={track.id}>
 								<CardContent>
-									<Typography variant='h5'>{genre.name}</Typography>
-									<Typography variant='body2'>{genre.description}</Typography>
+									<Image
+										src={track.thumbnail.file.location}
+										alt={`Video cover of ${track.title}`}
+										width={track.thumbnail.width}
+										height={track.thumbnail.height}
+									/>
+									<Typography variant='h5'>{track.title}</Typography>
+									<Typography variant='body2'>
+										By {track.author.name} | {secondsToTimestamp(track.duration)}
+									</Typography>
+									<Typography variant='body1'>
+										Sourced from <Link href={track.originalUrl}>{track.author.provider.name}</Link>
+									</Typography>
 								</CardContent>
 							</Card>
 						)
