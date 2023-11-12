@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client'
 import { GetTracksDocument } from '@/gql/codegen/graphql'
 import { secondsToTimestamp } from '@/libs/helpers'
 import Image from 'next/image'
+import AudioPlayerSmall from '@/components/ui/AudioPlayerSmall'
 
 const IndexPage = () => {
 	const { data, loading, error } = useQuery(GetTracksDocument)
@@ -42,6 +43,7 @@ const IndexPage = () => {
 											height={track.thumbnail.height}
 										/>
 									</Paper>
+									<AudioPlayerSmall src={track.file.location} />
 									<Typography variant='h5'>{track.title}</Typography>
 									<Typography variant='body2'>
 										By {track.author.name} | {secondsToTimestamp(track.duration)}

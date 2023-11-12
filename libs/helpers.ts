@@ -27,3 +27,11 @@ export const secondsToTimestamp = (inputSeconds: number) => {
 	if (inputSeconds >= oneHourInSeconds) return hours + ':' + minutes + ':' + seconds
 	return minutes + ':' + seconds
 }
+
+/**
+ * Gets a file from the CDN (content delivery network).
+ * @todo - Anyone: We need to make this string not hard coded.
+ */
+export const fromCdn = (path: string) => {
+	return `/api/cdn?p=${path}`
+}
