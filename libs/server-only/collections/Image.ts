@@ -28,7 +28,7 @@ namespace Image {
 		const imageDimensions = imageSize(output)
 		if (!imageDimensions.width || !imageDimensions.height) throw new Error(`Could not find valid image dimensions for file '${output}'.`)
 		Debugger.log('Image.get: Image details:', mediaType, byteSize, imageSize, imageDimensions)
-		const imageDetails = prisma.image.upsert({
+		const imageDetails = await prisma.image.upsert({
 			where: {
 				fileId: file.id,
 			},
@@ -51,7 +51,7 @@ namespace Image {
 				},
 			},
 		})
-		return imageDetails
+		return { ...imageDetails, file }
 	}
 	export type Type = Awaited<ReturnType<typeof upsert>>
 }
