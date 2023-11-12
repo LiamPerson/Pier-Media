@@ -24,6 +24,10 @@ const resolvers: Resolvers = {
 		},
 		tracks: async () => {
 			/** @todo - Anyone: Refactor this into the Track collection. */
+			/**
+			 * @todo - Anyone: The track collection should have a query function that gets all this information inside it.
+			 * Finding by 'id' so the database doesn't explode
+			 */
 			const tracksPromise = prisma.track.findMany()
 			const genresPromise = prisma.genre.findMany()
 			const authorsPromise = prisma.author.findMany()
@@ -46,11 +50,13 @@ const resolvers: Resolvers = {
 				const author = authors.find((author) => author.id === track.authorId)
 				if (!author) throw new Error(`Could not find author with id '${track.authorId}'`)
 				const file = files.find((file) => file.id === track.fileId)
-				if (!file) throw new Error(`Could not find file with id '${track.fileId}'`)
-				const thumbnail = thumbnails.find((thumbnail) => thumbnail.id === track.thumbnailId)
-				if (!thumbnail) throw new Error(`Could not find thumbnail with id '${track.thumbnailId}'`)
+				if (!file) throw new Error(`Could not find the track's file with id '${track.fileId}'`)
 				const provider = providers.find((provider) => provider.id === author.providerId)
 				if (!provider) throw new Error(`Could not find provider with id '${author.providerId}'`)
+				const thumbnail = thumbnails.find((thumbnail) => thumbnail.id === track.thumbnailId)
+				if (!thumbnail) throw new Error(`Could not find thumbnail with id '${track.thumbnailId}'`)
+				const thumbnailFile = files.find((file) => file.id === thumbnail.fileId)
+				if (!thumbnailFile) throw new Error(`Could not find thumbnail's file with id '${thumbnail.fileId}'`)
 				return {
 					...track,
 					genre,
@@ -58,8 +64,11 @@ const resolvers: Resolvers = {
 						...author,
 						provider,
 					},
+					thumbnail: {
+						...thumbnail,
+						file: thumbnailFile,
+					},
 					file,
-					thumbnail,
 				}
 			})
 		},
