@@ -1,0 +1,31 @@
+query GetTracks {
+	tracks {
+		id
+		title
+		genre {
+			id
+			name
+			description
+		}
+		bitrate
+		originalUrl
+		author {
+			id
+			name
+			provider {
+				id
+				name
+				domain
+			}
+		}
+		file {
+			id
+			location
+		}
+		contributors {
+			id
+			name
+		}
+		duration
+	}
+}
