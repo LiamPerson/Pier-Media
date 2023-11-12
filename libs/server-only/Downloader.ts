@@ -304,6 +304,7 @@ namespace Downloader {
 			prisma
 		)
 
+		/** @todo - Anyone: I really need to clean this up. The track here should really find all the information when got. */
 		return {
 			...track,
 			file,
