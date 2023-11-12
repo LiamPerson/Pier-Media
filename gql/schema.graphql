@@ -1,0 +1,93 @@
+type Genre {
+	id: Int!
+	name: String!
+	description: String!
+}
+
+type File {
+	id: Int!
+	location: String!
+}
+
+type Image {
+	id: Int!
+	file: File!
+	width: Int!
+	height: Int!
+}
+
+type Provider {
+	id: Int!
+	name: String!
+	domain: String!
+}
+
+type Author {
+	id: Int!
+	name: String!
+	provider: Provider!
+}
+
+type Track {
+	id: Int!
+	title: String!
+	genre: Genre
+	bitrate: Int!
+	originalUrl: String!
+	thumbnail: Image!
+	author: Author!
+	file: File!
+	contributors: [Author] # Please see ./json-interfaces for definition
+	duration: Int! # in milliseconds
+}
+
+type Settings {
+	id: Int!
+	downloads: DownloadSettings!
+	downloadSettingsId: Int!
+}
+
+type DownloadSettings {
+	id: Int!
+	updatedAt: String!
+	path: String!
+	audioPath: String!
+	imagePath: String!
+	videoPath: String!
+	metadataPath: String!
+}
+
+input DownloadSettingsInput {
+	path: String
+	audioPath: String
+	imagePath: String
+	videoPath: String
+	metadataPath: String
+}
+
+input SettingsInput {
+	downloads: DownloadSettingsInput
+}
+
+input InitializeGenresInput {
+	overrideExisting: Boolean
+}
+
+### START Downloads
+input GenericDownloadInput {
+	url: String!
+	overrideOnCollision: Boolean
+}
+## END Downloads
+
+type Query {
+	settings: Settings!
+	genres: [Genre]!
+	tracks: [Track]!
+}
+
+type Mutation {
+	update_settings(input: SettingsInput): Settings!
+	download_audio(input: GenericDownloadInput!): Track!
+	initialize_genres(input: InitializeGenresInput): Boolean!
+}

@@ -1,0 +1,9 @@
+mutation UpdateSettings($input: SettingsInput) {
+	update_settings(input: $input) {
+		id
+		downloads {
+			id
+			updatedAt
+		}
+	}
+}

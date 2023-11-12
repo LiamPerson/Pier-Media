@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model DownloadSettings {
+  id           Int        @id @default(autoincrement())
+  updatedAt    DateTime   @updatedAt
+  // Paths specify where NEW downloads go. Old downloads will not be moved.
+  path         String
+  audioPath    String
+  metadataPath String
+  imagePath    String
+  videoPath    String
+  Settings     Settings[]
+}
+
+model Settings {
+  id                 Int              @id @default(autoincrement())
+  downloads          DownloadSettings @relation(fields: [downloadSettingsId], references: [id])
+  downloadSettingsId Int
+}
+
+model File {
+  id         Int      @id @default(autoincrement())
+  location   String   @unique // The location of the file on the filesystem
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  dislikes   Int      @default(0)
+  superLikes Int      @default(0)
+  mediaType  String // The MIME type of the file
+  size       Int // In bytes
+  tagsJson   String // Please see ./json-interfaces for definition
+  Track      Track?
+  Image      Image?
+  Video      Video?
+}
+
+model Provider {
+  id      Int      @id @default(autoincrement())
+  name    String
+  domain  String   @unique
+  authors Author[]
+}
+
+model Author {
+  id         Int      @id @default(autoincrement())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tracks     Track[]
+  videos     Video[]
+  sourceId   String   @unique
+  providerId Int
+  provider   Provider @relation(fields: [providerId], references: [id])
+}
+
+model Genre {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  description String
+  tracks      Track[]
+}
+
+model Video {
+  id             Int      @id @default(autoincrement())
+  fileId         Int      @unique
+  file           File?    @relation(fields: [fileId], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  sourceId       String   @unique // The ID of the track on the source platform
+  originalUrl    String // We can store the original URl here so we can decode the source later
+  width          Int
+  height         Int
+  duration       Int // In milliseconds
+  categoriesJson String // Please see ./json-interfaces for definition
+  authorId       Int
+  author         Author   @relation(fields: [authorId], references: [id])
+  fps            Int
+  title          String
+  description    String
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  fileId    Int      @unique
+  file      File     @relation(fields: [fileId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  width     Int
+  height    Int
+  Track     Track?
+}
+
+model Track {
+  id                      Int      @id @default(autoincrement())
+  title                   String
+  description             String
+  genreId                 Int?
+  genre                   Genre?   @relation(fields: [genreId], references: [id])
+  bitrate                 Int // Stored in kbs
+  sourceId                String   @unique // The ID of the track on the source platform
+  originalUrl             String // We can store the original URl here so we can decode the source later
+  authorId                Int
+  author                  Author   @relation(fields: [authorId], references: [id])
+  fileId                  Int      @unique
+  file                    File     @relation(fields: [fileId], references: [id])
+  contributingArtistsJson String // Please see ./json-interfaces for definition
+  duration                Int // In milliseconds
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  thumbnailId             Int      @unique
+  thumbnail               Image    @relation(fields: [thumbnailId], references: [id])
+}

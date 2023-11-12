@@ -1,33 +1,65 @@
 {
-  "name": "node-pier",
-  "version": "1.0.0",
-  "description": "NodeJS Raspberry Pi Home Server",
-  "scripts": {
-    "client": "cd client && npm run start",
-    "debug-server": "cd server && nodemon --inspect-brk server.js",
-    "server": "cd server && nodemon server.js",
-    "build": "cd client && npm run build",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "prepare": "husky install"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YeloPartyHat/Node-Pier.git"
-  },
-  "author": "Liam",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/YeloPartyHat/Node-Pier/issues"
-  },
-  "homepage": "https://github.com/YeloPartyHat/Node-Pier#readme",
-  "devDependencies": {
-    "concurrently": "^8.2.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
-    "nodemon": "^3.0.1",
-    "prettier": "2.8.7"
-  },
-  "lint-staged": {
-		"*.{js,css,md,ts,tsx}": "prettier --write"
+	"name": "pier-media-server",
+	"scripts": {
+		"dev": "concurrently \"next dev\" \"npm run codegen:watch\"",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"prepare": "husky install",
+		"codegen": "graphql-codegen --config gql/config.ts",
+		"codegen:watch": "graphql-codegen --config gql/config.ts --watch",
+		"test": "jest"
+	},
+	"dependencies": {
+		"@apollo/client": "^3.7.17",
+		"@apollo/server": "^4.9.1",
+		"@as-integrations/next": "^2.0.1",
+		"@emotion/react": "^11.11.1",
+		"@emotion/styled": "^11.11.0",
+		"@mui/icons-material": "^5.14.1",
+		"@mui/material": "^5.14.1",
+		"@prisma/client": "^5.1.1",
+		"@types/node": "20.4.2",
+		"@types/react": "18.2.15",
+		"@types/react-dom": "18.2.7",
+		"deepmerge-ts": "^5.1.0",
+		"eslint": "8.45.0",
+		"eslint-config-next": "13.4.10",
+		"file-type": "^18.5.0",
+		"got": "^13.0.0",
+		"graphql": "^16.7.1",
+		"image-size": "^1.0.2",
+		"mime-types": "^2.1.35",
+		"music-metadata": "^8.1.4",
+		"next": "13.4.10",
+		"prisma": "^5.1.1",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"server-only": "^0.0.1",
+		"typescript": "5.1.6",
+		"usehooks-ts": "^2.9.1",
+		"yt-dlp-wrap-extended": "^2.3.15"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "5.0.0",
+		"@graphql-codegen/client-preset": "^4.1.0",
+		"@graphql-codegen/typescript": "^4.0.1",
+		"@graphql-codegen/typescript-resolvers": "^4.0.1",
+		"@parcel/watcher": "^2.2.0",
+		"@types/got": "^9.6.12",
+		"@types/jest": "^29.5.8",
+		"@types/mime-types": "^2.1.1",
+		"concurrently": "^8.2.0",
+		"husky": "^8.0.0",
+		"jest": "^29.7.0",
+		"jest-mock-extended": "^3.0.5",
+		"lint-staged": "^13.2.3",
+		"prettier": "^3.0.0",
+		"ts-jest": "^29.1.1"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx,json,graphql}": [
+			"prettier --write"
+		]
 	}
 }

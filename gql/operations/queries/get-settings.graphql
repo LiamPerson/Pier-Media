@@ -1,0 +1,14 @@
+query GetSettings {
+	settings {
+		id
+		downloads {
+			id
+			updatedAt
+			audioPath
+			videoPath
+			imagePath
+			metadataPath
+			path
+		}
+	}
+}

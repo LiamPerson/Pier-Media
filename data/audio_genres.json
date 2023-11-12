@@ -1,0 +1,151 @@
+[
+	{ "name": "Unknown", "description": "For music that has no genre assigned." },
+	{ "name": "Alternative rock", "description": "Calmer variant of rock. Has a focus on vibes." },
+	{ "name": "Ambient", "description": "Music that can easily fade into the background. Calming stuff!" },
+	{
+		"name": "Breakbeat",
+		"description": "A genre of electronic music characterized by the use of breaks, often sampled from earlier recordings in funk, jazz, and R&B, for the main rhythm."
+	},
+	{ "name": "Chillstep", "description": "A subgenre of dubstep that focuses on a more melodic and relaxing sound." },
+	{ "name": "Classical", "description": "Lots of traditional instruments, and a focus on the melody." },
+	{
+		"name": "Classical crossover",
+		"description": "A genre that combines classical music with other genres. Usually crossed with electronic."
+	},
+	{ "name": "Complextro", "description": "A subgenre of electro house characterized by a more complex, intricate and experimental sound." },
+	{
+		"name": "Contemporary rhythm and blues",
+		"description": "A genre that combines elements of rhythm and blues, soul, funk, pop, hip hop and dance."
+	},
+	{ "name": "Dance pop", "description": "Basically just popular dance music." },
+	{ "name": "Deep house", "description": "A subgenre of house music characterised by deep basslines and soulful vocals." },
+	{ "name": "Disco", "description": "A genre of dance music has a wide room sound, repetition, and is easy to dance to." },
+	{
+		"name": "Downtempo",
+		"description": "A genre of electronic music similar to ambient, but has a bit more going on. Very relaxing still."
+	},
+	{ "name": "Drum and bass", "description": "Does it have drums? Does it have bass?" },
+	{
+		"name": "Dubstep",
+		"description": "A genre of electronic dance music that goes brooooooohhhhhh bru- reaeeeeee vrom vrrrrooooooooooooooooooooooo-"
+	},
+	{ "name": "Easy listening", "description": "A genre of music that is easy to listen to. Usually instrumental. May have some vocals." },
+	{
+		"name": "Electro house",
+		"description": "Very 'electric' sounding. Has that same house structure but expresses mostly synthetic instruments."
+	},
+	{
+		"name": "Electro swing",
+		"description": "A genre of music that combines the influence of vintage or modern swing and jazz mixed with house, hip hop, and EDM."
+	},
+	{ "name": "Electronic", "description": "A genre of music that is made with electronic instruments." },
+	{ "name": "Electronic body synth", "description": "Repetitive beat with a progressive melody. Usually hard stuff with a medium drop." },
+	{ "name": "Electropop", "description": "If there was a pop house, this would be it. Very strong emphasis on the vocals." },
+	{
+		"name": "Funk",
+		"description": "Characterized by a strong rhythmic groove of a bassline and drumbeat with electric bass guitars, drums, and often keyboards."
+	},
+	{ "name": "Future bass", "description": "Electronic music. Very long bass notes. Usually has a very strong drop." },
+	{
+		"name": "Future funk",
+		"description": "A genre of music that combines elements of funk, disco, house and synthwave. Usually in Japanese 日本語. "
+	},
+	{ "name": "Future house", "description": "High notes, high energy, and a strong drop. Usually happy or motivational." },
+	{
+		"name": "Ghetto house",
+		"description": "Trashy lyrics, house vibes, usually mixed with pop music and many rogue samples from pop culture."
+	},
+	{
+		"name": "Glitch hop",
+		"description": "Sounds like stuff from indie games. Decent pace, strong beat, low bitrate sound. If low-poly was a genre this would be it."
+	},
+	{
+		"name": "Hard rock",
+		"description": "Despite its name, it has nothing to do with rocks. Usually high energy, motivational, and hard. Guitars, drums, vocals!"
+	},
+	{ "name": "Hardbass", "description": "сука блять гопник" },
+	{
+		"name": "Hardcore",
+		"description": "Electronic music that is very hard. Usually has a strong beat and a strong drop. Not to be confused with dubstep."
+	},
+	{
+		"name": "Hip hop",
+		"description": "Characterized by a rhythmic vocal style which is accompanied by backing beats. If rhythm and blues had a energetic child that smoked weed."
+	},
+	{
+		"name": "Hip hop rap",
+		"description": "Hip hop that has a strong focus on the vocals and rhythmic structure of said vocals. If poems had backing beats."
+	},
+	{
+		"name": "House",
+		"description": "Electronic dance music characterized by a repetitive four on the floor beat and a tempo of 120 to 130 beats per minute."
+	},
+	{ "name": "Jazz", "description": "Calm, usually instrumental, can have vocals. Usually has a piano and drums played softly." },
+	{ "name": "Jungle", "description": "Like drum and bass if it was made in the jungle and the jungle was on fire." },
+	{
+		"name": "Liquid drum and bass",
+		"description": "A subgenre of drum and bass that you would chill to. Usually quite repetitive, predictable, and with no strong drops."
+	},
+	{
+		"name": "Lofi",
+		"description": "Very relaxing and slow. A subgenre of hip hop that has an emphasis on the vibe. Almost like ambient and downtempo but in the realm of hip hop."
+	},
+	{
+		"name": "Ambient lofi",
+		"description": "An even slower variant of lofi with a focus on the ambient side of things. May have human sounds or a rare spoken line but has no vocals."
+	},
+	{ "name": "Lofi house", "description": "Nostalgic house. Usually has pop culture samples and has a strong focus on vibe." },
+	{ "name": "Minimal techno", "description": "A subgenre of techno that has minimal instruments. Progressive and repetitive." },
+	{
+		"name": "Neo-soul",
+		"description": "A subgenre of soul that has modern elements in it such as synthetic instruments and reverberations."
+	},
+	{ "name": "New-age", "description": "What you may imagine a gypsy or witch in the woods to listen to and create. Experimental house." },
+	{
+		"name": "Nightcore",
+		"description": "High pitch. Anime background. Sped-up high energy music. Usually in the form of remixes of pop, dance, or house music."
+	},
+	{
+		"name": "Nu-disco",
+		"description": "A subgenre of disco that has a modern twist to it. Still repetitive and easy to dance to but has synthetic instruments and bass."
+	},
+	{
+		"name": "Outrun",
+		"description": "The cyberpunk's genre. A subgenre of synthwave that has a focus on a repetitive beat. Usually associated with the colours red and black."
+	},
+	{
+		"name": "Phonk",
+		"description": "Lots of cowbell. High energy and heavy. Anime or cars background. Usually has male vocals, deep bass and drums, and is wet."
+	},
+	{
+		"name": "Pop",
+		"description": "Usually acoustic or electronic. Has a strong focus on the vocals and the melody. Usually has a strong beat and is sung by the general public."
+	},
+	{ "name": "Progressive house", "description": "A subgenre of house that slowly progresses the song. Usually predictable." },
+	{ "name": "Rhythm and blues", "description": "Acoustic sounds, soulful, passionate, with a focus on what is being said." },
+	{
+		"name": "Soul",
+		"description": "A calmer and more relaxing subgenre of rhythm and blues that has a focus on the soulful vocals and the melody. Very passionate."
+	},
+	{ "name": "Rock", "description": "I already made the joke once. Acoustic, guitars, drums, vocals, and a strong beat." },
+	{
+		"name": "Slowed",
+		"description": "Music that has intentionally been slowed down to create a more relaxing vibe. Pretty much the inverse of nightcore."
+	},
+	{ "name": "Speedcore, hardcore, breakcore", "description": "Very fast, very hard, very loud." },
+	{ "name": "Synth-pop", "description": "Synthwave but with an emphasis on the vocals instead of the synths." },
+	{ "name": "Synthwave", "description": "A subgenre of electronic music that has a focus on the synths. Usually has a retro vibe to it." },
+	{ "name": "Techno", "description": "A subgenre of electronic music that has a focus on the beat. Usually repetitive and progressive." },
+	{
+		"name": "Trance",
+		"description": "Electronic music that is supposed to put you into a trance with its repetitiveness and progressive nature."
+	},
+	{
+		"name": "Tropical house",
+		"description": "A subgenre of house that has a focus on the tropical vibe. Steel drums, wooden instruments, stuff you would hear on an island vacation if the island were a nightclub."
+	},
+	{
+		"name": "Vaporwave",
+		"description": "The new synthwave but for advertisements and pop culture. Focus on 2000s computer's aesthetics and the vibe. Usually not too predictable due to it being semi-experimental."
+	}
+]

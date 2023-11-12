@@ -1,0 +1,6 @@
+build/
+.next/
+node_modules/
+public/
+.husky/
+gql/codegen/

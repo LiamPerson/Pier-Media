@@ -1,7 +1,39 @@
 {
-    "cSpell.words": [
-        "nodepier",
-        "rxdb",
-        "websql"
-    ]
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	},
+	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json", ".next", "gql/codegen"],
+	"cSpell.language": "en-US",
+	"cSpell.words": [
+		"aarch",
+		"armv",
+		"breakcore",
+		"Chillstep",
+		"codegen",
+		"Complextro",
+		"dbaeumer",
+		"deduping",
+		"deepmerge",
+		"esbenp",
+		"FFPROBE",
+		"Hardbass",
+		"hediet",
+		"Lofi",
+		"nextjs",
+		"Nightcore",
+		"nodepier",
+		"Phonk",
+		"remux",
+		"rxdb",
+		"soundcloud",
+		"Speedcore",
+		"tanstack",
+		"upserted",
+		"usehooks",
+		"Vaporwave",
+		"Videocam",
+		"websql",
+		"Ytdlp"
+	]
 }
