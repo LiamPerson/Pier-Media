@@ -13,6 +13,8 @@ Includes:
 - automatic metadata assignment (coming soon)
 - metadata editing (coming soon)
 
+_@todo - Liam: Add screenshots of the web interface here 😇_
+
 **Advantages over Pier Legacy**
 
 - Requires only 2 dependencies
