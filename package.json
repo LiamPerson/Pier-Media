@@ -1,5 +1,5 @@
 {
-	"name": "pier-media-server",
+	"name": "pier-media",
 	"scripts": {
 		"dev": "concurrently \"next dev\" \"npm run codegen:watch\"",
 		"build": "next build",

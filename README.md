@@ -1,11 +1,17 @@
-# Ocean Pier
+# Pier Media
 
-**A NextJS Raspberry Pi Home Server**
+A home media center made for use with Raspberry Pi 4 Model B (though should work on other devices).
+Includes:
 
-![Sample image of Pier's homepage](./docs/sample.png)
-
-A home media center made for use with Raspberry Pi 4 Model B (though should work on other devices)
-Connect to your Pier server by going to it's IP address in the browser of your choice. For example in Google Chrome's address bar enter the server's ip address (example: `192.168.8.77/`) or simply go to the device's name which should be by default `raspberrypi/`.
+- graphql API for interfacing with other applications
+- web interface for managing your media (coming soon)
+- media player (developing)
+- media downloader
+- media converter
+- media organizer
+- genre inference
+- automatic metadata assignment (coming soon)
+- metadata editing (coming soon)
 
 **Advantages over Pier Legacy**
 
