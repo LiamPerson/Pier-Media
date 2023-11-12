@@ -1,6 +1,6 @@
 'use client'
 import DashboardPage from '@/components/core/DashboardPage'
-import { Box, Card, CardContent, Grid, Link, Typography } from '@mui/material'
+import { Box, Card, CardContent, Grid, Link, Typography, Paper } from '@mui/material'
 import { useQuery } from '@apollo/client'
 import { GetTracksDocument } from '@/gql/codegen/graphql'
 import { secondsToTimestamp } from '@/libs/helpers'
@@ -23,12 +23,25 @@ const IndexPage = () => {
 						return (
 							<Card key={track.id}>
 								<CardContent>
-									<Image
-										src={track.thumbnail.file.location}
-										alt={`Video cover of ${track.title}`}
-										width={track.thumbnail.width}
-										height={track.thumbnail.height}
-									/>
+									<Paper
+										sx={{
+											height: 200,
+											overflow: 'hidden',
+											img: {
+												objectFit: 'cover',
+												objectPosition: 'center',
+												width: '100%',
+												height: '100%',
+											},
+										}}
+									>
+										<Image
+											src={track.thumbnail.file.location}
+											alt={`Video cover of ${track.title}`}
+											width={track.thumbnail.width}
+											height={track.thumbnail.height}
+										/>
+									</Paper>
 									<Typography variant='h5'>{track.title}</Typography>
 									<Typography variant='body2'>
 										By {track.author.name} | {secondsToTimestamp(track.duration)}
