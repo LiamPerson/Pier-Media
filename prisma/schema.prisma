@@ -70,16 +70,6 @@ model Genre {
   tracks      Track[]
 }
 
-model Album {
-  id           Int      @id @default(autoincrement())
-  name         String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  tracks       Track[]
-  albumImageId Int      @unique
-  albumImage   Image    @relation(fields: [albumImageId], references: [id])
-}
-
 model Video {
   id             Int      @id @default(autoincrement())
   fileId         Int      @unique
@@ -107,7 +97,6 @@ model Image {
   updatedAt DateTime @updatedAt
   width     Int
   height    Int
-  Album     Album?
   Track     Track?
 }
 
@@ -125,8 +114,6 @@ model Track {
   fileId                  Int      @unique
   file                    File     @relation(fields: [fileId], references: [id])
   contributingArtistsJson String // Please see ./json-interfaces for definition
-  albumId                 Int?
-  album                   Album?   @relation(fields: [albumId], references: [id])
   duration                Int // In milliseconds
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt

@@ -37,8 +37,7 @@ const resolvers: Resolvers = {
 			return { ...rawSettings, downloads: { ...rawSettings.downloads, updatedAt: rawSettings.downloads.updatedAt.toISOString() } }
 		},
 		download_audio: async (_, { input: { url, overrideOnCollision } }) => {
-			await Downloader.download({ url, type: DownloadType.AUDIO, overrideOnCollision })
-			throw Error('Not implemented')
+			return await Downloader.download({ url, type: DownloadType.AUDIO, overrideOnCollision })
 		},
 		initialize_genres: async (_, { input }) => {
 			await Genre.tryAddDefaults({ overrideExisting: input?.overrideExisting }, prisma)

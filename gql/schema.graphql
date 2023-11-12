@@ -14,13 +14,6 @@ type Image {
 	file: File!
 }
 
-type Album {
-	id: Int!
-	name: String!
-	tracks: [Track]
-	albumImage: Image!
-}
-
 type Provider {
 	id: Int!
 	name: String!
@@ -42,7 +35,6 @@ type Track {
 	author: Author!
 	file: File!
 	contributors: [Author] # Please see ./json-interfaces for definition
-	album: Album!
 	duration: Int! # in milliseconds
 }
 

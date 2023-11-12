@@ -303,6 +303,14 @@ namespace Downloader {
 			},
 			prisma
 		)
+
+		return {
+			...track,
+			file,
+			thumbnail,
+			author,
+			genre,
+		}
 	}
 }
 

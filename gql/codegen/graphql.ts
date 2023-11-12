@@ -16,14 +16,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Album = {
-  __typename?: 'Album';
-  albumImage: Image;
-  id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
-  tracks?: Maybe<Array<Maybe<Track>>>;
-};
-
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -126,7 +118,6 @@ export type SettingsInput = {
 
 export type Track = {
   __typename?: 'Track';
-  album: Album;
   author: Author;
   bitrate: Scalars['Int']['output'];
   contributors?: Maybe<Array<Maybe<Author>>>;

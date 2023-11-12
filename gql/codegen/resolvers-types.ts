@@ -16,14 +16,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Album = {
-  __typename?: 'Album';
-  albumImage: Image;
-  id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
-  tracks?: Maybe<Array<Maybe<Track>>>;
-};
-
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -126,7 +118,6 @@ export type SettingsInput = {
 
 export type Track = {
   __typename?: 'Track';
-  album: Album;
   author: Author;
   bitrate: Scalars['Int']['output'];
   contributors?: Maybe<Array<Maybe<Author>>>;
@@ -209,7 +200,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Album: ResolverTypeWrapper<Album>;
   Author: ResolverTypeWrapper<Author>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DownloadSettings: ResolverTypeWrapper<DownloadSettings>;
@@ -231,7 +221,6 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Album: Album;
   Author: Author;
   Boolean: Scalars['Boolean']['output'];
   DownloadSettings: DownloadSettings;
@@ -249,14 +238,6 @@ export type ResolversParentTypes = {
   SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
   Track: Track;
-};
-
-export type AlbumResolvers<ContextType = any, ParentType extends ResolversParentTypes['Album'] = ResolversParentTypes['Album']> = {
-  albumImage?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  tracks?: Resolver<Maybe<Array<Maybe<ResolversTypes['Track']>>>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
@@ -322,7 +303,6 @@ export type SettingsResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
-  album?: Resolver<ResolversTypes['Album'], ParentType, ContextType>;
   author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
   bitrate?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   contributors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Author']>>>, ParentType, ContextType>;
@@ -336,7 +316,6 @@ export type TrackResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
-  Album?: AlbumResolvers<ContextType>;
   Author?: AuthorResolvers<ContextType>;
   DownloadSettings?: DownloadSettingsResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
