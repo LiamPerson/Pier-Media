@@ -308,7 +308,10 @@ namespace Downloader {
 			...track,
 			file,
 			thumbnail,
-			author,
+			author: {
+				...author,
+				provider,
+			},
 			genre,
 		}
 	}
