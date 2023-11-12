@@ -45,6 +45,8 @@ The included `yt-dlp` version automatically updates. Please replace the `yt-dlp`
 
 Find `yt-dlp` releases here: [yt-dlp releases](https://github.com/yt-dlp/yt-dlp#release-files)
 
+---
+
 # Developers
 
 All information below is only necessary for those wanting to contribute to, or edit the project.
@@ -72,9 +74,7 @@ All time units are stored in milliseconds (ms) unless otherwise specified.
 
 ## API
 
-The API is handled by [Next](./docs/packages/README.md#Next) but is built out using a [services](./docs/api/README.md#services-directory) architecture.
-
-Please read the [API readme](./docs/api/README.md) before interacting with or building out the API or any services.
+All API endpoints are handled, documented, and interfaced with via the Apollo Server GraphQL API.
 
 ## Packages
 
