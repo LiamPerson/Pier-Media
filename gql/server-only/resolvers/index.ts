@@ -40,7 +40,7 @@ const resolvers: Resolvers = {
 			await Downloader.download({ url, type: DownloadType.AUDIO, overrideOnCollision })
 			throw Error('Not implemented')
 		},
-		initialise_genres: async (_, { input }) => {
+		initialize_genres: async (_, { input }) => {
 			await Genre.tryAddDefaults({ overrideExisting: input?.overrideExisting }, prisma)
 			return true
 		},
