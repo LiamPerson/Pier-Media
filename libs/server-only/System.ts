@@ -1,5 +1,6 @@
 import 'server-only'
 import { accessSync, constants, existsSync } from 'node:fs'
+import { rm } from 'node:fs/promises'
 
 namespace System {
 	interface isAccessibleOptions {
@@ -25,6 +26,10 @@ namespace System {
 	 */
 	export const exists = (path: string) => {
 		return existsSync(path)
+	}
+
+	export const removeFile = (path: string) => {
+		return rm(path, { force: true })
 	}
 }
 
