@@ -72,6 +72,14 @@ All packages added should have their reason stated on the [packages readme](./do
 
 Read more here: [packages readme!](./docs/packages/README.md)
 
+## Setup
+
+To setup your local environment for development please run the following commands in the repository root:
+
+- `npm install` install all dependencies
+- `npx prisma generate` or `yarn prisma generate` generate the prisma client
+- `npx prisma migrate dev` or `yarn prisma migrate dev` run the migrations to build your development database
+
 # Licenses
 
 - [Ion-Icons](./public/ion-icons/LICENSE) (MIT License)
