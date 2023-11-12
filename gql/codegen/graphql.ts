@@ -94,9 +94,9 @@ export type MutationUpdate_SettingsArgs = {
 
 export type Provider = {
   __typename?: 'Provider';
+  domain: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  url: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -123,7 +123,7 @@ export type Track = {
   contributors?: Maybe<Array<Maybe<Author>>>;
   duration: Scalars['Int']['output'];
   file: File;
-  genre: Genre;
+  genre?: Maybe<Genre>;
   id: Scalars['Int']['output'];
   originalUrl: Scalars['String']['output'];
   title: Scalars['String']['output'];

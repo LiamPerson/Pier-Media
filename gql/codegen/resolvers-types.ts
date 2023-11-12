@@ -94,9 +94,9 @@ export type MutationUpdate_SettingsArgs = {
 
 export type Provider = {
   __typename?: 'Provider';
+  domain: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  url: Scalars['String']['output'];
 };
 
 export type Query = {
@@ -123,7 +123,7 @@ export type Track = {
   contributors?: Maybe<Array<Maybe<Author>>>;
   duration: Scalars['Int']['output'];
   file: File;
-  genre: Genre;
+  genre?: Maybe<Genre>;
   id: Scalars['Int']['output'];
   originalUrl: Scalars['String']['output'];
   title: Scalars['String']['output'];
@@ -284,9 +284,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type ProviderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Provider'] = ResolversParentTypes['Provider']> = {
+  domain?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -308,7 +308,7 @@ export type TrackResolvers<ContextType = any, ParentType extends ResolversParent
   contributors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Author']>>>, ParentType, ContextType>;
   duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
-  genre?: Resolver<ResolversTypes['Genre'], ParentType, ContextType>;
+  genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   originalUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
