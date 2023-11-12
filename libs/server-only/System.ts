@@ -5,19 +5,15 @@ import { rm } from 'node:fs/promises'
 namespace System {
 	interface isAccessibleOptions {
 		mode?: number
-		throwError?: boolean
 	}
 	/**
 	 * Checks if a path is accessible with the given mode.
 	 */
-	export const isAccessible = (path: string, { mode = constants.W_OK, throwError = false }: isAccessibleOptions = {}) => {
+	export const isAccessible = (path: string, { mode = constants.W_OK }: isAccessibleOptions = {}) => {
 		try {
 			accessSync(path, mode)
 			return true
-		} catch (e: any) {
-			if (throwError) {
-				throw e
-			}
+		} catch {
 			return false
 		}
 	}
