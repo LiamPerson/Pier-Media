@@ -12,6 +12,8 @@ type File {
 type Image {
 	id: Int!
 	file: File!
+	width: Int!
+	height: Int!
 }
 
 type Provider {
@@ -32,6 +34,7 @@ type Track {
 	genre: Genre
 	bitrate: Int!
 	originalUrl: String!
+	thumbnail: Image!
 	author: Author!
 	file: File!
 	contributors: [Author] # Please see ./json-interfaces for definition

@@ -63,7 +63,9 @@ export type Genre = {
 export type Image = {
   __typename?: 'Image';
   file: File;
+  height: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
+  width: Scalars['Int']['output'];
 };
 
 export type InitializeGenresInput = {
@@ -127,6 +129,7 @@ export type Track = {
   genre?: Maybe<Genre>;
   id: Scalars['Int']['output'];
   originalUrl: Scalars['String']['output'];
+  thumbnail: Image;
   title: Scalars['String']['output'];
 };
 
@@ -274,7 +277,9 @@ export type GenreResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type ImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']> = {
   file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
+  height?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  width?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -313,6 +318,7 @@ export type TrackResolvers<ContextType = any, ParentType extends ResolversParent
   genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   originalUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  thumbnail?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

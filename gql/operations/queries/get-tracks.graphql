@@ -27,5 +27,14 @@ query GetTracks {
 			name
 		}
 		duration
+		thumbnail {
+			width
+			height
+			id
+			file {
+				id
+				location
+			}
+		}
 	}
 }
