@@ -20,17 +20,7 @@ import prisma from '@/prisma/database'
 
 const MAX_DOWNLOAD_TIME = 1000 * 60 * 10 // 10 minutes
 
-const AUDIO_COMMANDS = ['--extract-audio', '--audio-format mp3', '--keep-video']
-
-/**
- * Excess files from the download that need to be cleaned up.
- * @note Is there a better way to do this with yt-dlp?
- *
- * For some reason --keep-video keeps a bunch of junk. We don't want this.
- * We only want the audio (mp3), and the video (mp4) that also contains the audio.
- * @example '1.f898934hhh.f140.m4a' // <- junk
- */
-const AUDIO_FILES_TO_BE_REMOVED_AFTER_DOWNLOAD = ['%name%.f140.m4a', '%name%.f614.mp4', '%name%']
+const AUDIO_COMMANDS = ['--extract-audio', '--audio-format mp3']
 
 export enum DownloadType {
 	AUDIO,
@@ -192,14 +182,6 @@ namespace Downloader {
 		return extension
 	}
 
-	const cleanUpFiles = (downloadFolder: string, baseName: string) => {
-		const deletionPromises = AUDIO_FILES_TO_BE_REMOVED_AFTER_DOWNLOAD.map((file) => {
-			const filename = file.replace('%name%', baseName)
-			return System.removeFile(`${downloadFolder}/${filename}`)
-		})
-		return Promise.all(deletionPromises)
-	}
-
 	const tryDownload = async ({ downloader, downloadPath, source, type }: TryDownloadProps) => {
 		const extraCommands = type === DownloadType.AUDIO ? AUDIO_COMMANDS : []
 		return new Promise<void>((resolve, reject) => {
@@ -295,9 +277,6 @@ namespace Downloader {
 		if (!System.exists(finalPath)) {
 			throw new Error(`Download failed. Verification of file '${finalPath}' found that the file does not exist.`)
 		}
-
-		Debugger.log('Cleaning up excess files')
-		await cleanUpFiles(downloadFolder, baseName)
 
 		const fileStats = statSync(finalPath)
 		console.log('File stats', fileStats)
