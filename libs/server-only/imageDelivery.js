@@ -11,5 +11,6 @@ export default function imageLoader({ src }) {
 	} catch {
 		return src
 	}
+	/** @todo - Anyone: Should we support resizing and file-size quality improvements? */
 	return `http://localhost:3000/api/cdn?p=${src}`
 }

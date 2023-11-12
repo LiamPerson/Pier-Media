@@ -5,10 +5,14 @@
  */
 
 import System from '@/libs/server-only/System'
-import { lookup } from 'mime'
 import { NextRequest, NextResponse } from 'next/server'
 import { constants } from 'node:fs'
 import { readFile } from 'node:fs/promises'
+
+/**
+ * Handles getting all files
+ * from the local storage of this computer.
+ */
 
 export const GET = async (request: NextRequest) => {
 	const url = new URL(request.url)
@@ -23,6 +27,7 @@ export const GET = async (request: NextRequest) => {
 
 	const file = await readFile(path)
 	const response = new NextResponse(file)
+	/** @todo - Anyone: Should we put the proper headers here? */
 	response.headers.set('Content-Type', 'application/octet-stream')
 	return response
 }
