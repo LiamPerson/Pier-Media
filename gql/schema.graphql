@@ -74,7 +74,7 @@ input SettingsInput {
 	downloads: DownloadSettingsInput
 }
 
-input InitialiseGenresInput {
+input InitializeGenresInput {
 	overrideExisting: Boolean
 }
 
@@ -93,5 +93,5 @@ type Query {
 type Mutation {
 	update_settings(input: SettingsInput): Settings!
 	download_audio(input: GenericDownloadInput!): Track!
-	initialise_genres(input: InitialiseGenresInput): Boolean!
+	initialize_genres(input: InitializeGenresInput): Boolean!
 }

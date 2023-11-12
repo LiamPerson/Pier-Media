@@ -74,14 +74,14 @@ export type Image = {
   id: Scalars['Int']['output'];
 };
 
-export type InitialiseGenresInput = {
+export type InitializeGenresInput = {
   overrideExisting?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
-  initialise_genres: Scalars['Boolean']['output'];
+  initialize_genres: Scalars['Boolean']['output'];
   update_settings: Settings;
 };
 
@@ -91,8 +91,8 @@ export type MutationDownload_AudioArgs = {
 };
 
 
-export type MutationInitialise_GenresArgs = {
-  input?: InputMaybe<InitialiseGenresInput>;
+export type MutationInitialize_GenresArgs = {
+  input?: InputMaybe<InitializeGenresInput>;
 };
 
 
@@ -218,7 +218,7 @@ export type ResolversTypes = {
   GenericDownloadInput: GenericDownloadInput;
   Genre: ResolverTypeWrapper<Genre>;
   Image: ResolverTypeWrapper<Image>;
-  InitialiseGenresInput: InitialiseGenresInput;
+  InitializeGenresInput: InitializeGenresInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Provider: ResolverTypeWrapper<Provider>;
@@ -240,7 +240,7 @@ export type ResolversParentTypes = {
   GenericDownloadInput: GenericDownloadInput;
   Genre: Genre;
   Image: Image;
-  InitialiseGenresInput: InitialiseGenresInput;
+  InitializeGenresInput: InitializeGenresInput;
   Int: Scalars['Int']['output'];
   Mutation: {};
   Provider: Provider;
@@ -298,7 +298,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
-  initialise_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialise_GenresArgs>>;
+  initialize_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialize_GenresArgs>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
 };
 
