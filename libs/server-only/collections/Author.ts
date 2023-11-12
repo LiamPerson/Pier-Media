@@ -11,7 +11,7 @@ namespace Author {
 		provider: Provider.Type
 	}
 
-	export const get = async (author: getProps, prisma: PrismaClient) => {
+	export const upsert = async (author: getProps, prisma: PrismaClient) => {
 		const authorDetails = await prisma.author.upsert({
 			where: {
 				sourceId: author.sourceId,
@@ -41,7 +41,7 @@ namespace Author {
 		return authorDetails
 	}
 
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default Author

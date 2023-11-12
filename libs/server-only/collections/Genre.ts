@@ -11,7 +11,7 @@ namespace Genre {
 		name: string
 		description: string
 	}
-	export const get = async (genre: getProps, prisma: PrismaClient) => {
+	export const upsert = async (genre: getProps, prisma: PrismaClient) => {
 		const genreDetails = await prisma.genre.upsert({
 			where: {
 				name: genre.name,
@@ -70,7 +70,7 @@ namespace Genre {
 		})
 	}
 
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default Genre

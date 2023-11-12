@@ -9,7 +9,7 @@ namespace File {
 		tags: string[] // Tags for the file
 	}
 
-	export const get = async (file: getProps, prisma: PrismaClient) => {
+	export const upsert = async (file: getProps, prisma: PrismaClient) => {
 		const mediaType = lookup(file.location)
 		if (!mediaType) throw new Error(`Error in File collection: Could not find media type for file '${file.location}'`)
 		Debugger.log(`Created new ${mediaType} file with location '${file.location}'`)
@@ -42,7 +42,7 @@ namespace File {
 		return updatedFileDetails
 	}
 
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default File

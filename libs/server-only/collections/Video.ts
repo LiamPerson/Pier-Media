@@ -10,7 +10,7 @@ namespace Video {
 		author: Author.Type
 	}
 
-	export const get = async (author: getProps, prisma: PrismaClient) => {
+	export const upsert = async (author: getProps, prisma: PrismaClient) => {
 		let authorDetails = await prisma.author.findFirst({
 			where: {
 				sourceId: author.sourceId,
@@ -32,7 +32,7 @@ namespace Video {
 		return authorDetails
 	}
 
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default Video

@@ -27,7 +27,7 @@ namespace Provider {
 		},
 	} as const
 
-	export const get = async (provider: Options, prisma: PrismaClient) => {
+	export const upsert = async (provider: Options, prisma: PrismaClient) => {
 		const providerDetails = await prisma.provider.upsert({
 			where: {
 				domain: Details[provider].domain,
@@ -50,7 +50,7 @@ namespace Provider {
 		return validProviders[0] as Options
 	}
 
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default Provider

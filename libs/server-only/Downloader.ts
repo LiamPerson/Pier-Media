@@ -244,8 +244,8 @@ namespace Downloader {
 
 		Debugger.dumpJsonToFile(downloadDetails)
 		const authorSourceId = downloadDetails.channel_id || downloadDetails.uploader_id
-		const provider = await Provider.get(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
-		const author = await Author.get({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
+		const provider = await Provider.upsert(Provider.toProviderOption(downloadDetails.webpage_url_domain), prisma)
+		const author = await Author.upsert({ name: downloadDetails.uploader, sourceId: authorSourceId, provider }, prisma)
 		const genre =
 			(await Genre.inferGenre(downloadDetails.tags.join(' '), prisma)) || (await Genre.inferGenre(downloadDetails.description, prisma))
 		Debugger.log('Inferred genre (from description & tags): ', genre)
@@ -263,7 +263,7 @@ namespace Downloader {
 		Debugger.log('Audio download path: ', downloadPath)
 		verifyOriginality({ targetPath: finalPath, throwErrorOnCollision: !overrideOnCollision })
 		const thumbnailFilename = `${baseName}.${getExtensionFromUrl(Network.removeSearchFromUrl(downloadDetails.thumbnail))}`
-		const thumbnail = await Image.get({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
+		const thumbnail = await Image.upsert({ source: downloadDetails.thumbnail, filename: thumbnailFilename }, prisma)
 
 		console.log(`Attempting to download to path ${downloadPath}`)
 		/**
@@ -281,12 +281,12 @@ namespace Downloader {
 		const fileStats = statSync(finalPath)
 		console.log('File stats', fileStats)
 		const fileTags = [...downloadDetails.categories, ...downloadDetails.tags]
-		const file = await File.get({ location: finalPath, size: fileStats.size, tags: fileTags }, prisma)
+		const file = await File.upsert({ location: finalPath, size: fileStats.size, tags: fileTags }, prisma)
 
 		// Get file bitrate and duration
 		const metadata = await parseFile(finalPath) /** @todo - Liam: This should be replaced with an FFMPEG call. */
 		console.log('Metadata', metadata)
-		const track = await Track.get(
+		const track = await Track.upsert(
 			{
 				title: downloadDetails.title,
 				author,

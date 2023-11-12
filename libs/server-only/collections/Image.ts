@@ -15,7 +15,7 @@ namespace Image {
 		isMetadata?: boolean // Is the image metadata for another file?
 	}
 
-	export const get = async ({ source, filename, isMetadata }: getProps, prisma: PrismaClient) => {
+	export const upsert = async ({ source, filename, isMetadata }: getProps, prisma: PrismaClient) => {
 		Debugger.log('Trying to create image from source:', source)
 		const settings = await PierSettings.getSettings(prisma)
 		let output = `${settings.downloads.imagePath}/${filename}`
@@ -23,7 +23,7 @@ namespace Image {
 			output = `${settings.downloads.metadataPath}/${filename}`
 		}
 		const { mediaType, size: byteSize } = await Network.getFile({ url: source, output })
-		const file = await File.get({ location: output, size: byteSize, tags: [] }, prisma)
+		const file = await File.upsert({ location: output, size: byteSize, tags: [] }, prisma)
 
 		const imageDimensions = imageSize(output)
 		if (!imageDimensions.width || !imageDimensions.height) throw new Error(`Could not find valid image dimensions for file '${output}'.`)
@@ -53,7 +53,7 @@ namespace Image {
 		})
 		return imageDetails
 	}
-	export type Type = Awaited<ReturnType<typeof get>>
+	export type Type = Awaited<ReturnType<typeof upsert>>
 }
 
 export default Image

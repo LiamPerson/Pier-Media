@@ -23,7 +23,7 @@ namespace Track {
 		contributingArtistIds: string[]
 		genre?: Genre.Type
 	}
-	export const get = async (track: getProps, prisma: PrismaClient) => {
+	export const upsert = async (track: getProps, prisma: PrismaClient) => {
 		const connectGenre = track.genre ? { genre: { connect: { id: track.genre.id } } } : {}
 		const trackDetails = await prisma.track.upsert({
 			where: {
