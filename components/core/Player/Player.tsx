@@ -12,10 +12,7 @@ export const Player = ({ children }: Props) => {
 	return (
 		<>
 			{children}
-			<Paper
-				id={'helol!'}
-				sx={{ width: '100%', position: 'sticky', bottom: '0', right: '0' }}
-			>
+			<Paper sx={{ width: '100%', position: 'sticky', bottom: '0', right: '0' }}>
 				<PlayerContent media={media} />
 			</Paper>
 		</>
