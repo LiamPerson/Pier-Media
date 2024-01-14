@@ -13,6 +13,7 @@ export const AudioPlayerSmall = ({ src }: AudioPlayerSmallProps) => {
 			autoPlay
 			src={fromCdn(src)}
 			style={{
+				borderRadius: 0,
 				background: '#00000033',
 				color: '#fff',
 			}}

@@ -1,6 +1,7 @@
 'use client'
 
-import { PlayerOverlay } from './Overlay'
+import { Paper } from '@mui/material'
+import { PlayerContent } from './PlayerContent'
 import { usePlayer } from './usePlayer'
 
 type Props = {
@@ -11,7 +12,12 @@ export const Player = ({ children }: Props) => {
 	return (
 		<>
 			{children}
-			<PlayerOverlay src={src} />
+			<Paper
+				id={'helol!'}
+				sx={{ width: '100%', position: 'sticky', bottom: '0', right: '0' }}
+			>
+				<PlayerContent src={src} />
+			</Paper>
 		</>
 	)
 }
