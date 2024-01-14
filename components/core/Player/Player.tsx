@@ -8,7 +8,7 @@ type Props = {
 	children: React.ReactNode
 }
 export const Player = ({ children }: Props) => {
-	const { src } = usePlayer()
+	const { media } = usePlayer()
 	return (
 		<>
 			{children}
@@ -16,7 +16,7 @@ export const Player = ({ children }: Props) => {
 				id={'helol!'}
 				sx={{ width: '100%', position: 'sticky', bottom: '0', right: '0' }}
 			>
-				<PlayerContent src={src} />
+				<PlayerContent media={media} />
 			</Paper>
 		</>
 	)

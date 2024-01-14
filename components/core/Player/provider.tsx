@@ -5,13 +5,18 @@ type Props = {
 	children: React.ReactNode
 }
 
-type ContextType = {
-	src: string | null
-	setSrc: React.Dispatch<React.SetStateAction<string | null>>
+export type Media = {
+	src: string
+	title: string
 }
-export const PlayerContext = createContext<ContextType>({ src: null, setSrc: () => {} })
+
+type ContextType = {
+	media: Media | null
+	setMedia: React.Dispatch<React.SetStateAction<Media | null>>
+}
+export const PlayerContext = createContext<ContextType>({ media: null, setMedia: () => {} })
 
 export const PlayerProvider = ({ children }: Props) => {
-	const [src, setSrc] = useState<string | null>(null)
-	return <PlayerContext.Provider value={{ src, setSrc }}>{children}</PlayerContext.Provider>
+	const [media, setMedia] = useState<Media | null>(null)
+	return <PlayerContext.Provider value={{ media: media, setMedia: setMedia }}>{children}</PlayerContext.Provider>
 }

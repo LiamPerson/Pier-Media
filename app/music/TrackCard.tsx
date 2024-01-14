@@ -9,13 +9,13 @@ type Props = {
 	track: NonNullable<GetTracksQuery['tracks'][number]>
 }
 export const TrackCard = ({ track }: Props) => {
-	const { setSrc } = usePlayer()
+	const { setMedia } = usePlayer()
 	return (
 		<Card
 			key={track.id}
 			sx={{ cursor: 'pointer' }}
 			onClick={() => {
-				setSrc(track.file.location)
+				setMedia({ src: track.file.location, title: track.title })
 			}}
 		>
 			<CardContent>

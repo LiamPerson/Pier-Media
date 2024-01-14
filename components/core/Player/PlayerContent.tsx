@@ -1,10 +1,11 @@
 import { AudioPlayerSmall } from './AudioPlayerSmall'
+import { Media } from './provider'
 
 type OverlayProps = {
-	src: string | null
+	media: Media | null
 }
 
-export const PlayerContent = ({ src }: OverlayProps) => {
-	if (!src) return <div>No audio selected.</div>
-	return <AudioPlayerSmall src={src} />
+export const PlayerContent = ({ media }: OverlayProps) => {
+	if (!media) return <div>No audio selected.</div>
+	return <AudioPlayerSmall media={media} />
 }
