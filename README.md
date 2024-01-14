@@ -19,7 +19,7 @@ _@todo - Liam: Add screenshots of the web interface here 😇_
 
 ### Roadmap
 
-Find the roadmap for this project here: [Roadmap](./docs/roadmap/README.md)
+Find the roadmap for this project in the GitHub Issues section of the project found here: https://github.com/LiamPerson/Pier-Media/issues
 
 **Advantages over Pier Legacy**
 
