@@ -114,6 +114,10 @@ For reading the magic number of files to get mime types and extensions.
 
 For getting files as streams compatible with [file-type](#file-type).
 
+## [react-h5-audio-player](https://www.npmjs.com/package/react-h5-audio-player)
+
+A nice UI for playing audio. We can probably remove this once we focus more on developing our own UI.
+
 ## [ESLint](https://eslint.org/)
 
 ### Sub-packages

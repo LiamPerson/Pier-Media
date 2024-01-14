@@ -1,4 +1,6 @@
 import { fromCdn } from '@/libs/helpers'
+import AudioPlayer from 'react-h5-audio-player'
+import 'react-h5-audio-player/lib/styles.css'
 
 interface AudioPlayerSmallProps {
 	src: string
@@ -6,9 +8,13 @@ interface AudioPlayerSmallProps {
 
 const AudioPlayerSmall = ({ src }: AudioPlayerSmallProps) => {
 	return (
-		<audio
-			controls
+		<AudioPlayer
+			// controls
 			src={fromCdn(src)}
+			style={{
+				background: '#00000033',
+				color: '#fff',
+			}}
 		/>
 	)
 }
