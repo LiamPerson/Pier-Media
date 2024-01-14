@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { GetTracksQuery } from '@/gql/codegen/graphql'
 import { usePlayer } from '@/components/core/Player/usePlayer'
+import { MediaType } from '@/constants/media'
 
 type Props = {
 	track: NonNullable<GetTracksQuery['tracks'][number]>
@@ -15,7 +16,7 @@ export const TrackCard = ({ track }: Props) => {
 			key={track.id}
 			sx={{ cursor: 'pointer' }}
 			onClick={() => {
-				setMedia({ src: track.file.location, title: track.title })
+				setMedia({ src: track.file.location, title: track.title, type: MediaType.AUDIO })
 			}}
 		>
 			<CardContent>

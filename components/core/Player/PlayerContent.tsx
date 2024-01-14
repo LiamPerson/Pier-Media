@@ -1,5 +1,5 @@
+import { Media } from '@/constants/media'
 import { AudioPlayerSmall } from './AudioPlayerSmall'
-import { Media } from './provider'
 
 type OverlayProps = {
 	media: Media | null
