@@ -17,6 +17,10 @@ Includes:
 
 _@todo - Liam: Add screenshots of the web interface here 😇_
 
+### Roadmap
+
+Find the roadmap for this project here: [Roadmap](./docs/roadmap/README.md)
+
 **Advantages over Pier Legacy**
 
 - Requires only 2 dependencies
