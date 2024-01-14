@@ -1,10 +1,10 @@
-import { Media } from '@/constants/media'
+import { AudioMedia } from '@/constants/media'
 import { fromCdn } from '@/libs/helpers'
 import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 
 type AudioPlayerSmallProps = {
-	media: Media
+	media: AudioMedia
 }
 
 export const AudioPlayerSmall = ({ media: media }: AudioPlayerSmallProps) => {
