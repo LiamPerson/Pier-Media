@@ -3,7 +3,7 @@ import { HEADER_HEIGHT_PX, SIDEBAR_WIDTH_PX } from './constants'
 import { ROUTE, ROUTE_ICON, ROUTE_NAME } from '@/libs/routes'
 import { BACKGROUND } from '@/styles/color'
 import { usePathname } from 'next/navigation'
-import NextLink from '@/components/templates/NextLink'
+import NextLink from '@/components/shared/NextLink'
 
 interface MenuButtonProps {
 	isActive: boolean

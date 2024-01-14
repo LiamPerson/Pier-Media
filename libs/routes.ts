@@ -1,8 +1,8 @@
-import CogIcon from '@/components/templates/icons/CogIcon'
-import HomeIcon from '@/components/templates/icons/HomeIcon'
-import MovieIcon from '@/components/templates/icons/MovieIcon'
-import MusicIcon from '@/components/templates/icons/MusicIcon'
-import VideoIcon from '@/components/templates/icons/VideoIcon'
+import CogIcon from '@/components/shared/icons/CogIcon'
+import HomeIcon from '@/components/shared/icons/HomeIcon'
+import MovieIcon from '@/components/shared/icons/MovieIcon'
+import MusicIcon from '@/components/shared/icons/MusicIcon'
+import VideoIcon from '@/components/shared/icons/VideoIcon'
 
 export enum ROUTE_NAME {
 	HOME = 'Home',

@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
 import { ROUTE } from '@/libs/routes'
 import SiteSearch from './SiteSearch'
-import NextLink from '@/components/templates/NextLink'
+import NextLink from '@/components/shared/NextLink'
 
 interface HeaderProps {
 	width: number // in pixels
