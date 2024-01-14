@@ -1,5 +1,5 @@
 'use client'
-import { Media, MediaType } from '@/constants/media'
+import { Media } from '@/constants/media'
 import { createContext, useState } from 'react'
 
 type Props = {
