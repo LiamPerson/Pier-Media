@@ -18,7 +18,7 @@
 		"description": "A genre that combines elements of rhythm and blues, soul, funk, pop, hip hop and dance."
 	},
 	{ "name": "Dance pop", "description": "Basically just popular dance music." },
-	{ "name": "Deep house", "description": "A subgenre of house music characterised by deep basslines and soulful vocals." },
+	{ "name": "Deep house", "description": "A subgenre of house music characterized by deep basslines and soulful vocals." },
 	{ "name": "Disco", "description": "A genre of dance music has a wide room sound, repetition, and is easy to dance to." },
 	{
 		"name": "Downtempo",
@@ -111,7 +111,7 @@
 	},
 	{
 		"name": "Outrun",
-		"description": "The cyberpunk's genre. A subgenre of synthwave that has a focus on a repetitive beat. Usually associated with the colours red and black."
+		"description": "The cyberpunk's genre. A subgenre of synthwave that has a focus on a repetitive beat. Usually associated with the colors red and black."
 	},
 	{
 		"name": "Phonk",
