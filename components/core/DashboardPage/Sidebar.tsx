@@ -2,8 +2,8 @@ import { Box, Typography, alpha } from '@mui/material'
 import { HEADER_HEIGHT_PX, SIDEBAR_WIDTH_PX } from './constants'
 import { ROUTE, ROUTE_ICON, ROUTE_NAME } from '@/libs/routes'
 import { BACKGROUND } from '@/styles/color'
-import NextLink from '@/components/ui/NextLink'
 import { usePathname } from 'next/navigation'
+import NextLink from '@/components/templates/NextLink'
 
 interface MenuButtonProps {
 	isActive: boolean

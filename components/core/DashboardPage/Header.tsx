@@ -3,8 +3,8 @@ import { HEADER_HEIGHT, HEADER_HEIGHT_PX } from './constants'
 import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
 import { ROUTE } from '@/libs/routes'
-import NextLink from '@/components/ui/NextLink'
 import SiteSearch from './SiteSearch'
+import NextLink from '@/components/templates/NextLink'
 
 interface HeaderProps {
 	width: number // in pixels
