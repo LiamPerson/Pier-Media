@@ -16,7 +16,13 @@ export const TrackCard = ({ track }: Props) => {
 			key={track.id}
 			sx={{ cursor: 'pointer' }}
 			onClick={() => {
-				setMedia({ src: track.file.location, title: track.title, type: MediaType.AUDIO })
+				setMedia({
+					src: track.file.location,
+					title: track.title,
+					type: MediaType.AUDIO,
+					author: track.author.name,
+					genre: track.genre?.name,
+				})
 			}}
 		>
 			<CardContent>

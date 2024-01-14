@@ -12,7 +12,12 @@ export const AudioPlayerSmall = ({ media: media }: AudioPlayerSmallProps) => {
 		<AudioPlayer
 			// controls
 			autoPlay
-			header={media.title}
+			header={
+				/** @todo - Anyone: Improve the styling here */
+				<>
+					{media.title} <i style={{ fontWeight: 'lighter' }}>By</i> {media.author} | {media.genre}
+				</>
+			}
 			src={fromCdn(media.src)}
 			style={{
 				borderRadius: 0,

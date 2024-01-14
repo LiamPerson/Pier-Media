@@ -12,10 +12,13 @@ export interface BaseMedia {
 }
 
 export interface AudioMedia extends BaseMedia {
-	genre: string
-	artist: string
+	genre?: string
+	author: string
+	type: 'audio'
 }
 
-export interface VideoMedia extends BaseMedia {}
+export interface VideoMedia extends BaseMedia {
+	type: 'video'
+}
 
 export type Media = AudioMedia | VideoMedia
