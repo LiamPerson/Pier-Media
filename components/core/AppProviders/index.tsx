@@ -4,11 +4,14 @@ import { ThemeProvider } from '@mui/material'
 import theme from '@/styles/theme'
 import { ApolloProvider } from '@apollo/client'
 import apollo from '@/libs/apollo'
+import { PlayerProvider } from '../Player/provider'
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<ApolloProvider client={apollo}>
-			<ThemeProvider theme={theme}>{children}</ThemeProvider>
+			<PlayerProvider>
+				<ThemeProvider theme={theme}>{children}</ThemeProvider>
+			</PlayerProvider>
 		</ApolloProvider>
 	)
 }

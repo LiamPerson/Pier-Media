@@ -1,4 +1,5 @@
 import AppProviders from '@/components/core/AppProviders'
+import { Player } from '@/components/core/Player/Player'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='en'>
 			<body>
-				<AppProviders>{children}</AppProviders>
+				<AppProviders>
+					<Player>{children}</Player>
+				</AppProviders>
 			</body>
 		</html>
 	)

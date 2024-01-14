@@ -2,11 +2,11 @@ import { fromCdn } from '@/libs/helpers'
 import AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 
-interface AudioPlayerSmallProps {
+type AudioPlayerSmallProps = {
 	src: string
 }
 
-const AudioPlayerSmall = ({ src }: AudioPlayerSmallProps) => {
+export const AudioPlayerSmall = ({ src }: AudioPlayerSmallProps) => {
 	return (
 		<AudioPlayer
 			// controls
@@ -18,5 +18,3 @@ const AudioPlayerSmall = ({ src }: AudioPlayerSmallProps) => {
 		/>
 	)
 }
-
-export default AudioPlayerSmall
