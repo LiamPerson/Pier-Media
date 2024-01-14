@@ -7,6 +7,8 @@ import { secondsToTimestamp } from '@/libs/helpers'
 import Image from 'next/image'
 import AudioPlayerSmall from '@/components/ui/AudioPlayerSmall'
 
+/** @note - Anyone: We can probably render all of this at the page level. */
+
 const IndexPage = () => {
 	const { data, loading, error } = useQuery(GetTracksDocument)
 	return (
