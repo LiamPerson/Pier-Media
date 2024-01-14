@@ -12,11 +12,13 @@ import { readFile } from 'node:fs/promises'
 /**
  * Handles getting all files
  * from the local storage of this computer.
+ *
+ * @note p = path
  */
 
 export const GET = async (request: NextRequest) => {
 	const url = new URL(request.url)
-	const path = url.searchParams.get('p')
+	const path = url.searchParams.get('p') // p = path
 
 	if (typeof path !== 'string') {
 		throw new Error('No path provided.')
@@ -27,7 +29,17 @@ export const GET = async (request: NextRequest) => {
 
 	const file = await readFile(path)
 	const response = new NextResponse(file)
+
+	const range = request.headers.get('range')
+	if (range) {
+		/** @todo - Anyone: Perhaps there are some improvements we could make here with performance. There are lots of requests from this. */
+		response.headers.set('Content-Range', range)
+	}
+
 	/** @todo - Anyone: Should we put the proper headers here? */
+	response.headers.set('Accept-Ranges', 'bytes')
 	response.headers.set('Content-Type', 'application/octet-stream')
+	response.headers.set('Content-Length', file.length.toString())
+
 	return response
 }
