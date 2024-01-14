@@ -22,6 +22,7 @@ export const TrackCard = ({ track }: Props) => {
 					type: MediaType.AUDIO,
 					author: track.author.name,
 					genre: track.genre?.name,
+					thumbnail: track.thumbnail,
 				})
 			}}
 		>
