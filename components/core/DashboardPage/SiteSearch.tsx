@@ -1,10 +1,9 @@
 import { Autocomplete, TextField, Box } from '@mui/material'
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 import { useRouter } from 'next/navigation'
 import { SyntheticEvent } from 'react'
 
 interface ActionParams {
-	router?: AppRouterInstance
+	router?: ReturnType<typeof useRouter>
 }
 
 interface Option {
