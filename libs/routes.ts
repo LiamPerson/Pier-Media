@@ -1,7 +1,7 @@
 import CogIcon from '@/components/shared/icons/CogIcon'
 import HomeIcon from '@/components/shared/icons/HomeIcon'
 import MovieIcon from '@/components/shared/icons/MovieIcon'
-import MusicIcon from '@/components/shared/icons/MusicIcon'
+import MusicalNotesOutlineIcon from '@/components/shared/icons/MusicalNotesOutlineIcon'
 import VideoIcon from '@/components/shared/icons/VideoIcon'
 
 export enum ROUTE_NAME {
@@ -24,6 +24,6 @@ export const ROUTE_ICON: Record<ROUTE_NAME, typeof HomeIcon> = {
 	[ROUTE_NAME.HOME]: HomeIcon,
 	[ROUTE_NAME.VIDEOS]: VideoIcon,
 	[ROUTE_NAME.MOVIES]: MovieIcon,
-	[ROUTE_NAME.MUSIC]: MusicIcon,
+	[ROUTE_NAME.MUSIC]: MusicalNotesOutlineIcon,
 	[ROUTE_NAME.SETTINGS]: CogIcon,
 }

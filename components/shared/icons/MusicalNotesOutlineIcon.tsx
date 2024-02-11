@@ -1,6 +1,6 @@
 import { SVGAttributes } from 'react'
 
-const MusicIcon = (props: SVGAttributes<SVGElement>) => (
+const MusicalNotesOutlineIcon = (props: SVGAttributes<SVGElement>) => (
 	<svg
 		xmlns='http://www.w3.org/2000/svg'
 		viewBox='0 0 512 512'
@@ -26,4 +26,4 @@ const MusicIcon = (props: SVGAttributes<SVGElement>) => (
 	</svg>
 )
 
-export default MusicIcon
+export default MusicalNotesOutlineIcon
