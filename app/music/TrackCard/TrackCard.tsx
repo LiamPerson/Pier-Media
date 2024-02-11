@@ -1,14 +1,18 @@
-import { secondsToTimestamp } from '@/libs/helpers'
 import { Card, CardContent, Paper, Typography } from '@mui/material'
-import Link from 'next/link'
 import Image from 'next/image'
-import { GetTracksQuery } from '@/gql/codegen/graphql'
+import Link from 'next/link'
+
+import TrackCardDuration from './TrackCardDuration'
+import TrackCardGenre from './TrackCardGenre'
+
 import { usePlayer } from '@/components/core/Player/usePlayer'
 import { MediaType } from '@/constants/media'
+import { GetTracksQuery } from '@/gql/codegen/graphql'
 
 type Props = {
 	track: NonNullable<GetTracksQuery['tracks'][number]>
 }
+
 export const TrackCard = ({ track }: Props) => {
 	const { setMedia } = usePlayer()
 	return (
@@ -48,7 +52,7 @@ export const TrackCard = ({ track }: Props) => {
 				</Paper>
 				<Typography variant='h5'>{track.title}</Typography>
 				<Typography variant='body2'>
-					By {track.author.name} | {secondsToTimestamp(track.duration)} {track.genre?.name && ' | ' + track.genre.name}
+					By {track.author.name} <TrackCardDuration duration={track.duration} /> <TrackCardGenre genre={track.genre} />
 				</Typography>
 				<Typography variant='body1'>
 					Sourced from <Link href={track.originalUrl}>{track.author.provider.name}</Link>

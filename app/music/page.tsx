@@ -1,9 +1,11 @@
 'use client'
-import DashboardPage from '@/components/core/DashboardPage'
-import { Grid, Typography } from '@mui/material'
 import { useQuery } from '@apollo/client'
-import { GetTracksDocument } from '@/gql/codegen/graphql'
+import { Grid, Typography } from '@mui/material'
+
 import { TrackCard } from './TrackCard'
+
+import DashboardPage from '@/components/core/DashboardPage'
+import { GetTracksDocument } from '@/gql/codegen/graphql'
 
 /** @note - Anyone: We can probably render all of this at the page level. */
 
