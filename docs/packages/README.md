@@ -79,10 +79,6 @@ Our GraphQL server that heavily simplifies querying and types.
 
 ## [@apollo/client](https://www.apollographql.com/docs/react/get-started)
 
-### Sub-packages
-
-- [@apollo/experimental-nextjs-app-support](https://www.npmjs.com/package/@apollo/experimental-nextjs-app-support) (for easy integration with NextJS server-side components)
-
 A hook-based approach to interacting with the graphql API. Anywhere you need to interact with the api should use this in the form of either `useQuery` _(get something)_ or `useMutation` _(change something)_.
 
 ## [yt-dlp-wrap-extended](https://www.npmjs.com/package/yt-dlp-wrap-extended)

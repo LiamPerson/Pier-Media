@@ -12,7 +12,6 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3",
-		"@apollo/experimental-nextjs-app-support": "^0.8.0",
 		"@apollo/server": "^4",
 		"@as-integrations/next": "^2",
 		"@emotion/react": "^11",
