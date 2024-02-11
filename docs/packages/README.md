@@ -79,6 +79,10 @@ Our GraphQL server that heavily simplifies querying and types.
 
 ## [@apollo/client](https://www.apollographql.com/docs/react/get-started)
 
+### Sub-packages
+
+- [@apollo/experimental-nextjs-app-support](https://www.npmjs.com/package/@apollo/experimental-nextjs-app-support) (for easy integration with NextJS server-side components)
+
 A hook-based approach to interacting with the graphql API. Anywhere you need to interact with the api should use this in the form of either `useQuery` _(get something)_ or `useMutation` _(change something)_.
 
 ## [yt-dlp-wrap-extended](https://www.npmjs.com/package/yt-dlp-wrap-extended)
@@ -123,6 +127,8 @@ A nice UI for playing audio. We can probably remove this once we focus more on d
 ### Sub-packages
 
 - [eslint-config-next](https://www.npmjs.com/package/eslint-config-next) (for NextJS specific linting rules)
+- [eslint-plugin-unused-imports](https://www.npmjs.com/package/eslint-plugin-unused-imports) (for automatically removing unused imports)
+- [eslint-plugin-validate-jsx-nesting](https://www.npmjs.com/package/eslint-plugin-validate-jsx-nesting) (for validating JSX nesting such as `<p>` in `<div>`)
 
 ### VSCode Extension Requirements
 
