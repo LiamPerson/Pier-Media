@@ -1,3 +1,24 @@
 {
-  "extends": ["next/core-web-vitals"]
+	"extends": ["next/core-web-vitals"],
+	"plugins": ["validate-jsx-nesting", "unused-imports"],
+	"rules": {
+		"import/order": [
+			"warn",
+			{
+				"alphabetize": {
+					"order": "asc"
+				},
+				"newlines-between": "always"
+			}
+		],
+		"import/no-duplicates": "warn",
+		"sort-imports": [
+			"warn",
+			{
+				"ignoreDeclarationSort": true
+			}
+		],
+		"unused-imports/no-unused-imports": "warn",
+		"validate-jsx-nesting/no-invalid-jsx-nesting": "error"
+	}
 }
