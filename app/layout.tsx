@@ -1,6 +1,7 @@
+import { Metadata } from 'next'
+
 import AppProviders from '@/components/core/AppProviders'
 import { Player } from '@/components/core/Player/Player'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
 	title: 'Pier Media',

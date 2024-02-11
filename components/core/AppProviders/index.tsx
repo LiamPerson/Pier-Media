@@ -1,10 +1,12 @@
 'use client'
 import '@/styles/global.css'
-import { ThemeProvider } from '@mui/material'
-import theme from '@/styles/theme'
 import { ApolloProvider } from '@apollo/client'
-import apollo from '@/libs/apollo'
+import { ThemeProvider } from '@mui/material'
+
 import { PlayerProvider } from '../Player/provider'
+
+import { apollo } from '@/libs/apollo'
+import theme from '@/styles/theme'
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
 	return (
