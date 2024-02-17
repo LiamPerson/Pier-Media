@@ -16,14 +16,14 @@ const TvIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='32.14'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<path
 			stroke='currentColor'
-			stroke-linecap='round'
-			stroke-miterlimit='10'
-			stroke-width='32'
+			strokeLinecap='round'
+			strokeMiterlimit='10'
+			strokeWidth='32'
 			d='M128 416h256'
 		/>
 	</svg>

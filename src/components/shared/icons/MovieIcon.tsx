@@ -16,8 +16,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='384'
@@ -28,8 +28,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='384'
@@ -40,8 +40,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='384'
@@ -52,8 +52,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='384'
@@ -64,8 +64,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='48'
@@ -76,8 +76,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='48'
@@ -88,8 +88,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='48'
@@ -100,8 +100,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='48'
@@ -112,8 +112,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='128'
@@ -124,8 +124,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 		<rect
 			x='128'
@@ -136,8 +136,8 @@ const MovieIcon = (props: SVGAttributes<SVGElement>) => (
 			ry='28'
 			fill='none'
 			stroke='currentColor'
-			stroke-linejoin='round'
-			stroke-width='32'
+			strokeLinejoin='round'
+			strokeWidth='32'
 		/>
 	</svg>
 )
