@@ -6,6 +6,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky install",
+		"prisma:generate": "prisma generate --schema=./src/prisma/schema.prisma",
 		"codegen": "graphql-codegen --config src/gql/config.ts",
 		"codegen:watch": "graphql-codegen --config src/gql/config.ts --watch",
 		"test": "jest"
