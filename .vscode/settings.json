@@ -6,7 +6,7 @@
 	"[prisma]": {
 		"editor.defaultFormatter": "Prisma.prisma"
 	},
-	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json", ".next", "gql/codegen"],
+	"cSpell.ignorePaths": ["package.json", "package-lock.json", ".vscode/settings.json", ".next", "gql/codegen", ".eslintrc.json"],
 	"cSpell.language": "en-US",
 	"cSpell.words": [
 		"aarch",
