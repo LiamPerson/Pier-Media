@@ -1,8 +1,11 @@
-import { AudioMedia } from '@/constants/media'
 import { Box, Button, Collapse, Paper, Stack, Typography } from '@mui/material'
+
 import 'react-h5-audio-player/lib/styles.css'
-import { AudioThumbnail } from './AudioThumbnail'
 import { useState } from 'react'
+
+import { AudioThumbnail } from './AudioThumbnail'
+
+import { AudioMedia } from '@/constants/media'
 
 type Props = {
 	media: AudioMedia
@@ -29,7 +32,7 @@ export const AudioPlayerDetails = ({ media }: Props) => {
 			<Collapse in={!minimized}>
 				<Paper sx={{ padding: 2, height: minimized ? 0 : 'auto', overflow: 'hidden' }}>
 					<Stack
-						direction='row'
+						direction={{ xs: 'column', sm: 'row' }}
 						justifyContent='space-between'
 						spacing={2}
 					>
