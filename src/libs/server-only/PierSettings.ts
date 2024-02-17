@@ -1,7 +1,9 @@
 import 'server-only'
-import { PrismaClient } from '@prisma/client'
 import path from 'path'
+
+import { PrismaClient } from '@prisma/client'
 import { deepmergeInto } from 'deepmerge-ts'
+
 import { InputMaybe, SettingsInput } from '@/gql/codegen/graphql'
 
 class PierSettings {

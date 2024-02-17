@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+
 namespace Provider {
 	/** @todo - Liam: Add more providers here to align with yt-dlp */
 	export enum Options {

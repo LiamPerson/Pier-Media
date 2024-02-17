@@ -1,8 +1,10 @@
+import { createWriteStream, mkdirSync, writeFileSync } from 'node:fs'
 import { basename, dirname } from 'node:path'
 import { pipeline as streamPipeline } from 'node:stream/promises'
-import got from 'got'
-import { createWriteStream, mkdirSync, writeFileSync } from 'node:fs'
+
 import { fileTypeFromFile } from 'file-type'
+import got from 'got'
+
 import Debugger from './Debugger'
 
 namespace Network {

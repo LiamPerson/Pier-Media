@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client'
+
 import DEFAULT_GENRES from '@/data/audio_genres.json'
-import { Maybe } from '@/gql/codegen/resolvers-types'
 import { InputMaybe } from '@/gql/codegen/graphql'
 
 /**

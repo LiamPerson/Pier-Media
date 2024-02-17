@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { lookup } from 'mime-types'
+
 import Debugger from '../Debugger'
 
 namespace File {

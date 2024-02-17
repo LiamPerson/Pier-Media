@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client'
+import imageSize from 'image-size'
+
+import Debugger from '../Debugger'
 import Network from '../Network'
 import PierSettings from '../PierSettings'
-import imageSize from 'image-size'
+
 import File from './File'
-import Debugger from '../Debugger'
 
 /**
  * The Image collection.

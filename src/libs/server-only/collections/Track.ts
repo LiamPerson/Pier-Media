@@ -1,9 +1,10 @@
 import { PrismaClient } from '@prisma/client'
-import Provider from './Provider'
-import Image from './Image'
+
 import Author from './Author'
-import Genre from './Genre'
 import File from './File'
+import Genre from './Genre'
+import Image from './Image'
+import Provider from './Provider'
 
 /**
  * The Track (audio file) collection.

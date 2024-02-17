@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+
 import Provider from './Provider'
 
 /**
