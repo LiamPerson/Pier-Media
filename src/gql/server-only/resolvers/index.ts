@@ -1,5 +1,6 @@
 import 'server-only'
 import { InputMaybe, Resolvers } from '@/gql/codegen/resolvers-types'
+import { nullsToUndefined } from '@/libs/helpers'
 import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
 import PierSettings from '@/libs/server-only/PierSettings'
 import System from '@/libs/server-only/System'
@@ -22,13 +23,13 @@ const resolvers: Resolvers = {
 		genres: async () => {
 			return prisma.genre.findMany()
 		},
-		tracks: async () => {
+		tracks: async (_, { where }) => {
 			/** @todo - Anyone: Refactor this into the Track collection. */
 			/**
 			 * @todo - Anyone: The track collection should have a query function that gets all this information inside it.
 			 * Finding by 'id' so the database doesn't explode
 			 */
-			const tracksPromise = prisma.track.findMany()
+			const tracksPromise = prisma.track.findMany(nullsToUndefined({ where }))
 			const genresPromise = prisma.genre.findMany()
 			const authorsPromise = prisma.author.findMany()
 			const filesPromise = prisma.file.findMany()
