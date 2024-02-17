@@ -10,6 +10,7 @@ export const MediaType = {
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
 export interface BaseMedia {
+	id: number
 	src: string
 	title: string
 	type: MediaType

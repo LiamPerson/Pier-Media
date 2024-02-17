@@ -1,5 +1,7 @@
-import { AudioMedia } from '@/constants/media'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { AudioMedia } from '@/constants/media'
 
 const MAXIMUM_HEIGHT = 90
 
@@ -13,14 +15,16 @@ type Props = {
 }
 export const AudioThumbnail = ({ media }: Props) => {
 	return (
-		<Image
-			src={media.thumbnail.file.location}
-			alt={media.title}
-			quality={100}
-			priority
-			width={media.thumbnail.width}
-			height={media.thumbnail.height}
-			style={{ maxHeight: MAXIMUM_HEIGHT, maxWidth: getMaxWidth(media.thumbnail.height, media.thumbnail.width), objectFit: 'cover' }}
-		/>
+		<Link href={`/music/${media.id}`}>
+			<Image
+				src={media.thumbnail.file.location}
+				alt={media.title}
+				quality={100}
+				priority
+				width={media.thumbnail.width}
+				height={media.thumbnail.height}
+				style={{ maxHeight: MAXIMUM_HEIGHT, maxWidth: getMaxWidth(media.thumbnail.height, media.thumbnail.width), objectFit: 'cover' }}
+			/>
+		</Link>
 	)
 }

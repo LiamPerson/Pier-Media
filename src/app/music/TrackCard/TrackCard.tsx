@@ -19,6 +19,7 @@ export const TrackCard = ({ track }: Props) => {
 	const router = useRouter()
 	const handleClick = () => {
 		setMedia({
+			id: track.id,
 			src: track.file.location,
 			title: track.title,
 			type: MediaType.AUDIO,
