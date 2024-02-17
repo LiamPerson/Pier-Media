@@ -2,14 +2,14 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
 	overwrite: true,
-	schema: 'gql/schema.graphql',
-	documents: 'gql/operations/**/*.graphql',
+	schema: 'src/gql/schema.graphql',
+	documents: 'src/gql/operations/**/*.graphql',
 	generates: {
-		'./gql/codegen/': {
+		'./src/gql/codegen/': {
 			preset: 'client',
 			plugins: [],
 		},
-		'./gql/codegen/resolvers-types.ts': {
+		'./src/gql/codegen/resolvers-types.ts': {
 			plugins: ['typescript', 'typescript-resolvers'],
 		},
 	},
