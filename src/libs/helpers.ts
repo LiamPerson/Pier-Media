@@ -35,3 +35,13 @@ export const secondsToTimestamp = (inputSeconds: number) => {
 export const fromCdn = (path: string) => {
 	return `/api/cdn?p=${path}`
 }
+
+/**
+ * Replaces nulls with undefined in an object.
+ */
+export const nullsToUndefined = <T extends Record<string, any>>(object: T) => {
+	return JSON.parse(JSON.stringify(object), (key, value) => {
+		if (value === null) return undefined
+		return value
+	})
+}
