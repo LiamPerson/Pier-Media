@@ -1,8 +1,8 @@
 import 'server-only'
 import { InputMaybe, Resolvers } from '@/gql/codegen/resolvers-types'
+import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
 import PierSettings from '@/libs/server-only/PierSettings'
 import System from '@/libs/server-only/System'
-import Downloader, { DownloadType } from '@/libs/server-only/Downloader'
 import Genre from '@/libs/server-only/collections/Genre'
 import prisma from '@/prisma/database'
 
