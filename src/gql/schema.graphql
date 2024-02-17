@@ -80,10 +80,20 @@ input GenericDownloadInput {
 }
 ## END Downloads
 
+### START Queries
+input TrackWhereInput {
+	id: Int
+	genre: GenreWhereInput
+}
+input GenreWhereInput {
+	id: Int
+}
+### END Queries
+
 type Query {
 	settings: Settings!
 	genres: [Genre]!
-	tracks: [Track]!
+	tracks(where: TrackWhereInput): [Track]!
 }
 
 type Mutation {

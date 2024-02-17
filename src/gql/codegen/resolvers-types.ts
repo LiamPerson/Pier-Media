@@ -60,6 +60,10 @@ export type Genre = {
   name: Scalars['String']['output'];
 };
 
+export type GenreWhereInput = {
+  id?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Image = {
   __typename?: 'Image';
   file: File;
@@ -108,6 +112,11 @@ export type Query = {
   tracks: Array<Maybe<Track>>;
 };
 
+
+export type QueryTracksArgs = {
+  where?: InputMaybe<TrackWhereInput>;
+};
+
 export type Settings = {
   __typename?: 'Settings';
   downloadSettingsId: Scalars['Int']['output'];
@@ -131,6 +140,11 @@ export type Track = {
   originalUrl: Scalars['String']['output'];
   thumbnail: Image;
   title: Scalars['String']['output'];
+};
+
+export type TrackWhereInput = {
+  genre?: InputMaybe<GenreWhereInput>;
+  id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -211,6 +225,7 @@ export type ResolversTypes = {
   File: ResolverTypeWrapper<File>;
   GenericDownloadInput: GenericDownloadInput;
   Genre: ResolverTypeWrapper<Genre>;
+  GenreWhereInput: GenreWhereInput;
   Image: ResolverTypeWrapper<Image>;
   InitializeGenresInput: InitializeGenresInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
@@ -221,6 +236,7 @@ export type ResolversTypes = {
   SettingsInput: SettingsInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Track: ResolverTypeWrapper<Track>;
+  TrackWhereInput: TrackWhereInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -232,6 +248,7 @@ export type ResolversParentTypes = {
   File: File;
   GenericDownloadInput: GenericDownloadInput;
   Genre: Genre;
+  GenreWhereInput: GenreWhereInput;
   Image: Image;
   InitializeGenresInput: InitializeGenresInput;
   Int: Scalars['Int']['output'];
@@ -242,6 +259,7 @@ export type ResolversParentTypes = {
   SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
   Track: Track;
+  TrackWhereInput: TrackWhereInput;
 };
 
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
@@ -299,7 +317,7 @@ export type ProviderResolvers<ContextType = any, ParentType extends ResolversPar
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   genres?: Resolver<Array<Maybe<ResolversTypes['Genre']>>, ParentType, ContextType>;
   settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType>;
-  tracks?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType>;
+  tracks?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType, Partial<QueryTracksArgs>>;
 };
 
 export type SettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Settings'] = ResolversParentTypes['Settings']> = {
