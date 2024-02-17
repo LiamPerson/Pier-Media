@@ -6,8 +6,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky install",
-		"codegen": "graphql-codegen --config gql/config.ts",
-		"codegen:watch": "graphql-codegen --config gql/config.ts --watch",
+		"codegen": "graphql-codegen --config src/gql/config.ts",
+		"codegen:watch": "graphql-codegen --config src/gql/config.ts --watch",
 		"test": "jest"
 	},
 	"dependencies": {
