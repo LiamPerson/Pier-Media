@@ -1,10 +1,12 @@
-import resolvers from '@/gql/server-only/resolvers'
-import { ApolloServer } from '@apollo/server'
-import { startServerAndCreateNextHandler } from '@as-integrations/next'
 import { readFileSync } from 'fs'
 import path from 'path'
 
-const typeDefs = readFileSync(path.resolve('./gql/schema.graphql')).toString('utf-8')
+import { ApolloServer } from '@apollo/server'
+import { startServerAndCreateNextHandler } from '@as-integrations/next'
+
+import resolvers from '@/gql/server-only/resolvers'
+
+const typeDefs = readFileSync(path.resolve('./src/gql/schema.graphql')).toString('utf-8')
 
 const server = new ApolloServer({
 	resolvers,
