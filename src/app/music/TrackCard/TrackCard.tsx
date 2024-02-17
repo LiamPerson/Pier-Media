@@ -1,6 +1,7 @@
 import { Card, CardContent, Paper, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import TrackCardDuration from './TrackCardDuration'
 import TrackCardGenre from './TrackCardGenre'
@@ -15,20 +16,23 @@ type Props = {
 
 export const TrackCard = ({ track }: Props) => {
 	const { setMedia } = usePlayer()
+	const router = useRouter()
+	const handleClick = () => {
+		setMedia({
+			src: track.file.location,
+			title: track.title,
+			type: MediaType.AUDIO,
+			author: track.author.name,
+			genre: track.genre?.name,
+			thumbnail: track.thumbnail,
+		})
+		router.push(`/music/${track.id}`)
+	}
 	return (
 		<Card
 			key={track.id}
 			sx={{ cursor: 'pointer' }}
-			onClick={() => {
-				setMedia({
-					src: track.file.location,
-					title: track.title,
-					type: MediaType.AUDIO,
-					author: track.author.name,
-					genre: track.genre?.name,
-					thumbnail: track.thumbnail,
-				})
-			}}
+			onClick={handleClick}
 		>
 			<CardContent>
 				<Paper
