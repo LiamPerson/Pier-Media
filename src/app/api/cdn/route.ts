@@ -4,10 +4,12 @@
  * with no security.
  */
 
-import System from '@/libs/server-only/System'
-import { NextRequest, NextResponse } from 'next/server'
 import { constants } from 'node:fs'
 import { readFile } from 'node:fs/promises'
+
+import { NextRequest, NextResponse } from 'next/server'
+
+import System from '@/libs/server-only/System'
 
 /**
  * Handles getting all files
