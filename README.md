@@ -91,8 +91,8 @@ Read more here: [packages readme!](./docs/packages/README.md)
 To setup your local environment for development please run the following commands in the repository root:
 
 - `npm install` install all dependencies
-- `npx prisma generate` or `yarn prisma generate` generate the prisma client
-- `npx prisma migrate dev` or `yarn prisma migrate dev` run the migrations to build your development database
+- `npm run prisma:generate` or `yarn prisma:generate` generate the prisma client
+- `npm run prisma:migrate:dev` or `yarn prisma:migrate:dev` run the migrations to build your development database
 
 # Licenses
 
