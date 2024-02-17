@@ -6,7 +6,7 @@ const nextConfig = {
 	},
 	images: {
 		loader: 'custom',
-		loaderFile: './libs/server-only/imageDelivery.js',
+		loaderFile: './src/libs/server-only/imageDelivery.js',
 	},
 }
 
