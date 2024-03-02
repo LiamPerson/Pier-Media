@@ -9,7 +9,7 @@ type Props = {
 	children: React.ReactNode
 }
 export const Player = ({ children }: Props) => {
-	const { media } = usePlayer()
+	const { current: media } = usePlayer()
 	return (
 		<>
 			{children}

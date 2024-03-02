@@ -15,9 +15,9 @@ type Props = {
 }
 
 export const TrackCard = ({ track }: Props) => {
-	const { setMedia } = usePlayer()
+	const { add } = usePlayer()
 	const handleClick = () => {
-		setMedia({
+		add({
 			id: track.id,
 			src: track.file.location,
 			title: track.title,
