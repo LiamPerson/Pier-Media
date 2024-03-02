@@ -1,19 +1,28 @@
+import AudioPlayer from 'react-h5-audio-player'
+
+import { AudioPlayerDetails } from './AudioPlayerDetails'
+import { usePlayer } from './usePlayer'
+
 import { AudioMedia } from '@/constants/media'
 import { fromCdn } from '@/libs/helpers'
-import AudioPlayer from 'react-h5-audio-player'
+
 import 'react-h5-audio-player/lib/styles.css'
-import { AudioPlayerDetails } from './AudioPlayerDetails'
 
 type AudioPlayerSmallProps = {
 	media: AudioMedia
 }
 
 export const AudioPlayerSmall = ({ media }: AudioPlayerSmallProps) => {
+	const { previous, next } = usePlayer()
 	return (
 		<AudioPlayer
-			// controls
+			showSkipControls
+			showJumpControls={false}
 			autoPlay
 			header={<AudioPlayerDetails media={media} />}
+			onClickNext={next}
+			onClickPrevious={previous}
+			onEnded={next}
 			src={fromCdn(media.src)}
 			style={{
 				borderRadius: 0,

@@ -4,6 +4,7 @@ import 'react-h5-audio-player/lib/styles.css'
 import { useState } from 'react'
 
 import { AudioThumbnail } from './AudioThumbnail'
+import { usePlayer } from './usePlayer'
 
 import { AudioMedia } from '@/constants/media'
 
@@ -12,6 +13,7 @@ type Props = {
 }
 export const AudioPlayerDetails = ({ media }: Props) => {
 	const [minimized, setMinimized] = useState(false)
+	const { playlist } = usePlayer()
 	return (
 		<Box>
 			<Stack
@@ -28,6 +30,7 @@ export const AudioPlayerDetails = ({ media }: Props) => {
 					</Typography>
 				)}
 				<Button onClick={() => setMinimized(!minimized)}>{minimized ? 'Maximize' : 'Minimize'}</Button>
+				<Button onClick={() => console.log('Playlist', playlist)}>Log Playlist</Button>
 			</Stack>
 			<Collapse in={!minimized}>
 				<Paper sx={{ padding: 2, height: minimized ? 0 : 'auto', overflow: 'hidden' }}>
