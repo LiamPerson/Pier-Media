@@ -1,6 +1,7 @@
 'use client'
-import { Media } from '@/constants/media'
 import { createContext, useState } from 'react'
+
+import { Media } from '@/constants/media'
 
 type Props = {
 	children: React.ReactNode

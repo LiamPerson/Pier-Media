@@ -3,7 +3,7 @@ import '@/styles/global.css'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from '@mui/material'
 
-import { PlayerProvider } from '../Player/provider'
+import { PlayerProvider } from '../Player/PlayerProvider'
 
 import { apollo } from '@/libs/apollo'
 import theme from '@/styles/theme'

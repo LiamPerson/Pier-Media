@@ -1,6 +1,7 @@
 'use client'
 
 import { Paper } from '@mui/material'
+
 import { PlayerContent } from './PlayerContent'
 import { usePlayer } from './usePlayer'
 
