@@ -1,3 +1,5 @@
+import { shuffle } from './helpers'
+
 import { Media } from '@/constants/media'
 
 /**
@@ -31,6 +33,12 @@ class Playlist {
 	 */
 	public add(...items: Media[]): void {
 		this.list.push(...items)
+	}
+
+	public clear(): void {
+		// I wonder if this is safe to do 🤔
+		this.currentIndex = 0
+		this.list = []
 	}
 
 	/**
@@ -74,6 +82,21 @@ class Playlist {
 	 */
 	public previous(): Media {
 		this.currentIndex -= 1
+		return this.current()
+	}
+
+	/**
+	 * Shuffles the playlist.
+	 */
+	public shuffle(): void {
+		this.list = shuffle(this.list)
+	}
+
+	/**
+	 * Jumps to a specific index in the playlist.
+	 */
+	public jumpTo(index: number): Media {
+		this.currentIndex = index
 		return this.current()
 	}
 }
