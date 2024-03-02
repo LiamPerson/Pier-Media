@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material'
+
 import { BACKGROUND } from './color'
 
 const theme = createTheme({
@@ -20,6 +21,12 @@ const theme = createTheme({
 					backgroundImage: 'linear-gradient(rgba(144, 144, 180, 0.09), rgba(2, 2, 8, 0.09));',
 				},
 			},
+		},
+	},
+	typography: {
+		h1: {
+			// Add other style properties as needed
+			fontSize: '2.5rem',
 		},
 	},
 })
