@@ -29,14 +29,14 @@ class Playlist {
 	/**
 	 * Adds items to the playlist.
 	 */
-	public addItems(...items: Media[]): void {
+	public add(...items: Media[]): void {
 		this.list.push(...items)
 	}
 
 	/**
 	 * Removes items from the playlist.
 	 */
-	public removeItems(...item: Media[]): void {
+	public remove(...item: Media[]): void {
 		for (const i of item) {
 			this.removeItem(i)
 		}
@@ -57,7 +57,7 @@ class Playlist {
 	/**
 	 * Gets the currently playing media item.
 	 */
-	public getCurrentItem(): Media {
+	public current(): Media {
 		return this.list[this.currentIndex]
 	}
 
@@ -66,7 +66,7 @@ class Playlist {
 	 */
 	public next(): Media {
 		this.currentIndex += 1
-		return this.getCurrentItem()
+		return this.current()
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Playlist {
 	 */
 	public previous(): Media {
 		this.currentIndex -= 1
-		return this.getCurrentItem()
+		return this.current()
 	}
 }
 
