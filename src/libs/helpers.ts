@@ -57,3 +57,10 @@ export const shuffle = <T>(array: T[]) => {
 	}
 	return newArray
 }
+
+/**
+ * Clamps a number between a minimum and a maximum.
+ */
+export const clamp = (value: number, min: number, max: number) => {
+	return Math.min(Math.max(value, min), max)
+}
