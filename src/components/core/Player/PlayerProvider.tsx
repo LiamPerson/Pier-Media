@@ -12,6 +12,7 @@ type ContextType = {
 	previous: ReturnType<typeof usePlaylist>['previous']
 	add: ReturnType<typeof usePlaylist>['add']
 	remove: ReturnType<typeof usePlaylist>['remove']
+	playlist: ReturnType<typeof usePlaylist>['playlist']
 }
 export const PlayerContext = createContext<ContextType>({
 	current: null,
@@ -20,9 +21,10 @@ export const PlayerContext = createContext<ContextType>({
 	previous: () => {},
 	add: () => {},
 	remove: () => {},
+	playlist: [],
 })
 
 export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
-	const { jumpTo, current, next, previous, add, remove } = usePlaylist()
-	return <PlayerContext.Provider value={{ current, jumpTo, next, previous, add, remove }}>{children}</PlayerContext.Provider>
+	const { jumpTo, current, next, previous, add, remove, playlist } = usePlaylist()
+	return <PlayerContext.Provider value={{ current, jumpTo, next, previous, add, remove, playlist }}>{children}</PlayerContext.Provider>
 }
