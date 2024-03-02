@@ -1,12 +1,12 @@
 import { Card, CardContent, Paper, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 import TrackCardDuration from './TrackCardDuration'
 import TrackCardGenre from './TrackCardGenre'
 
 import { usePlayer } from '@/components/core/Player/usePlayer'
+import NextLink from '@/components/shared/NextLink'
 import { MediaType } from '@/constants/media'
 import { GetTracksQuery } from '@/gql/codegen/graphql'
 
@@ -16,7 +16,6 @@ type Props = {
 
 export const TrackCard = ({ track }: Props) => {
 	const { setMedia } = usePlayer()
-	const router = useRouter()
 	const handleClick = () => {
 		setMedia({
 			id: track.id,
@@ -27,42 +26,43 @@ export const TrackCard = ({ track }: Props) => {
 			genre: track.genre?.name,
 			thumbnail: track.thumbnail,
 		})
-		router.push(`/music/${track.id}`)
 	}
 	return (
-		<Card
-			key={track.id}
-			sx={{ cursor: 'pointer' }}
-			onClick={handleClick}
-		>
-			<CardContent>
-				<Paper
-					sx={{
-						height: 200,
-						overflow: 'hidden',
-						img: {
-							objectFit: 'cover',
-							objectPosition: 'center',
-							width: '100%',
-							height: '100%',
-						},
-					}}
-				>
-					<Image
-						src={track.thumbnail.file.location}
-						alt={`Video cover of ${track.title}`}
-						width={track.thumbnail.width}
-						height={track.thumbnail.height}
-					/>
-				</Paper>
-				<Typography variant='h5'>{track.title}</Typography>
-				<Typography variant='body2'>
-					By {track.author.name} <TrackCardDuration duration={track.duration} /> <TrackCardGenre genre={track.genre} />
-				</Typography>
-				<Typography variant='body1'>
-					Sourced from <Link href={track.originalUrl}>{track.author.provider.name}</Link>
-				</Typography>
-			</CardContent>
-		</Card>
+		<NextLink href={`/music/${track.id}`}>
+			<Card
+				key={track.id}
+				sx={{ cursor: 'pointer' }}
+				onClick={handleClick}
+			>
+				<CardContent>
+					<Paper
+						sx={{
+							height: 200,
+							overflow: 'hidden',
+							img: {
+								objectFit: 'cover',
+								objectPosition: 'center',
+								width: '100%',
+								height: '100%',
+							},
+						}}
+					>
+						<Image
+							src={track.thumbnail.file.location}
+							alt={`Video cover of ${track.title}`}
+							width={track.thumbnail.width}
+							height={track.thumbnail.height}
+						/>
+					</Paper>
+					<Typography variant='h5'>{track.title}</Typography>
+					<Typography variant='body2'>
+						By {track.author.name} <TrackCardDuration duration={track.duration} /> <TrackCardGenre genre={track.genre} />
+					</Typography>
+					<Typography variant='body1'>
+						Sourced from <Link href={track.originalUrl}>{track.author.provider.name}</Link>
+					</Typography>
+				</CardContent>
+			</Card>
+		</NextLink>
 	)
 }
