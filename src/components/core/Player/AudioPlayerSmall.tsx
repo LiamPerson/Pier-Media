@@ -17,18 +17,16 @@ export const AudioPlayerSmall = ({ media }: AudioPlayerSmallProps) => {
 	const audio = useAudio(media.id)
 	const { previous, next } = usePlayer()
 
-	if (!audio) return null // @todo - Add loading state
-
 	return (
 		<AudioPlayer
 			showSkipControls
 			showJumpControls={false}
 			autoPlay
-			header={<AudioPlayerDetails media={media} />}
+			header={<AudioPlayerDetails audio={audio} />}
 			onClickNext={next}
 			onClickPrevious={previous}
 			onEnded={next}
-			src={fromCdn(audio.file.location)}
+			src={audio ? fromCdn(audio.file.location) : ''}
 			style={{
 				borderRadius: 0,
 				background: '#00000033',
