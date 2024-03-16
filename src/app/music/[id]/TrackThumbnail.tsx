@@ -11,10 +11,13 @@ export const TrackThumbnail = ({ track }: Props) => {
 	return (
 		<Paper
 			sx={{
-				height: 200,
+				aspectRatio: '16 / 9',
+				maxHeight: '70vh',
+				minHeight: '360px',
+				width: '100%',
 				overflow: 'hidden',
 				img: {
-					objectFit: 'cover',
+					objectFit: 'contain',
 					objectPosition: 'center',
 					width: '100%',
 					height: '100%',
