@@ -16,6 +16,11 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AffectedRows = {
+  __typename?: 'AffectedRows';
+  affected_rows: Scalars['Int']['output'];
+};
+
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -26,7 +31,7 @@ export type Author = {
 export type AuthorInput = {
   _where: WithId;
   name?: InputMaybe<Scalars['String']['input']>;
-  provider?: InputMaybe<ProviderInput>;
+  providerId?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type DownloadSettings = {
@@ -92,7 +97,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
   initialize_genres: Scalars['Boolean']['output'];
-  update_audio: Track;
+  update_audio: AffectedRows;
   update_settings: Settings;
 };
 
@@ -168,8 +173,8 @@ export type Track = {
 
 export type TrackInput = {
   _where: WithId;
-  author?: InputMaybe<AuthorInput>;
-  genre?: InputMaybe<GenreInput>;
+  authorId?: InputMaybe<Scalars['Int']['input']>;
+  genreId?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 

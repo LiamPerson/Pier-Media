@@ -1,3 +1,7 @@
+type AffectedRows {
+	affected_rows: Int!
+}
+
 type Genre {
 	id: Int!
 	name: String!
@@ -84,14 +88,17 @@ input GenreInput {
 input AuthorInput {
 	_where: WithId!
 	name: String
-	provider: ProviderInput
+	# provider: ProviderInput
+	providerId: Int
 }
 
 input TrackInput {
 	_where: WithId!
 	title: String
-	genre: GenreInput
-	author: AuthorInput
+	# genre: GenreInput
+	genreId: Int
+	# author: AuthorInput
+	authorId: Int
 }
 
 input SettingsInput {
@@ -128,6 +135,6 @@ type Query {
 type Mutation {
 	update_settings(input: SettingsInput): Settings!
 	download_audio(input: GenericDownloadInput!): Track!
-	update_audio(input: TrackInput): Track!
+	update_audio(input: TrackInput): AffectedRows!
 	initialize_genres(input: InitializeGenresInput): Boolean!
 }

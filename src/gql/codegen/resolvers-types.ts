@@ -16,6 +16,11 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AffectedRows = {
+  __typename?: 'AffectedRows';
+  affected_rows: Scalars['Int']['output'];
+};
+
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -26,7 +31,7 @@ export type Author = {
 export type AuthorInput = {
   _where: WithId;
   name?: InputMaybe<Scalars['String']['input']>;
-  provider?: InputMaybe<ProviderInput>;
+  providerId?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type DownloadSettings = {
@@ -92,7 +97,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
   initialize_genres: Scalars['Boolean']['output'];
-  update_audio: Track;
+  update_audio: AffectedRows;
   update_settings: Settings;
 };
 
@@ -168,8 +173,8 @@ export type Track = {
 
 export type TrackInput = {
   _where: WithId;
-  author?: InputMaybe<AuthorInput>;
-  genre?: InputMaybe<GenreInput>;
+  authorId?: InputMaybe<Scalars['Int']['input']>;
+  genreId?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -253,6 +258,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AffectedRows: ResolverTypeWrapper<AffectedRows>;
   Author: ResolverTypeWrapper<Author>;
   AuthorInput: AuthorInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -281,6 +287,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AffectedRows: AffectedRows;
   Author: Author;
   AuthorInput: AuthorInput;
   Boolean: Scalars['Boolean']['output'];
@@ -305,6 +312,11 @@ export type ResolversParentTypes = {
   TrackInput: TrackInput;
   TrackWhereInput: TrackWhereInput;
   WithId: WithId;
+};
+
+export type AffectedRowsResolvers<ContextType = any, ParentType extends ResolversParentTypes['AffectedRows'] = ResolversParentTypes['AffectedRows']> = {
+  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
@@ -349,7 +361,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
   initialize_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialize_GenresArgs>>;
-  update_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, Partial<MutationUpdate_AudioArgs>>;
+  update_audio?: Resolver<ResolversTypes['AffectedRows'], ParentType, ContextType, Partial<MutationUpdate_AudioArgs>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
 };
 
@@ -388,6 +400,7 @@ export type TrackResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
+  AffectedRows?: AffectedRowsResolvers<ContextType>;
   Author?: AuthorResolvers<ContextType>;
   DownloadSettings?: DownloadSettingsResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
