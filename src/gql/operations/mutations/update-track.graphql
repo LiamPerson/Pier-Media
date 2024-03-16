@@ -1,0 +1,5 @@
+mutation UpdateTrack($input: TrackInput) {
+	update_audio(input: $input) {
+		affected_rows
+	}
+}
