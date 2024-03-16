@@ -1,7 +1,10 @@
+import { GenreSelect } from './GenreSelect'
+
 import { GetTracksQuery, Maybe } from '@/gql/codegen/graphql'
+import { ValueOf } from '@/libs/types'
 
 type Props = {
-	track?: Maybe<GetTracksQuery['tracks'][number]>
+	track?: Maybe<ValueOf<GetTracksQuery['tracks']>>
 }
 export const TrackDetails = ({ track }: Props) => {
 	if (!track) {
@@ -11,14 +14,10 @@ export const TrackDetails = ({ track }: Props) => {
 		<div>
 			<p>Duration: {track.duration} seconds</p>
 			<p>Bitrate: {track.bitrate} bits/second</p>
-			{track.genre ? (
-				<div>
-					<p>{track.genre.name}</p>
-					<p>{track.genre.description}</p>
-				</div>
-			) : (
-				<>No genre found</>
-			)}
+			<GenreSelect
+				trackId={track.id}
+				defaultGenre={track.genre}
+			/>
 			{track.contributors?.map((contributor) => {
 				if (!contributor) {
 					return null
