@@ -32,7 +32,7 @@ type Author {
 	provider: Provider!
 }
 
-type Track {
+type Audio {
 	id: Int!
 	title: String!
 	genre: Genre
@@ -92,7 +92,7 @@ input AuthorInput {
 	providerId: Int
 }
 
-input TrackInput {
+input AudioInput {
 	_where: WithId!
 	title: String
 	# genre: GenreInput
@@ -117,7 +117,7 @@ input GenericDownloadInput {
 ## END Downloads
 
 ### START Queries
-input TrackWhereInput {
+input AudioWhereInput {
 	id: Int
 	genre: GenreWhereInput
 }
@@ -129,12 +129,12 @@ input GenreWhereInput {
 type Query {
 	settings: Settings!
 	genres: [Genre]!
-	tracks(where: TrackWhereInput): [Track]!
+	audios(where: AudioWhereInput): [Audio]!
 }
 
 type Mutation {
 	update_settings(input: SettingsInput): Settings!
-	download_audio(input: GenericDownloadInput!): Track!
-	update_audio(input: TrackInput): AffectedRows!
+	download_audio(input: GenericDownloadInput!): Audio!
+	update_audio(input: AudioInput): AffectedRows!
 	initialize_genres(input: InitializeGenresInput): Boolean!
 }

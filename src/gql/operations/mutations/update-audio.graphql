@@ -1,4 +1,4 @@
-mutation UpdateTrack($input: TrackInput) {
+mutation UpdateAudio($input: AudioInput) {
 	update_audio(input: $input) {
 		affected_rows
 	}

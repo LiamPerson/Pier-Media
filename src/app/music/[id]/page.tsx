@@ -2,27 +2,27 @@
 import { useQuery } from '@apollo/client'
 import { Typography } from '@mui/material'
 
-import { TrackDetails } from './TrackDetails'
-import { TrackThumbnail } from './TrackThumbnail'
-import { TrackTitle } from './TrackTitle'
+import { AudioDetails } from './AudioDetails'
+import { AudioThumbnail } from './AudioThumbnail'
+import { AudioTitle } from './AudioTitle'
 
 import DashboardPage from '@/components/core/DashboardPage'
-import { GetTracksDocument } from '@/gql/codegen/graphql'
+import { GetAudiosDocument } from '@/gql/codegen/graphql'
 
 /**
  * @note - Anyone: We can probably render all of this at the page level.
  * @todo Surely there is a better way to the page types for this.
  */
 const PlayMusicPage = ({ params }: { params: { id: string } }) => {
-	const trackId = parseInt(params.id, 10)
-	const { data, error } = useQuery(GetTracksDocument, { variables: { where: { id: trackId } } })
-	const track = data?.tracks[0]
+	const audioId = parseInt(params.id, 10)
+	const { data, error } = useQuery(GetAudiosDocument, { variables: { where: { id: audioId } } })
+	const audio = data?.audios[0]
 	return (
 		<DashboardPage>
 			{error && <Typography variant='body1'>Error: {error.message}</Typography>}
-			<TrackThumbnail track={track} />
-			<TrackTitle track={track} />
-			<TrackDetails track={track} />
+			<AudioThumbnail audio={audio} />
+			<AudioTitle audio={audio} />
+			<AudioDetails audio={audio} />
 		</DashboardPage>
 	)
 }

@@ -7,7 +7,7 @@ type Props = {
 	duration: number
 }
 
-const TrackCardDuration = ({ duration }: Props) => (
+const AudioCardDuration = ({ duration }: Props) => (
 	<Typography sx={{ display: 'inline-block' }}>
 		<TimeIcon
 			width={'12px'}
@@ -17,4 +17,4 @@ const TrackCardDuration = ({ duration }: Props) => (
 	</Typography>
 )
 
-export default TrackCardDuration
+export default AudioCardDuration

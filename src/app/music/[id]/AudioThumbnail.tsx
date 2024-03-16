@@ -1,13 +1,14 @@
 import { Paper, Skeleton } from '@mui/material'
 import Image from 'next/image'
 
-import { GetTracksQuery, Maybe } from '@/gql/codegen/graphql'
+import { GetAudiosQuery, Maybe } from '@/gql/codegen/graphql'
+import { ValueOf } from '@/libs/types'
 
 type Props = {
-	track?: Maybe<GetTracksQuery['tracks'][number]>
+	audio?: Maybe<ValueOf<GetAudiosQuery['audios']>>
 }
 
-export const TrackThumbnail = ({ track }: Props) => {
+export const AudioThumbnail = ({ audio }: Props) => {
 	return (
 		<Paper
 			sx={{
@@ -24,7 +25,7 @@ export const TrackThumbnail = ({ track }: Props) => {
 				},
 			}}
 		>
-			{!track ? (
+			{!audio ? (
 				<Skeleton
 					variant='rectangular'
 					width='100%'
@@ -32,10 +33,10 @@ export const TrackThumbnail = ({ track }: Props) => {
 				/>
 			) : (
 				<Image
-					src={track.thumbnail.file.location}
-					alt={`Video cover of ${track.title}`}
-					width={track.thumbnail.width}
-					height={track.thumbnail.height}
+					src={audio.thumbnail.file.location}
+					alt={`Video cover of ${audio.title}`}
+					width={audio.thumbnail.width}
+					height={audio.thumbnail.height}
 				/>
 			)}
 		</Paper>

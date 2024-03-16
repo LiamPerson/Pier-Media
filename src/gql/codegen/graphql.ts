@@ -21,6 +21,32 @@ export type AffectedRows = {
   affected_rows: Scalars['Int']['output'];
 };
 
+export type Audio = {
+  __typename?: 'Audio';
+  author: Author;
+  bitrate: Scalars['Int']['output'];
+  contributors?: Maybe<Array<Maybe<Author>>>;
+  duration: Scalars['Int']['output'];
+  file: File;
+  genre?: Maybe<Genre>;
+  id: Scalars['Int']['output'];
+  originalUrl: Scalars['String']['output'];
+  thumbnail: Image;
+  title: Scalars['String']['output'];
+};
+
+export type AudioInput = {
+  _where: WithId;
+  authorId?: InputMaybe<Scalars['Int']['input']>;
+  genreId?: InputMaybe<Scalars['Int']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AudioWhereInput = {
+  genre?: InputMaybe<GenreWhereInput>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -95,7 +121,7 @@ export type InitializeGenresInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  download_audio: Track;
+  download_audio: Audio;
   initialize_genres: Scalars['Boolean']['output'];
   update_audio: AffectedRows;
   update_settings: Settings;
@@ -113,7 +139,7 @@ export type MutationInitialize_GenresArgs = {
 
 
 export type MutationUpdate_AudioArgs = {
-  input?: InputMaybe<TrackInput>;
+  input?: InputMaybe<AudioInput>;
 };
 
 
@@ -136,14 +162,14 @@ export type ProviderInput = {
 
 export type Query = {
   __typename?: 'Query';
+  audios: Array<Maybe<Audio>>;
   genres: Array<Maybe<Genre>>;
   settings: Settings;
-  tracks: Array<Maybe<Track>>;
 };
 
 
-export type QueryTracksArgs = {
-  where?: InputMaybe<TrackWhereInput>;
+export type QueryAudiosArgs = {
+  where?: InputMaybe<AudioWhereInput>;
 };
 
 export type Settings = {
@@ -157,35 +183,16 @@ export type SettingsInput = {
   downloads?: InputMaybe<DownloadSettingsInput>;
 };
 
-export type Track = {
-  __typename?: 'Track';
-  author: Author;
-  bitrate: Scalars['Int']['output'];
-  contributors?: Maybe<Array<Maybe<Author>>>;
-  duration: Scalars['Int']['output'];
-  file: File;
-  genre?: Maybe<Genre>;
-  id: Scalars['Int']['output'];
-  originalUrl: Scalars['String']['output'];
-  thumbnail: Image;
-  title: Scalars['String']['output'];
-};
-
-export type TrackInput = {
-  _where: WithId;
-  authorId?: InputMaybe<Scalars['Int']['input']>;
-  genreId?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type TrackWhereInput = {
-  genre?: InputMaybe<GenreWhereInput>;
-  id?: InputMaybe<Scalars['Int']['input']>;
-};
-
 export type WithId = {
   id: Scalars['Int']['input'];
 };
+
+export type UpdateAudioMutationVariables = Exact<{
+  input?: InputMaybe<AudioInput>;
+}>;
+
+
+export type UpdateAudioMutation = { __typename?: 'Mutation', update_audio: { __typename?: 'AffectedRows', affected_rows: number } };
 
 export type UpdateSettingsMutationVariables = Exact<{
   input?: InputMaybe<SettingsInput>;
@@ -194,12 +201,12 @@ export type UpdateSettingsMutationVariables = Exact<{
 
 export type UpdateSettingsMutation = { __typename?: 'Mutation', update_settings: { __typename?: 'Settings', id: number, downloads: { __typename?: 'DownloadSettings', id: number, updatedAt: string } } };
 
-export type UpdateTrackMutationVariables = Exact<{
-  input?: InputMaybe<TrackInput>;
+export type GetAudiosQueryVariables = Exact<{
+  where?: InputMaybe<AudioWhereInput>;
 }>;
 
 
-export type UpdateTrackMutation = { __typename?: 'Mutation', update_audio: { __typename?: 'AffectedRows', affected_rows: number } };
+export type GetAudiosQuery = { __typename?: 'Query', audios: Array<{ __typename?: 'Audio', id: number, title: string, bitrate: number, originalUrl: string, duration: number, genre?: { __typename?: 'Genre', id: number, name: string, description: string } | null, author: { __typename?: 'Author', id: number, name: string, provider: { __typename?: 'Provider', id: number, name: string, domain: string } }, file: { __typename?: 'File', id: number, location: string }, contributors?: Array<{ __typename?: 'Author', id: number, name: string } | null> | null, thumbnail: { __typename?: 'Image', width: number, height: number, id: number, file: { __typename?: 'File', id: number, location: string } } } | null> };
 
 export type GetGenresQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -211,16 +218,9 @@ export type GetSettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetSettingsQuery = { __typename?: 'Query', settings: { __typename?: 'Settings', id: number, downloads: { __typename?: 'DownloadSettings', id: number, updatedAt: string, audioPath: string, videoPath: string, imagePath: string, metadataPath: string, path: string } } };
 
-export type GetTracksQueryVariables = Exact<{
-  where?: InputMaybe<TrackWhereInput>;
-}>;
 
-
-export type GetTracksQuery = { __typename?: 'Query', tracks: Array<{ __typename?: 'Track', id: number, title: string, bitrate: number, originalUrl: string, duration: number, genre?: { __typename?: 'Genre', id: number, name: string, description: string } | null, author: { __typename?: 'Author', id: number, name: string, provider: { __typename?: 'Provider', id: number, name: string, domain: string } }, file: { __typename?: 'File', id: number, location: string }, contributors?: Array<{ __typename?: 'Author', id: number, name: string } | null> | null, thumbnail: { __typename?: 'Image', width: number, height: number, id: number, file: { __typename?: 'File', id: number, location: string } } } | null> };
-
-
+export const UpdateAudioDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateAudio"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"AudioInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_audio"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateAudioMutation, UpdateAudioMutationVariables>;
 export const UpdateSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateSettings"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"SettingsInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"downloads"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateSettingsMutation, UpdateSettingsMutationVariables>;
-export const UpdateTrackDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateTrack"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"TrackInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_audio"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<UpdateTrackMutation, UpdateTrackMutationVariables>;
+export const GetAudiosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAudios"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"AudioWhereInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"audios"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"genre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bitrate"}},{"kind":"Field","name":{"kind":"Name","value":"originalUrl"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"provider"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"domain"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contributors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAudiosQuery, GetAudiosQueryVariables>;
 export const GetGenresDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetGenres"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"genres"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<GetGenresQuery, GetGenresQueryVariables>;
 export const GetSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"settings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"downloads"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"audioPath"}},{"kind":"Field","name":{"kind":"Name","value":"videoPath"}},{"kind":"Field","name":{"kind":"Name","value":"imagePath"}},{"kind":"Field","name":{"kind":"Name","value":"metadataPath"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]}}]} as unknown as DocumentNode<GetSettingsQuery, GetSettingsQueryVariables>;
-export const GetTracksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTracks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"where"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"TrackWhereInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tracks"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"where"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"genre"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bitrate"}},{"kind":"Field","name":{"kind":"Name","value":"originalUrl"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"provider"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"domain"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contributors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetTracksQuery, GetTracksQueryVariables>;

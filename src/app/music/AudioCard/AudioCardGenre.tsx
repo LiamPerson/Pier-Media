@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material'
 
 import PriceTagsIcon from '@/components/shared/icons/PriceTagsIcon'
-import { GetTracksQuery } from '@/gql/codegen/graphql'
+import { GetAudiosQuery } from '@/gql/codegen/graphql'
 
-type Track = NonNullable<GetTracksQuery['tracks'][number]>
+type Audio = NonNullable<GetAudiosQuery['audios'][number]>
 
 type Props = {
-	genre?: Track['genre']
+	genre?: Audio['genre']
 }
 
-const TrackCardGenre = ({ genre }: Props) => {
+const AudioCardGenre = ({ genre }: Props) => {
 	if (!genre) return null
 	return (
 		<Typography sx={{ display: 'inline-block' }}>
@@ -22,4 +22,4 @@ const TrackCardGenre = ({ genre }: Props) => {
 	)
 }
 
-export default TrackCardGenre
+export default AudioCardGenre

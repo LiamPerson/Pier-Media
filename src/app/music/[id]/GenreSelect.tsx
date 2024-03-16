@@ -1,18 +1,18 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { Autocomplete, FormControl, TextField } from '@mui/material'
 
-import { GetGenresDocument, GetTracksDocument, GetTracksQuery, UpdateTrackDocument } from '@/gql/codegen/graphql'
+import { GetAudiosDocument, GetAudiosQuery, GetGenresDocument, UpdateAudioDocument } from '@/gql/codegen/graphql'
 import { ValueOf } from '@/libs/types'
 
 type GenreSelectProps = {
-	trackId: number
-	defaultGenre: NonNullable<ValueOf<GetTracksQuery['tracks']>>['genre']
+	audioId: number
+	defaultGenre: NonNullable<ValueOf<GetAudiosQuery['audios']>>['genre']
 }
-export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
+export const GenreSelect = ({ audioId, defaultGenre }: GenreSelectProps) => {
 	const { data: genres, loading } = useQuery(GetGenresDocument, { fetchPolicy: 'cache-first' })
-	const [mutate, { loading: sendingMutation, error: errorMutation }] = useMutation(UpdateTrackDocument)
+	const [mutate, { loading: sendingMutation, error: errorMutation }] = useMutation(UpdateAudioDocument)
 	if (errorMutation) {
-		console.error('Error while mutating track in GenreSelect:', errorMutation)
+		console.error('Error while mutating audio in GenreSelect:', errorMutation)
 	}
 	const handleChange = (newGenreId: number | undefined) => {
 		if (newGenreId === undefined) {
@@ -21,21 +21,21 @@ export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
 		mutate({
 			variables: {
 				input: {
-					_where: { id: trackId },
+					_where: { id: audioId },
 					genreId: newGenreId,
 				},
 			},
 			update(cache, { data: returnedData }) {
 				if (!returnedData?.update_audio.affected_rows) return console.log('Early return 3')
-				const track = cache
+				const audio = cache
 					.readQuery({
-						query: GetTracksDocument,
+						query: GetAudiosDocument,
 					})
-					?.tracks.find((t) => t?.id === trackId)
+					?.audios.find((item) => item?.id === audioId)
 				const newGenre = genres?.genres.find((g) => g?.id === newGenreId)
-				if (!track) return console.log('Early return 1')
+				if (!audio) return console.log('Early return 1')
 				if (!newGenre) return console.log('Early return 2')
-				cache.modify({ id: cache.identify({ __typename: track.__typename, id: trackId }), fields: { genre: () => newGenre } })
+				cache.modify({ id: cache.identify({ __typename: audio.__typename, id: audioId }), fields: { genre: () => newGenre } })
 			},
 		})
 	}

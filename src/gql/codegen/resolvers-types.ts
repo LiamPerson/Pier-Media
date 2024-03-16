@@ -21,6 +21,32 @@ export type AffectedRows = {
   affected_rows: Scalars['Int']['output'];
 };
 
+export type Audio = {
+  __typename?: 'Audio';
+  author: Author;
+  bitrate: Scalars['Int']['output'];
+  contributors?: Maybe<Array<Maybe<Author>>>;
+  duration: Scalars['Int']['output'];
+  file: File;
+  genre?: Maybe<Genre>;
+  id: Scalars['Int']['output'];
+  originalUrl: Scalars['String']['output'];
+  thumbnail: Image;
+  title: Scalars['String']['output'];
+};
+
+export type AudioInput = {
+  _where: WithId;
+  authorId?: InputMaybe<Scalars['Int']['input']>;
+  genreId?: InputMaybe<Scalars['Int']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AudioWhereInput = {
+  genre?: InputMaybe<GenreWhereInput>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Author = {
   __typename?: 'Author';
   id: Scalars['Int']['output'];
@@ -95,7 +121,7 @@ export type InitializeGenresInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  download_audio: Track;
+  download_audio: Audio;
   initialize_genres: Scalars['Boolean']['output'];
   update_audio: AffectedRows;
   update_settings: Settings;
@@ -113,7 +139,7 @@ export type MutationInitialize_GenresArgs = {
 
 
 export type MutationUpdate_AudioArgs = {
-  input?: InputMaybe<TrackInput>;
+  input?: InputMaybe<AudioInput>;
 };
 
 
@@ -136,14 +162,14 @@ export type ProviderInput = {
 
 export type Query = {
   __typename?: 'Query';
+  audios: Array<Maybe<Audio>>;
   genres: Array<Maybe<Genre>>;
   settings: Settings;
-  tracks: Array<Maybe<Track>>;
 };
 
 
-export type QueryTracksArgs = {
-  where?: InputMaybe<TrackWhereInput>;
+export type QueryAudiosArgs = {
+  where?: InputMaybe<AudioWhereInput>;
 };
 
 export type Settings = {
@@ -155,32 +181,6 @@ export type Settings = {
 
 export type SettingsInput = {
   downloads?: InputMaybe<DownloadSettingsInput>;
-};
-
-export type Track = {
-  __typename?: 'Track';
-  author: Author;
-  bitrate: Scalars['Int']['output'];
-  contributors?: Maybe<Array<Maybe<Author>>>;
-  duration: Scalars['Int']['output'];
-  file: File;
-  genre?: Maybe<Genre>;
-  id: Scalars['Int']['output'];
-  originalUrl: Scalars['String']['output'];
-  thumbnail: Image;
-  title: Scalars['String']['output'];
-};
-
-export type TrackInput = {
-  _where: WithId;
-  authorId?: InputMaybe<Scalars['Int']['input']>;
-  genreId?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type TrackWhereInput = {
-  genre?: InputMaybe<GenreWhereInput>;
-  id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type WithId = {
@@ -259,6 +259,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   AffectedRows: ResolverTypeWrapper<AffectedRows>;
+  Audio: ResolverTypeWrapper<Audio>;
+  AudioInput: AudioInput;
+  AudioWhereInput: AudioWhereInput;
   Author: ResolverTypeWrapper<Author>;
   AuthorInput: AuthorInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -279,15 +282,15 @@ export type ResolversTypes = {
   Settings: ResolverTypeWrapper<Settings>;
   SettingsInput: SettingsInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
-  Track: ResolverTypeWrapper<Track>;
-  TrackInput: TrackInput;
-  TrackWhereInput: TrackWhereInput;
   WithId: WithId;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   AffectedRows: AffectedRows;
+  Audio: Audio;
+  AudioInput: AudioInput;
+  AudioWhereInput: AudioWhereInput;
   Author: Author;
   AuthorInput: AuthorInput;
   Boolean: Scalars['Boolean']['output'];
@@ -308,14 +311,25 @@ export type ResolversParentTypes = {
   Settings: Settings;
   SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
-  Track: Track;
-  TrackInput: TrackInput;
-  TrackWhereInput: TrackWhereInput;
   WithId: WithId;
 };
 
 export type AffectedRowsResolvers<ContextType = any, ParentType extends ResolversParentTypes['AffectedRows'] = ResolversParentTypes['AffectedRows']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AudioResolvers<ContextType = any, ParentType extends ResolversParentTypes['Audio'] = ResolversParentTypes['Audio']> = {
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  bitrate?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  contributors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Author']>>>, ParentType, ContextType>;
+  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
+  genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  originalUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  thumbnail?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -359,7 +373,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
+  download_audio?: Resolver<ResolversTypes['Audio'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
   initialize_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialize_GenresArgs>>;
   update_audio?: Resolver<ResolversTypes['AffectedRows'], ParentType, ContextType, Partial<MutationUpdate_AudioArgs>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
@@ -373,9 +387,9 @@ export type ProviderResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  audios?: Resolver<Array<Maybe<ResolversTypes['Audio']>>, ParentType, ContextType, Partial<QueryAudiosArgs>>;
   genres?: Resolver<Array<Maybe<ResolversTypes['Genre']>>, ParentType, ContextType>;
   settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType>;
-  tracks?: Resolver<Array<Maybe<ResolversTypes['Track']>>, ParentType, ContextType, Partial<QueryTracksArgs>>;
 };
 
 export type SettingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Settings'] = ResolversParentTypes['Settings']> = {
@@ -385,22 +399,9 @@ export type SettingsResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type TrackResolvers<ContextType = any, ParentType extends ResolversParentTypes['Track'] = ResolversParentTypes['Track']> = {
-  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
-  bitrate?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  contributors?: Resolver<Maybe<Array<Maybe<ResolversTypes['Author']>>>, ParentType, ContextType>;
-  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  file?: Resolver<ResolversTypes['File'], ParentType, ContextType>;
-  genre?: Resolver<Maybe<ResolversTypes['Genre']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  originalUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  thumbnail?: Resolver<ResolversTypes['Image'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type Resolvers<ContextType = any> = {
   AffectedRows?: AffectedRowsResolvers<ContextType>;
+  Audio?: AudioResolvers<ContextType>;
   Author?: AuthorResolvers<ContextType>;
   DownloadSettings?: DownloadSettingsResolvers<ContextType>;
   File?: FileResolvers<ContextType>;
@@ -410,6 +411,5 @@ export type Resolvers<ContextType = any> = {
   Provider?: ProviderResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Settings?: SettingsResolvers<ContextType>;
-  Track?: TrackResolvers<ContextType>;
 };
 

@@ -39,7 +39,7 @@ model File {
   mediaType  String // The MIME type of the file
   size       Int // In bytes
   tagsJson   String // Please see ./json-interfaces for definition
-  Track      Track?
+  Audio      Audio?
   Image      Image?
   Video      Video?
 }
@@ -56,7 +56,7 @@ model Author {
   name       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  tracks     Track[]
+  audios     Audio[]
   videos     Video[]
   sourceId   String   @unique
   providerId Int
@@ -67,7 +67,7 @@ model Genre {
   id          Int     @id @default(autoincrement())
   name        String  @unique
   description String
-  tracks      Track[]
+  audios      Audio[]
 }
 
 model Video {
@@ -76,8 +76,8 @@ model Video {
   file           File?    @relation(fields: [fileId], references: [id])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  sourceId       String   @unique // The ID of the track on the source platform
-  originalUrl    String // We can store the original URl here so we can decode the source later
+  sourceId       String   @unique // The ID of the original media on the source platform
+  originalUrl    String // We store the original URL here so we can decode the source later
   width          Int
   height         Int
   duration       Int // In milliseconds
@@ -97,18 +97,18 @@ model Image {
   updatedAt DateTime @updatedAt
   width     Int
   height    Int
-  Track     Track?
+  Audio     Audio?
 }
 
-model Track {
+model Audio {
   id                      Int      @id @default(autoincrement())
   title                   String
   description             String
   genreId                 Int?
   genre                   Genre?   @relation(fields: [genreId], references: [id])
   bitrate                 Int // Stored in kbs
-  sourceId                String   @unique // The ID of the track on the source platform
-  originalUrl             String // We can store the original URl here so we can decode the source later
+  sourceId                String   @unique // The ID of the original media on the source platform
+  originalUrl             String // We store the original URl here so we can decode the source later
   authorId                Int
   author                  Author   @relation(fields: [authorId], references: [id])
   fileId                  Int      @unique
@@ -119,4 +119,6 @@ model Track {
   updatedAt               DateTime @updatedAt
   thumbnailId             Int      @unique
   thumbnail               Image    @relation(fields: [thumbnailId], references: [id])
+
+  @@map("Track")
 }

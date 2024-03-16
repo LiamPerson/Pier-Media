@@ -3,8 +3,8 @@ import 'react-h5-audio-player/lib/styles.css'
 import { useState } from 'react'
 
 import { AudioThumbnail } from './AudioThumbnail'
+import { useAudio } from './useAudio'
 import { usePlayer } from './usePlayer'
-import { useTrack } from './useTrack'
 
 import { AudioMedia } from '@/constants/media'
 
@@ -12,11 +12,11 @@ type Props = {
 	media: AudioMedia
 }
 export const AudioPlayerDetails = ({ media }: Props) => {
-	const track = useTrack(media.id)
+	const audio = useAudio(media.id)
 	const [minimized, setMinimized] = useState(false)
 	const { playlist } = usePlayer()
 
-	if (!track) return null // @todo - Add loading state
+	if (!audio) return null // @todo - Add loading state
 
 	return (
 		<Box>
@@ -30,7 +30,7 @@ export const AudioPlayerDetails = ({ media }: Props) => {
 						variant='h6'
 						fontWeight='light'
 					>
-						{track.title} <span style={{ color: '#ffffffb7' }}>By {track.author.name}</span>
+						{audio.title} <span style={{ color: '#ffffffb7' }}>By {audio.author.name}</span>
 					</Typography>
 				)}
 				<Button onClick={() => setMinimized(!minimized)}>{minimized ? 'Maximize' : 'Minimize'}</Button>
@@ -44,11 +44,11 @@ export const AudioPlayerDetails = ({ media }: Props) => {
 						spacing={2}
 					>
 						<Box>
-							<Typography variant='h6'>{track.title}</Typography>
+							<Typography variant='h6'>{audio.title}</Typography>
 							<Typography variant='subtitle1'>
-								<i style={{ fontWeight: 'lighter' }}>By</i> {track.author.name}
+								<i style={{ fontWeight: 'lighter' }}>By</i> {audio.author.name}
 							</Typography>
-							<Typography variant='subtitle2'>{track.genre?.name}</Typography>
+							<Typography variant='subtitle2'>{audio.genre?.name}</Typography>
 						</Box>
 						<AudioThumbnail media={media} />
 					</Stack>

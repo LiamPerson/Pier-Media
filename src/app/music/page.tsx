@@ -2,15 +2,15 @@
 import { useQuery } from '@apollo/client'
 import { Grid, Typography } from '@mui/material'
 
-import { TrackCard } from './TrackCard'
+import { AudioCard } from './AudioCard'
 
 import DashboardPage from '@/components/core/DashboardPage'
-import { GetTracksDocument } from '@/gql/codegen/graphql'
+import { GetAudiosDocument } from '@/gql/codegen/graphql'
 
 /** @note - Anyone: We can probably render all of this at the page level. */
 
 const IndexPage = () => {
-	const { data, loading, error } = useQuery(GetTracksDocument)
+	const { data, loading, error } = useQuery(GetAudiosDocument)
 	return (
 		<DashboardPage>
 			<Typography variant='h1'>Music</Typography>
@@ -21,12 +21,12 @@ const IndexPage = () => {
 					container
 					gap={2}
 				>
-					{data?.tracks.map((track) => {
-						if (!track) return null
+					{data?.audios.map((audio) => {
+						if (!audio) return null
 						return (
-							<TrackCard
-								key={track.id}
-								track={track}
+							<AudioCard
+								key={audio.id}
+								audio={audio}
 							/>
 						)
 					})}

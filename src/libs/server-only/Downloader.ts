@@ -16,7 +16,7 @@ import File from './collections/File'
 import Genre from './collections/Genre'
 import Image from './collections/Image'
 import Provider from './collections/Provider'
-import Track from './collections/Track'
+import Audio from './collections/Audio'
 
 import { InputMaybe } from '@/gql/codegen/graphql'
 import prisma from '@/prisma/database'
@@ -289,7 +289,7 @@ namespace Downloader {
 		// Get file bitrate and duration
 		const metadata = await parseFile(finalPath) /** @todo - Liam: This should be replaced with an FFMPEG call. */
 		console.log('Metadata', metadata)
-		const track = await Track.upsert(
+		const audio = await Audio.upsert(
 			{
 				title: downloadDetails.title,
 				author,
@@ -307,9 +307,9 @@ namespace Downloader {
 			prisma
 		)
 
-		/** @todo - Anyone: I really need to clean this up. The track here should really find all the information when got. */
+		/** @todo - Anyone: I really need to clean this up. The audio here should really find all the information when got. */
 		return {
-			...track,
+			...audio,
 			file,
 			thumbnail,
 			author: {

@@ -1,5 +1,5 @@
-query GetTracks($where: TrackWhereInput) {
-	tracks(where: $where) {
+query GetAudios($where: AudioWhereInput) {
+	audios(where: $where) {
 		id
 		title
 		genre {

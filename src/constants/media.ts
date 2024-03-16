@@ -1,7 +1,3 @@
-import { GetTracksQuery } from '@/gql/codegen/graphql'
-
-type Thumbnail = NonNullable<GetTracksQuery['tracks'][number]>['thumbnail']
-
 export const MediaType = {
 	VIDEO: 'video',
 	AUDIO: 'audio',
