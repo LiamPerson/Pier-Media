@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { Autocomplete, FormControl, TextField } from '@mui/material'
 
-import { GetGenresDocument, GetTracksQuery, UpdateTrackDocument } from '@/gql/codegen/graphql'
+import { GetGenresDocument, GetTracksDocument, GetTracksQuery, UpdateTrackDocument } from '@/gql/codegen/graphql'
 import { ValueOf } from '@/libs/types'
 
 type GenreSelectProps = {
@@ -9,7 +9,7 @@ type GenreSelectProps = {
 	defaultGenre: NonNullable<ValueOf<GetTracksQuery['tracks']>>['genre']
 }
 export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
-	const { data, loading } = useQuery(GetGenresDocument, { fetchPolicy: 'cache-first' })
+	const { data: genres, loading } = useQuery(GetGenresDocument, { fetchPolicy: 'cache-first' })
 	const [mutate, { loading: sendingMutation, error: errorMutation }] = useMutation(UpdateTrackDocument)
 	if (errorMutation) {
 		console.error('Error while mutating track in GenreSelect:', errorMutation)
@@ -24,6 +24,18 @@ export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
 					_where: { id: trackId },
 					genreId: newGenreId,
 				},
+			},
+			update(cache, { data: returnedData }) {
+				if (!returnedData?.update_audio.affected_rows) return console.log('Early return 3')
+				const track = cache
+					.readQuery<GetTracksQuery>({
+						query: GetTracksDocument,
+					})
+					?.tracks.find((t) => t?.id === trackId)
+				const newGenre = genres?.genres.find((g) => g?.id === newGenreId)
+				if (!track) return console.log('Early return 1')
+				if (!newGenre) return console.log('Early return 2')
+				cache.modify({ id: cache.identify({ __typename: track.__typename, id: trackId }), fields: { genre: () => newGenre } })
 			},
 		})
 	}
@@ -42,7 +54,7 @@ export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
 				autoHighlight
 				defaultValue={defaultGenre}
 				onChange={(_, value) => handleChange(value?.id)}
-				options={data?.genres || [defaultGenre]}
+				options={genres?.genres || [defaultGenre]}
 				getOptionLabel={(option) => option?.name || ''}
 			/>
 		</FormControl>
