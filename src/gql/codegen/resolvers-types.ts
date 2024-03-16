@@ -23,6 +23,12 @@ export type Author = {
   provider: Provider;
 };
 
+export type AuthorInput = {
+  _where: WithId;
+  name?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<ProviderInput>;
+};
+
 export type DownloadSettings = {
   __typename?: 'DownloadSettings';
   audioPath: Scalars['String']['output'];
@@ -60,6 +66,12 @@ export type Genre = {
   name: Scalars['String']['output'];
 };
 
+export type GenreInput = {
+  _where: WithId;
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type GenreWhereInput = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -80,6 +92,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
   initialize_genres: Scalars['Boolean']['output'];
+  update_audio: Track;
   update_settings: Settings;
 };
 
@@ -94,6 +107,11 @@ export type MutationInitialize_GenresArgs = {
 };
 
 
+export type MutationUpdate_AudioArgs = {
+  input?: InputMaybe<TrackInput>;
+};
+
+
 export type MutationUpdate_SettingsArgs = {
   input?: InputMaybe<SettingsInput>;
 };
@@ -103,6 +121,12 @@ export type Provider = {
   domain: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+};
+
+export type ProviderInput = {
+  _where: WithId;
+  domain?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -142,9 +166,20 @@ export type Track = {
   title: Scalars['String']['output'];
 };
 
+export type TrackInput = {
+  _where: WithId;
+  author?: InputMaybe<AuthorInput>;
+  genre?: InputMaybe<GenreInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TrackWhereInput = {
   genre?: InputMaybe<GenreWhereInput>;
   id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type WithId = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -219,47 +254,57 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Author: ResolverTypeWrapper<Author>;
+  AuthorInput: AuthorInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   DownloadSettings: ResolverTypeWrapper<DownloadSettings>;
   DownloadSettingsInput: DownloadSettingsInput;
   File: ResolverTypeWrapper<File>;
   GenericDownloadInput: GenericDownloadInput;
   Genre: ResolverTypeWrapper<Genre>;
+  GenreInput: GenreInput;
   GenreWhereInput: GenreWhereInput;
   Image: ResolverTypeWrapper<Image>;
   InitializeGenresInput: InitializeGenresInput;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Provider: ResolverTypeWrapper<Provider>;
+  ProviderInput: ProviderInput;
   Query: ResolverTypeWrapper<{}>;
   Settings: ResolverTypeWrapper<Settings>;
   SettingsInput: SettingsInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Track: ResolverTypeWrapper<Track>;
+  TrackInput: TrackInput;
   TrackWhereInput: TrackWhereInput;
+  WithId: WithId;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Author: Author;
+  AuthorInput: AuthorInput;
   Boolean: Scalars['Boolean']['output'];
   DownloadSettings: DownloadSettings;
   DownloadSettingsInput: DownloadSettingsInput;
   File: File;
   GenericDownloadInput: GenericDownloadInput;
   Genre: Genre;
+  GenreInput: GenreInput;
   GenreWhereInput: GenreWhereInput;
   Image: Image;
   InitializeGenresInput: InitializeGenresInput;
   Int: Scalars['Int']['output'];
   Mutation: {};
   Provider: Provider;
+  ProviderInput: ProviderInput;
   Query: {};
   Settings: Settings;
   SettingsInput: SettingsInput;
   String: Scalars['String']['output'];
   Track: Track;
+  TrackInput: TrackInput;
   TrackWhereInput: TrackWhereInput;
+  WithId: WithId;
 };
 
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
@@ -304,6 +349,7 @@ export type ImageResolvers<ContextType = any, ParentType extends ResolversParent
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   download_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, RequireFields<MutationDownload_AudioArgs, 'input'>>;
   initialize_genres?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationInitialize_GenresArgs>>;
+  update_audio?: Resolver<ResolversTypes['Track'], ParentType, ContextType, Partial<MutationUpdate_AudioArgs>>;
   update_settings?: Resolver<ResolversTypes['Settings'], ParentType, ContextType, Partial<MutationUpdate_SettingsArgs>>;
 };
 

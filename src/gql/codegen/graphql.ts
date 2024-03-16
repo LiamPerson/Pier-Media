@@ -23,6 +23,12 @@ export type Author = {
   provider: Provider;
 };
 
+export type AuthorInput = {
+  _where: WithId;
+  name?: InputMaybe<Scalars['String']['input']>;
+  provider?: InputMaybe<ProviderInput>;
+};
+
 export type DownloadSettings = {
   __typename?: 'DownloadSettings';
   audioPath: Scalars['String']['output'];
@@ -60,6 +66,12 @@ export type Genre = {
   name: Scalars['String']['output'];
 };
 
+export type GenreInput = {
+  _where: WithId;
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type GenreWhereInput = {
   id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -80,6 +92,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   download_audio: Track;
   initialize_genres: Scalars['Boolean']['output'];
+  update_audio: Track;
   update_settings: Settings;
 };
 
@@ -94,6 +107,11 @@ export type MutationInitialize_GenresArgs = {
 };
 
 
+export type MutationUpdate_AudioArgs = {
+  input?: InputMaybe<TrackInput>;
+};
+
+
 export type MutationUpdate_SettingsArgs = {
   input?: InputMaybe<SettingsInput>;
 };
@@ -103,6 +121,12 @@ export type Provider = {
   domain: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
+};
+
+export type ProviderInput = {
+  _where: WithId;
+  domain?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -142,9 +166,20 @@ export type Track = {
   title: Scalars['String']['output'];
 };
 
+export type TrackInput = {
+  _where: WithId;
+  author?: InputMaybe<AuthorInput>;
+  genre?: InputMaybe<GenreInput>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TrackWhereInput = {
   genre?: InputMaybe<GenreWhereInput>;
   id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type WithId = {
+  id: Scalars['Int']['input'];
 };
 
 export type UpdateSettingsMutationVariables = Exact<{

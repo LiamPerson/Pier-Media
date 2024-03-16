@@ -65,6 +65,35 @@ input DownloadSettingsInput {
 	metadataPath: String
 }
 
+input WithId {
+	id: Int!
+}
+
+input ProviderInput {
+	_where: WithId!
+	name: String
+	domain: String
+}
+
+input GenreInput {
+	_where: WithId!
+	name: String
+	description: String
+}
+
+input AuthorInput {
+	_where: WithId!
+	name: String
+	provider: ProviderInput
+}
+
+input TrackInput {
+	_where: WithId!
+	title: String
+	genre: GenreInput
+	author: AuthorInput
+}
+
 input SettingsInput {
 	downloads: DownloadSettingsInput
 }
@@ -99,5 +128,6 @@ type Query {
 type Mutation {
 	update_settings(input: SettingsInput): Settings!
 	download_audio(input: GenericDownloadInput!): Track!
+	update_audio(input: TrackInput): Track!
 	initialize_genres(input: InitializeGenresInput): Boolean!
 }
