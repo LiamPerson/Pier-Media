@@ -75,6 +75,27 @@ const resolvers: Resolvers = {
 		},
 	},
 	Mutation: {
+		update_audio: async (_, { input }) => {
+			if (!input) throw new Error('No input provided')
+
+			const { _where, authorId, title, genreId } = input
+			const trackPromise = prisma.track.findUnique({ where: _where })
+			const authorPromise = authorId && prisma.author.findUnique({ where: { id: authorId } })
+			const genrePromise = genreId && prisma.genre.findUnique({ where: { id: genreId } })
+			const [trackRecord, authorRecord, genreRecord] = await Promise.all([trackPromise, authorPromise, genrePromise])
+			if (!trackRecord) throw new Error(`Could not find track with id '${_where.id}'`)
+			if (authorId && !authorRecord) throw new Error(`Could not find author with id '${authorId}'`)
+			if (genreId && !genreRecord) throw new Error(`Could not find genre with id '${genreId}'`)
+			await prisma.track.update({
+				where: _where,
+				data: {
+					authorId: authorId ? authorId : trackRecord.authorId,
+					title: title ? title : trackRecord.title,
+					genreId: genreId ? genreId : trackRecord.genreId,
+				},
+			})
+			return { affected_rows: 1 }
+		},
 		update_settings: async (_, { input }) => {
 			if (!input) throw new Error('No input provided')
 
