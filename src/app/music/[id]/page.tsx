@@ -2,6 +2,7 @@
 import { useQuery } from '@apollo/client'
 import { Typography } from '@mui/material'
 
+import { TrackDetails } from './TrackDetails'
 import { TrackThumbnail } from './TrackThumbnail'
 import { TrackTitle } from './TrackTitle'
 
@@ -21,6 +22,7 @@ const PlayMusicPage = ({ params }: { params: { id: string } }) => {
 			{error && <Typography variant='body1'>Error: {error.message}</Typography>}
 			<TrackThumbnail track={track} />
 			<TrackTitle track={track} />
+			<TrackDetails track={track} />
 		</DashboardPage>
 	)
 }
