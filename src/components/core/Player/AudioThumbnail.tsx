@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { useTrack } from './useTrack'
+
 import { AudioMedia } from '@/constants/media'
 
 const MAXIMUM_HEIGHT = 90
@@ -14,16 +16,20 @@ type Props = {
 	media: AudioMedia
 }
 export const AudioThumbnail = ({ media }: Props) => {
+	const track = useTrack(media.id)
+
+	if (!track) return null // @todo - Add loading state
+
 	return (
 		<Link href={`/music/${media.id}`}>
 			<Image
-				src={media.thumbnail.file.location}
-				alt={media.title}
+				src={track.thumbnail.file.location}
+				alt={track.title}
 				quality={100}
 				priority
-				width={media.thumbnail.width}
-				height={media.thumbnail.height}
-				style={{ maxHeight: MAXIMUM_HEIGHT, maxWidth: getMaxWidth(media.thumbnail.height, media.thumbnail.width), objectFit: 'cover' }}
+				width={track.thumbnail.width}
+				height={track.thumbnail.height}
+				style={{ maxHeight: MAXIMUM_HEIGHT, maxWidth: getMaxWidth(track.thumbnail.height, track.thumbnail.width), objectFit: 'cover' }}
 			/>
 		</Link>
 	)
