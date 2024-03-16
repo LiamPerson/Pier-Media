@@ -4,4 +4,4 @@ export type DeepPartial<T> = T extends object
 		}
 	: T
 
-export type ItemOf<T> = T extends (infer U)[] ? U : never
+export type ValueOf<T> = T extends (infer U)[] ? U : never
