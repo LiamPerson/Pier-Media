@@ -2,6 +2,7 @@ import AudioPlayer from 'react-h5-audio-player'
 
 import { AudioPlayerDetails } from './AudioPlayerDetails'
 import { usePlayer } from './usePlayer'
+import { useTrack } from './useTrack'
 
 import { AudioMedia } from '@/constants/media'
 import { fromCdn } from '@/libs/helpers'
@@ -13,7 +14,11 @@ type AudioPlayerSmallProps = {
 }
 
 export const AudioPlayerSmall = ({ media }: AudioPlayerSmallProps) => {
+	const track = useTrack(media.id)
 	const { previous, next } = usePlayer()
+
+	if (!track) return null // @todo - Add loading state
+
 	return (
 		<AudioPlayer
 			showSkipControls
@@ -23,7 +28,7 @@ export const AudioPlayerSmall = ({ media }: AudioPlayerSmallProps) => {
 			onClickNext={next}
 			onClickPrevious={previous}
 			onEnded={next}
-			src={fromCdn(media.src)}
+			src={fromCdn(track.file.location)}
 			style={{
 				borderRadius: 0,
 				background: '#00000033',
