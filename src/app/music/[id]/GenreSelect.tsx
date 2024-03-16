@@ -28,7 +28,7 @@ export const GenreSelect = ({ trackId, defaultGenre }: GenreSelectProps) => {
 			update(cache, { data: returnedData }) {
 				if (!returnedData?.update_audio.affected_rows) return console.log('Early return 3')
 				const track = cache
-					.readQuery<GetTracksQuery>({
+					.readQuery({
 						query: GetTracksDocument,
 					})
 					?.tracks.find((t) => t?.id === trackId)
