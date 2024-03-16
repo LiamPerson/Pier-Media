@@ -34,7 +34,7 @@
 		"mime-types": "^2",
 		"music-metadata": "^8",
 		"next": "^13",
-		"prisma": "^5",
+		"prisma": "^5.11",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-h5-audio-player": "^3",
