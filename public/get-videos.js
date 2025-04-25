@@ -30,7 +30,7 @@ const timeAgo = (unixTimestamp) => {
 const displayResults = (results) => {
 	const newContent = []
 	results.forEach((item) => {
-		newContent.push(`<a href="./watch?v=${item.fileUrl}" class="video-card">
+		newContent.push(`<a href="./watch.html?v=${item.fileUrl}" class="video-card">
 				        <div class="thumbnail">
 					        <span class="duration">${item.duration}</span>
 				        </div>
