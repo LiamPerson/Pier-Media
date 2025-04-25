@@ -1,20 +1,32 @@
 const videoPlayer = document.getElementById('video')
 const fileServer = 'http://0.0.0.0:8112/'
 
-const getFileFromUrl = (url) => {
-	const splitUrl = url.split('/')
-	const splitLength = splitUrl.length
-	return splitUrl[splitLength - 1]
+const slugs = (url) => new URL(url).pathname.match(/[^\/]+/g)
+
+const getVideo = (url) => {
+	const urlSlugs = slugs(url)
+	const slugsLength = urlSlugs.length
+	return fileServer + urlSlugs[slugsLength - 1]
 }
 
-const start = () => {
+const getMetadata = (url) => {
+	const urlSlugs = slugs(url)
+	const slugsLength = urlSlugs.length
+	const videoFile = urlSlugs[slugsLength - 1]
+	const splitUrl = videoFile.split('.')
+	return fileServer + splitUrl[0] + '.info.json'
+}
+
+const start = async () => {
 	const currentUrl = new URL(window.location.href)
-	console.log('currentUrl', currentUrl)
 	const videoSourceRaw = currentUrl.searchParams.get('v')
-	console.log('videoSourceRaw', videoSourceRaw)
-	const videoSource = getFileFromUrl(videoSourceRaw)
-	console.log('Video source', fileServer + videoSource)
-	videoPlayer.src = fileServer + videoSource
+
+	const videoSource = getVideo(videoSourceRaw)
+
+	const metadata = fetch(getMetadata(videoSourceRaw))
+
+	console.log('Metadata', metadata)
+	videoPlayer.src = videoSource
 }
 
 start()
