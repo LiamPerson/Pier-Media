@@ -4,6 +4,23 @@ const tagsElement = document.getElementById('tags')
 const dateAndLengthElement = document.getElementById('dateAndLength')
 const videoPlayer = document.getElementById('video')
 
+const convertSecondsToMMSS = (seconds) => {
+	// If seconds is less than 60, return "00:00" per the given specification.
+	if (seconds < 60) {
+		return '00:00'
+	}
+
+	// Calculate minutes and remaining seconds
+	const minutes = Math.floor(seconds / 60)
+	const remainingSeconds = seconds % 60
+
+	// Format minutes and seconds to always show two digits
+	const formattedMinutes = String(minutes).padStart(2, '0')
+	const formattedSeconds = String(remainingSeconds).padStart(2, '0')
+
+	return `${formattedMinutes}:${formattedSeconds}`
+}
+
 const getMetadata = (url) => {
 	// Find the last occurrence of dot in the URL to remove the current extension
 	const lastDotIndex = url.lastIndexOf('.')
@@ -37,7 +54,7 @@ const start = async () => {
 	// Fill in content:
 	titleElement.innerText = metadata.title
 	descriptionElement.innerText = metadata.description
-	dateAndLengthElement.innerText = `${metadata.duration_string} • ${timeAgo(metadata.timestamp)}`
+	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(metadata.tags)
 	document.title = metadata.title
 	document.description = metadata.description
