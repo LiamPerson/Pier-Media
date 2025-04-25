@@ -6,10 +6,6 @@ const videoPlayer = document.getElementById('video')
 
 const convertSecondsToMMSS = (seconds) => {
 	seconds = Math.floor(seconds)
-	// If seconds is less than 60, return "00:00" per the given specification.
-	if (seconds < 60) {
-		return '00:00'
-	}
 
 	// Calculate minutes and remaining seconds
 	const minutes = Math.floor(seconds / 60)
@@ -55,6 +51,7 @@ const start = async () => {
 	// Fill in content:
 	titleElement.innerText = metadata.title
 	descriptionElement.innerText = metadata.description
+	console.log('dur', metadata.duration, convertSecondsToMMSS(metadata.duration))
 	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(metadata.tags || metadata.genres)
 	document.title = metadata.title
