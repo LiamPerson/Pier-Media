@@ -11,8 +11,16 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
  * Therefore it is highly recommended to use the babel or swc plugin for production.
+ * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
-const documents = {
+type Documents = {
+    "mutation UpdateAudio($input: AudioInput) {\n  update_audio(input: $input) {\n    affected_rows\n  }\n}": typeof types.UpdateAudioDocument,
+    "mutation UpdateSettings($input: SettingsInput) {\n  update_settings(input: $input) {\n    id\n    downloads {\n      id\n      updatedAt\n    }\n  }\n}": typeof types.UpdateSettingsDocument,
+    "query GetAudios($where: AudioWhereInput) {\n  audios(where: $where) {\n    id\n    title\n    genre {\n      id\n      name\n      description\n    }\n    bitrate\n    originalUrl\n    author {\n      id\n      name\n      provider {\n        id\n        name\n        domain\n      }\n    }\n    file {\n      id\n      location\n    }\n    contributors {\n      id\n      name\n    }\n    duration\n    thumbnail {\n      width\n      height\n      id\n      file {\n        id\n        location\n      }\n    }\n  }\n}": typeof types.GetAudiosDocument,
+    "query GetGenres {\n  genres {\n    id\n    name\n    description\n  }\n}": typeof types.GetGenresDocument,
+    "query GetSettings {\n  settings {\n    id\n    downloads {\n      id\n      updatedAt\n      audioPath\n      videoPath\n      imagePath\n      metadataPath\n      path\n    }\n  }\n}": typeof types.GetSettingsDocument,
+};
+const documents: Documents = {
     "mutation UpdateAudio($input: AudioInput) {\n  update_audio(input: $input) {\n    affected_rows\n  }\n}": types.UpdateAudioDocument,
     "mutation UpdateSettings($input: SettingsInput) {\n  update_settings(input: $input) {\n    id\n    downloads {\n      id\n      updatedAt\n    }\n  }\n}": types.UpdateSettingsDocument,
     "query GetAudios($where: AudioWhereInput) {\n  audios(where: $where) {\n    id\n    title\n    genre {\n      id\n      name\n      description\n    }\n    bitrate\n    originalUrl\n    author {\n      id\n      name\n      provider {\n        id\n        name\n        domain\n      }\n    }\n    file {\n      id\n      location\n    }\n    contributors {\n      id\n      name\n    }\n    duration\n    thumbnail {\n      width\n      height\n      id\n      file {\n        id\n        location\n      }\n    }\n  }\n}": types.GetAudiosDocument,
