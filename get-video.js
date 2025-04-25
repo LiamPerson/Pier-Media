@@ -39,6 +39,8 @@ const start = async () => {
 	descriptionElement.innerText = metadata.description
 	dateAndLengthElement.innerText = `${metadata.duration_string} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(metadata.tags)
+	document.title = metadata.title
+	document.description = metadata.description
 }
 
 start()
