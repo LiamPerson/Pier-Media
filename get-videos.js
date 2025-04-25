@@ -10,7 +10,7 @@ const displayResults = (results) => {
 				        </div>
 				        <div class="video-info">
 					        <h3>${item.title}</h3>
-					        <p><span>${item.uploader}</span> ${timeAgo(item.createdAt)}</p>
+					        <p><span>${item.uploader}</span> • ${timeAgo(item.createdAt)}</p>
 				        </div>
 			        </a>`)
 	})
