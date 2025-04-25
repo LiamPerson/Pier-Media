@@ -51,7 +51,6 @@ const start = async () => {
 	// Fill in content:
 	titleElement.innerText = metadata.title
 	descriptionElement.innerText = metadata.description
-	console.log('dur', metadata.duration, convertSecondsToMMSS(metadata.duration))
 	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(metadata.tags || metadata.genres)
 	document.title = metadata.title
