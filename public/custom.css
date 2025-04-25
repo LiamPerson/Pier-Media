@@ -40,7 +40,6 @@ header {
 
 .search-container {
 	flex: 1;
-	max-width: 800px;
 }
 
 .search-input {
