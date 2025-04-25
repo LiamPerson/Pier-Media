@@ -36,7 +36,7 @@ const getMetadata = (url) => {
 const createTags = (tags) => {
 	const tagsInHtml = []
 	tags.forEach((item) => {
-		tagsInHtml.push(`<span class="tag">${item}</span>`)
+		tagsInHtml.push(`<a href="./?q=${item}" class="tag">${item}</a>`)
 	})
 	return tagsInHtml
 }
