@@ -1,7 +1,0 @@
-query GetGenres {
-	genres {
-		id
-		name
-		description
-	}
-}

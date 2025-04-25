@@ -1,9 +1,0 @@
-{
-	"recommendations": [
-		"dbaeumer.vscode-eslint",
-		"hediet.vscode-drawio",
-		"esbenp.prettier-vscode",
-		"Prisma.prisma",
-		"streetsidesoftware.code-spell-checker"
-	]
-}
