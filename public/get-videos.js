@@ -63,7 +63,6 @@ const start = () => {
 		.then((data) => {
 			console.log(data)
 			displayResults(data)
-			alert('Data fetched successfully!')
 		})
 		.catch((error) => {
 			console.error('Error fetching data:', error)
