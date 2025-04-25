@@ -11,6 +11,11 @@ body {
 	line-height: 1.6;
 }
 
+a {
+	color: unset;
+	text-decoration: none;
+}
+
 header {
 	position: fixed;
 	top: 0;
@@ -155,8 +160,12 @@ header {
 
 .content h1 {
 	font-size: 1.5rem;
-	margin-bottom: 1rem;
 	color: #030303;
+}
+
+.content h2 {
+	font-size: 1.35rem;
+	margin-bottom: 1rem;
 }
 
 .meta {

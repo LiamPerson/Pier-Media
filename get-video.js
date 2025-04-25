@@ -1,4 +1,5 @@
 const titleElement = document.getElementById('title')
+const uploaderElement = document.getElementById('uploader')
 const descriptionElement = document.getElementById('description')
 const tagsElement = document.getElementById('tags')
 const dateAndLengthElement = document.getElementById('dateAndLength')
@@ -50,6 +51,7 @@ const start = async () => {
 
 	// Fill in content:
 	titleElement.innerText = metadata.title
+	uploaderElement.innerHTML = `<a href="./?q=${metadata.uploader}">${metadata.uploader}</a>`
 	descriptionElement.innerText = metadata.description
 	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(metadata.tags || metadata.genres)
