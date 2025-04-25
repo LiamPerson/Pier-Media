@@ -1,5 +1,8 @@
 {
 	"name": "pier-media",
+	"engines": {
+		"node": "^22"
+	},
 	"scripts": {
 		"dev": "concurrently \"next dev\" \"npm run codegen:watch\"",
 		"build": "next build",
