@@ -123,7 +123,7 @@ header {
 
 /* Video Detail Page Styles */
 .video-detail {
-	padding: 5rem 2rem 2rem;
+	padding: 6rem 2rem 2rem;
 	max-width: 1200px;
 	margin: 0 auto;
 }
@@ -131,12 +131,6 @@ header {
 .video-player {
 	width: 100%;
 	margin-bottom: 2rem;
-}
-
-.video-placeholder {
-	width: 100%;
-	padding-top: 56.25%;
-	background-color: #000;
 	border-radius: 12px;
 }
 
