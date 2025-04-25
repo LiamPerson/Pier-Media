@@ -30,7 +30,7 @@ const start = () => {
 	}
 
 	// Construct the URL with the query parameter
-	const fetchUrl = `http://localhost:3000/search?q=${encodeURIComponent(query)}&r=20`
+	const fetchUrl = `http://localhost:3000/search?q=${encodeURIComponent(query)}&r=50`
 
 	fetch(fetchUrl)
 		.then((response) => response.json())
