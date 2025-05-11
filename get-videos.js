@@ -18,19 +18,18 @@ const displayResults = (results) => {
 }
 
 const start = () => {
-	const defaultQuery = 'dog'
-
 	// Get the query parameter from the current URL
 	const urlParams = new URLSearchParams(window.location.search)
-	const query = urlParams.get('q') || defaultQuery
+	let query = urlParams.get('q')
+	let sortAlgorithm = 'normal'
 
 	if (!query) {
-		console.log(`No query provided. Showing "${defaultQuery}"`)
-		return
+		sortAlgorithm = 'random'
+		query = 'random'
 	}
 
 	// Construct the URL with the query parameter
-	const fetchUrl = `${SEARCH_API_URL}?q=${encodeURIComponent(query)}&r=50`
+	const fetchUrl = `${SEARCH_API_URL}?q=${encodeURIComponent(query)}&r=50&s=${sortAlgorithm}`
 
 	fetch(fetchUrl)
 		.then((response) => response.json())
