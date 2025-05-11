@@ -10,7 +10,7 @@ window.addEventListener(
 		const urlParams = new URLSearchParams(this.location.search)
 		let query = urlParams.get('q')
 
-		if (query) this.sessionStorage.setItem(SESSION_KEY_SEARCH, query)
+		if (query !== undefined && query !== null && query !== false) this.sessionStorage.setItem(SESSION_KEY_SEARCH, query)
 
 		// If no value, try load from session
 		query = this.sessionStorage.getItem(SESSION_KEY_SEARCH)
