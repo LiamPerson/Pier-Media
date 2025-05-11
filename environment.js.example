@@ -1,0 +1,2 @@
+const FILE_SERVER = 'http://localhost:5020/file?url='
+const SEARCH_API_URL = 'http://localhost:5020/search'
