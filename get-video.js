@@ -4,6 +4,7 @@ const descriptionElement = document.getElementById('description')
 const tagsElement = document.getElementById('tags')
 const dateAndLengthElement = document.getElementById('dateAndLength')
 const videoPlayer = document.getElementById('video')
+const relatedVideosContainer = document.getElementById('related-videos')
 
 const convertSecondsToMMSS = (seconds) => {
 	seconds = Math.floor(seconds)
@@ -39,6 +40,30 @@ const createTags = (tags) => {
 	return tagsInHtml
 }
 
+/**
+ * Renders items
+ * @param {*} results
+ * @param {string} currentVideoSourceUri The current video's URI. This is like an ID to filter it out of the related results.
+ */
+const displayResults = (results, currentVideoSourceUri) => {
+	const newContent = []
+	results.forEach((item) => {
+		if (item.fileUrl === currentVideoSourceUri) return
+
+		newContent.push(`<a href="./watch.html?v=${item.fileUrl}" class="video-card">
+				        <div class="thumbnail">
+							<img src="${FILE_SERVER + item.fileUrl}?thumbnail=true" alt="Watch ${item.title}" />
+					        <span class="duration">${item.duration}</span>
+				        </div>
+				        <div class="video-info">
+					        <h3>${item.title}</h3>
+					        <p><span>${item.uploader}</span> • ${timeAgo(item.createdAt)}</p>
+				        </div>
+			        </a>`)
+	})
+	relatedVideosContainer.innerHTML = newContent.join('')
+}
+
 const start = async () => {
 	const currentUrl = new URL(window.location.href)
 	const videoSourceRaw = currentUrl.searchParams.get('v')
@@ -50,13 +75,30 @@ const start = async () => {
 	videoPlayer.src = FILE_SERVER + videoSourceRaw
 
 	// Fill in content:
+	const categories = metadata.tags || metadata.genres
 	titleElement.innerText = metadata.title
 	uploaderElement.innerHTML = `<a href="./?q=${metadata.uploader}">${metadata.uploader}</a>`
 	descriptionElement.innerText = metadata.description
 	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
-	tagsElement.innerHTML = createTags(metadata.tags || metadata.genres)
+	tagsElement.innerHTML = createTags(categories)
 	document.title = metadata.title
 	document.description = metadata.description
+
+	// Get related videos
+	// Construct the search from video metadata
+	const searchQuery = `${metadata.title} - ${metadata.uploader}`
+	const fetchUrl = `${SEARCH_API_URL}?q=${encodeURIComponent(searchQuery)}&r=50&s=normal`
+
+	fetch(fetchUrl)
+		.then((response) => response.json())
+		.then((data) => {
+			console.log(data)
+			displayResults(data, videoSourceRaw)
+		})
+		.catch((error) => {
+			console.error('Error fetching data:', error)
+			relatedVideosContainer.innerHTML = 'Failed to fetch content... Check console for errors.'
+		})
 }
 
 start()
