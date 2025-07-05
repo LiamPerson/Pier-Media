@@ -5,6 +5,7 @@ const tagsElement = document.getElementById('tags')
 const dateAndLengthElement = document.getElementById('dateAndLength')
 const videoPlayer = document.getElementById('video')
 const relatedVideosContainer = document.getElementById('related-videos')
+const sourceLink = document.getElementById('source')
 
 const convertSecondsToMMSS = (seconds) => {
 	seconds = Math.floor(seconds)
@@ -81,6 +82,8 @@ const start = async () => {
 	descriptionElement.innerText = metadata.description
 	dateAndLengthElement.innerText = `${convertSecondsToMMSS(metadata.duration)} • ${timeAgo(metadata.timestamp)}`
 	tagsElement.innerHTML = createTags(categories)
+	sourceLink.href = metadata.webpage_url
+	sourceLink.innerText = metadata.webpage_url
 	document.title = metadata.title
 	document.description = metadata.description
 
