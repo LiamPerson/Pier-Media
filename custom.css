@@ -99,6 +99,8 @@ header {
 	border-radius: 24px;
 	outline: none;
 	transition: all 0.3s ease;
+	background: var(--header-bg);
+	color: var(--fg);
 }
 
 .search-input:focus {
