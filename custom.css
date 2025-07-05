@@ -1,3 +1,42 @@
+/* 1) Define your variables in :root for light mode */
+:root {
+	--bg: #f9f9f9;
+	--fg: #333;
+	--fg-muted: #606060;
+	--fg-strong: #030303;
+	--fg-strong-alpha: #030303de;
+	--card-bg: #fff;
+	--header-bg: #fff;
+	--header-shadow: rgba(0, 0, 0, 0.1);
+	--shadow-light: rgba(0, 0, 0, 0.05);
+	--shadow-hover: rgba(0, 0, 0, 0.1);
+	--border: #ddd;
+	--border-light: #eee;
+	--primary: #1a73e8;
+	--tag-bg: #f0f0f0;
+	--code-bg: rgba(0, 0, 0, 0.8);
+}
+
+/* 2) Override for dark mode */
+:root[data-theme='dark'] {
+	--bg: #121212;
+	--fg: #e0e0e0;
+	--fg-muted: #aaaaaa;
+	--fg-strong: #fff;
+	--fg-strong-alpha: rgba(255, 255, 255, 0.87);
+	--card-bg: #1e1e1e;
+	--header-bg: #1b1b1b;
+	--header-shadow: rgba(0, 0, 0, 0.6);
+	--shadow-light: rgba(0, 0, 0, 0.5);
+	--shadow-hover: rgba(0, 0, 0, 0.7);
+	--border: #333;
+	--border-light: #2a2a2a;
+	--primary: #8ab4f8;
+	--tag-bg: #2a2a2a;
+	--code-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Reset & base */
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -6,8 +45,8 @@
 
 body {
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-	color: #333;
-	background-color: #f9f9f9;
+	color: var(--fg);
+	background-color: var(--bg);
 	line-height: 1.6;
 }
 
@@ -16,14 +55,15 @@ a {
 	text-decoration: none;
 }
 
+/* Header */
 header {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
-	background: white;
+	background: var(--header-bg);
 	padding: 1rem;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px var(--header-shadow);
 	z-index: 100;
 	display: flex;
 	align-items: center;
@@ -37,8 +77,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-decoration: none;
-	color: #333;
+	color: var(--fg);
 	font-weight: bold;
 }
 
@@ -56,17 +95,25 @@ header {
 	width: 100%;
 	padding: 0.8rem 1.2rem;
 	font-size: 1rem;
-	border: 1px solid #ddd;
+	border: 1px solid var(--border);
 	border-radius: 24px;
 	outline: none;
 	transition: all 0.3s ease;
 }
 
 .search-input:focus {
-	border-color: #1a73e8;
-	box-shadow: 0 0 0 1px #1a73e8;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 1px var(--primary);
 }
 
+.theme-toggle {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--primary);
+}
+
+/* Video grid & cards */
 .video-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -77,21 +124,21 @@ header {
 }
 
 .video-card {
-	background: white;
+	background: var(--card-bg);
 	border-radius: 12px;
 	overflow: hidden;
 	transition: transform 0.2s ease;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 10px var(--shadow-light);
 	cursor: pointer;
-	text-decoration: none;
 	color: inherit;
+	text-decoration: none;
 	display: block;
 	position: relative;
 }
 
 .video-card:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 20px var(--shadow-hover);
 }
 
 .thumbnail {
@@ -111,13 +158,14 @@ header {
 	position: absolute;
 	bottom: 8px;
 	right: 8px;
-	background: rgba(0, 0, 0, 0.8);
-	color: white;
+	background: var(--code-bg);
+	color: var(--fg-strong);
 	padding: 2px 4px;
 	border-radius: 4px;
 	font-size: 0.8rem;
 }
 
+/* Video info */
 .video-info {
 	padding: 1rem;
 }
@@ -125,19 +173,19 @@ header {
 .video-info h3 {
 	font-size: 1rem;
 	margin-bottom: 0.5rem;
-	color: #030303;
+	color: var(--fg-strong);
 }
 
 .video-info p {
 	font-size: 0.9rem;
-	color: #606060;
+	color: var(--fg-muted);
 }
 
 .video-info p span {
-	color: #030303de;
+	color: var(--fg-strong-alpha);
 }
 
-/* Video Detail Page Styles */
+/* Video Detail Page */
 .video-detail {
 	padding: 6rem 2rem 2rem;
 	max-width: 1200px;
@@ -152,15 +200,15 @@ header {
 }
 
 .content {
-	background: white;
+	background: var(--card-bg);
 	padding: 2rem;
 	border-radius: 12px;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 10px var(--shadow-light);
 }
 
 .content h1 {
 	font-size: 1.5rem;
-	color: #030303;
+	color: var(--fg-strong);
 }
 
 .content h2 {
@@ -171,11 +219,11 @@ header {
 .meta {
 	margin-bottom: 2rem;
 	padding-bottom: 1rem;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid var(--border-light);
 }
 
 .meta p {
-	color: #606060;
+	color: var(--fg-muted);
 	margin-bottom: 1rem;
 }
 
@@ -186,11 +234,11 @@ header {
 }
 
 .tag {
-	background: #f0f0f0;
+	background: var(--tag-bg);
 	padding: 0.3rem 0.8rem;
 	border-radius: 16px;
 	font-size: 0.9rem;
-	color: #606060;
+	color: var(--fg-muted);
 	text-decoration: none;
 }
 
@@ -202,7 +250,7 @@ header {
 .description h3 {
 	font-size: 1.2rem;
 	margin-bottom: 0.5rem;
-	color: #030303;
+	color: var(--fg-strong);
 }
 
 .description p {
@@ -216,9 +264,10 @@ header {
 
 .description li {
 	margin-bottom: 0.5rem;
-	color: #606060;
+	color: var(--fg-muted);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
 	.video-grid {
 		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
